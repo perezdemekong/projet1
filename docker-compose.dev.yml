@@ -7,9 +7,9 @@ services:
     container_name: tabiblib-office-container
     build: .
     ports:
-      - 6001:6001
+      - 6004:6004
     command: >
-      bash -c "npm install && ng serve --host 0.0.0.0 --port 6001"
+      bash -c "npm install && ng serve --host 0.0.0.0 --port 6004"
     environment:
       STARTUP_COMMAND_1: "npm start"
       NG_APP_NAME: "${NG_APP_NAME}"

@@ -24,7 +24,7 @@ down:
 	@ docker-compose -f docker-compose.dev.yml down
 
 i:
-	@ npm install && ng serve --host 0.0.0.0 --port 6001
+	@ npm install && ng serve --host 0.0.0.0 --port 6004
 
 clean:
 	echo "cleaning the dist directory"
