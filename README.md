@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Docker Environment
 
-Run `make up` pour lancer le container de developpement. Navigate to `http://localhost:6001/`. The application will automatically reload if you change any of the source files.
+Run `make up` pour lancer le container de developpement. Navigate to `http://localhost:6004/`. The application will automatically reload if you change any of the source files.
 
 Run `make down` pour stopper le serveur.
 
@@ -12,7 +12,7 @@ Run `make i` si vous n'avez pas encore Docker sur votre machine afin de demarrer
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:6001/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:6004/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
