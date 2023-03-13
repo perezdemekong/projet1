@@ -1,0 +1,21 @@
+# This Docker Compose file should only be used for your development environment!
+version: '3.8'
+
+services:
+  tabiblib-office:
+    # image: node:16
+    container_name: tabiblib-office-container
+    build: .
+    ports:
+      - 6001:6001
+    command: >
+      bash -c "npm install && ng serve --host 0.0.0.0 --port 6001"
+    environment:
+      STARTUP_COMMAND_1: "npm start"
+      NG_APP_NAME: "${NG_APP_NAME}"
+      NG_APP_DEBUG: "${NG_APP_DEBUG}"
+      NG_APP_VERSION: "${NG_APP_VERSION}"
+      NG_APP_BASE_URL: "${NG_APP_BASE_URL}"
+      NG_APP_API_URL: "${NG_APP_API_URL}"
+    volumes:
+      - .:/usr/src/app
