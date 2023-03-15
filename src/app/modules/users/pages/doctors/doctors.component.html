@@ -1,12 +1,12 @@
-<div class="px-10 py-8">
+<div class="lg:px-10 px-4 py-8">
 
     <!-- Heading -->
     <app-page-heading title="Praticiens" description="Liste des praticiens sur l'application Tabiblib"></app-page-heading>
 
     <!-- Actions -->
-    <div class="flex justify-between mb-5">
+    <div class="flex justify-between mb-5 max-lg:flex-col max-lg:gap-2.5">
 
-        <div class="flex gap-2.5">
+        <div class="flex flex-wrap gap-2.5">
 
             <app-select label="perPage" name="perPage" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
             
@@ -16,7 +16,7 @@
 
         </div>
 
-        <form [formGroup]="searchForm" (submit)="chang()" class="flex gap-2 5 items-center">
+        <form [formGroup]="searchForm" (submit)="chang()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
 
             <app-search-bar placeholder="Rechercher par nom, prénom, email..." formControlName="search"></app-search-bar>
 

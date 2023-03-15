@@ -18,7 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
           [value]="value"
           (input)="onChange($any($event.target).value)"
           (blur)="onTouched()"
-          class="p-0 h-full sm:min-w-[364px] block w-full text-slate-700 placeholder:text-sm text-sm bg-primary-100 placeholder:text-gray-400  rounded-md border-transparent focus:border-primary-100 focus:ring-primary-100"
+          class="p-0 h-full sm:min-w-[364px] min-w-[300px] block w-full text-slate-700 placeholder:text-sm text-sm bg-primary-100 placeholder:text-gray-400  rounded-md border-transparent focus:border-primary-100 focus:ring-primary-100"
           >
       </div>
     </div>
