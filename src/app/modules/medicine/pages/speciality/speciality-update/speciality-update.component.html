@@ -1,0 +1,36 @@
+<div class="md:px-10 px-5 py-8">
+
+    <app-breadscrumb [breadcrumb]="breadscrumbs"></app-breadscrumb>
+
+    <!-- Heading -->
+    <app-page-heading title="Spécialités" description="Mettre à jour une spécialité"></app-page-heading>
+
+    <!-- Form -->
+    <form class="sm:p-5 space-y-8 max-w-3xl">
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Nom</div>
+            <div class="flex-1">
+                <app-big-input labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Adresse</div>
+            <div class="flex-1">
+                <app-big-input labelFor="code" label="code" name="code" placeholder="Entrez le code" [class]="'w-full'"></app-big-input>
+            </div>
+        </div>
+        <div class="flex items-center">
+            <div class="w-40">Status</div>
+            <div class="flex-1">
+                <app-toggle (click)="toggleStatus()" [toggled]="status" [backgroundClass]="!status ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
+            </div>
+        </div>
+
+        <div class="flex justify-end">
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                Valider
+            </app-button>
+        </div>
+    </form>
+
+</div>
