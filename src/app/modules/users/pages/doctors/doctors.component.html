@@ -1,0 +1,95 @@
+<div class="lg:px-10 px-4 py-8">
+
+    <!-- Heading -->
+    <app-page-heading title="Praticiens" description="Liste des praticiens sur l'application Tabiblib"></app-page-heading>
+
+    <!-- Actions -->
+    <div class="flex justify-between mb-5 max-lg:flex-col max-lg:gap-2.5">
+
+        <div class="flex flex-wrap gap-2.5">
+
+            <app-select label="perPage" name="perPage" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
+            
+            <app-select label="activity" name="activity" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
+
+            <app-select label="speciality" name="speciality" [options]="specialities" [(ngModel)]="speciality"></app-select>
+
+        </div>
+
+        <form [formGroup]="searchForm" (submit)="chang()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
+
+            <app-search-bar placeholder="Rechercher par nom, prénom, email..." formControlName="search"></app-search-bar>
+
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">Rechercher</app-button>
+
+        </form>
+
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+        <div class="inline-block min-w-full pb-2 align-middle">
+            <table class="min-w-full">
+                <thead>
+                <tr class="bg-primary-500">
+                    <th scope="col" class="!py-3.5 !p-2.5 !pl-4 border-none text-left font-semibold max-w-fit text-white">Noms</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Prénom</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Spécialité</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Adresse</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Téléphone</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Email</th>
+                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Status</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                        <span class="sr-only">Actions</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="pt-3 divide-y-2 divide-gray-300">
+                <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
+                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">Belaouier</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">Mohamed</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">Médecin Généraliste</td>
+                    <td class="pt-1.5 pb-1 text-tertiary capitalize min-w-[140px]">11 Rue Rouget de Lisle, 92800 Puteaux</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">+07 456 890 678</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary">belaouier.mohamed@gmail.com</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="'actif' | checkUserStatusSvgdf" />
+                        </svg>                                                                                                    
+                    </td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                        <a [routerLink]="['/users/patients', i, 'antecedents']" class="mr-3" type="button">
+                            <span class="sr-only">Options</span>
+                            <span class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 fill-black">
+                                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                    <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                                </svg>                                                                                                                                                                            
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <nav class="flex items-center justify-between border-t border-gray-200 bg-white py-3 pt-8" aria-label="Pagination">
+                <div class="hidden sm:block">
+                  <p class="text-sm text-gray-700 !m-0">
+                    Affichage de
+                    <span class="font-medium">1</span>
+                    à
+                    <span class="font-medium">20</span>
+                    sur
+                    <span class="font-medium">200</span>
+                    résultats
+                  </p>
+                </div>
+                <div class="flex flex-1 justify-between sm:justify-end gap-3">
+                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Précédent</button>
+                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Suivant</button>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+</div>
