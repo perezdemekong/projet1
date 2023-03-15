@@ -16,6 +16,13 @@ export const ROUTES: Routes = [
             )
     },
     {
+        path: 'medicine',
+        loadChildren: () =>
+            import('@modules/medicine/medicine.module').then(
+                m => m.MedicineModule
+            )
+    },
+    {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'

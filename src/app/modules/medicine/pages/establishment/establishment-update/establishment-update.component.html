@@ -1,0 +1,48 @@
+<div class="md:px-10 px-5 py-8">
+
+    <app-breadscrumb [breadcrumb]="breadscrumbs"></app-breadscrumb>
+
+    <!-- Heading -->
+    <app-page-heading title="Établissments" description="Mettre à jour un établissement"></app-page-heading>
+
+    <!-- Form -->
+    <form class="sm:p-5 space-y-8 max-w-3xl">
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Nom</div>
+            <div class="flex-1">
+                <app-big-input labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Type</div>
+            <div class="flex-1">
+                <app-big-select labelFor="type" label="type" name="type" [options]="establishmentTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Adresse</div>
+            <div class="flex-1">
+                <app-big-input labelFor="address" label="adresse" name="address" placeholder="Entrez l'adresse" [class]="'w-full'"></app-big-input>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Code postal</div>
+            <div class="flex-1">
+                <app-big-input labelFor="postalCode" label="code postal" name="postalCode" placeholder="Entrez le code postal" [class]="'w-full'"></app-big-input>
+            </div>
+        </div>
+        <div class="flex max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Description</div>
+            <div class="flex-1">
+                <app-textarea labelFor="description" label="description" name="description" [rows]="4" [class]="'w-full'"></app-textarea>
+            </div>
+        </div>
+
+        <div class="flex justify-end">
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                Valider
+            </app-button>
+        </div>
+    </form>
+
+</div>

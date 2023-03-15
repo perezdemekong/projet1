@@ -4,6 +4,9 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from './select/select.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
+import { BigInputComponent } from './big-input/big-input.component';
+import { TextareaComponent } from './textarea/textarea.component';
+import { BigSelectComponent } from './big-select/big-select.component';
 
 
 
@@ -11,7 +14,10 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
   declarations: [
     SearchBarComponent,
     SelectComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    BigInputComponent,
+    TextareaComponent,
+    BigSelectComponent
   ],
   imports: [
     FormsModule,
@@ -21,6 +27,9 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
   exports: [
     SearchBarComponent,
     SelectComponent,
+    BigInputComponent,
+    TextareaComponent,
+    BigSelectComponent,
   ]
 })
 export class InputModule { }

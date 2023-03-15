@@ -11,6 +11,7 @@ import { CheckUserStatusColorPipe } from './pipes/check-user-status-color.pipe';
 import { CheckUserStatusSvgdfPipe } from './pipes/check-user-status-svgdf.pipe';
 import { BreadscrumbModule } from './components/breadscrumb/breadscrumb.module';
 import { TabsModule } from './components/tabs/tabs.module';
+import { ModalModule } from './components/modal/modal.module';
 
 
 
@@ -27,7 +28,8 @@ import { TabsModule } from './components/tabs/tabs.module';
     InputModule,
     ToggleModule,
     BreadscrumbModule,
-    TabsModule
+    TabsModule,
+    ModalModule
   ],
   exports: [
     ThemeModule,
@@ -37,6 +39,7 @@ import { TabsModule } from './components/tabs/tabs.module';
     ToggleModule,
     BreadscrumbModule,
     TabsModule,
+    ModalModule,
 
 
     CheckUserStatusColorPipe,
