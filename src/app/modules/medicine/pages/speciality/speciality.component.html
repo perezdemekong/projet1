@@ -1,0 +1,127 @@
+<div class="lg:px-10 px-4 py-8">
+
+    <!-- Heading -->
+    <app-page-heading title="Spécialité" description="Liste des spécialités sur l'application Tabiblib">
+        <app-button type="button" routerLink="/medicine/specialities/create" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">
+            <svg class="w-5 h-5 fill-current mr-2.5" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 13.5H13V17.5H11V13.5H7V11.5H11V7.5H13V11.5H17M12 2.5C10.6868 2.5 9.38642 2.75866 8.17317 3.2612C6.95991 3.76375 5.85752 4.50035 4.92893 5.42893C3.05357 7.3043 2 9.84784 2 12.5C2 15.1522 3.05357 17.6957 4.92893 19.5711C5.85752 20.4997 6.95991 21.2362 8.17317 21.7388C9.38642 22.2413 10.6868 22.5 12 22.5C14.6522 22.5 17.1957 21.4464 19.0711 19.5711C20.9464 17.6957 22 15.1522 22 12.5C22 11.1868 21.7413 9.88642 21.2388 8.67317C20.7362 7.45991 19.9997 6.35752 19.0711 5.42893C18.1425 4.50035 17.0401 3.76375 15.8268 3.2612C14.6136 2.75866 13.3132 2.5 12 2.5Z"/>
+            </svg>                
+            <span class="sm:block hidden">Ajouter une spécialité</span>
+            <span class="block sm:hidden">Ajouter</span>
+        </app-button>
+    </app-page-heading>
+
+    <!-- Actions -->
+    <div class="flex justify-between mb-5 max-lg:flex-col max-lg:gap-2.5">
+
+        <div class="flex gap-2.5">
+
+            <app-select label="perPage" name="perPage" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
+            
+            <app-select label="activity" name="activity" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
+
+        </div>
+
+        <form [formGroup]="searchForm" (submit)="chang()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
+
+            <app-search-bar placeholder="Rechercher par nom" formControlName="search"></app-search-bar>
+
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">Rechercher</app-button>
+
+        </form>
+
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+        <div class="inline-block min-w-full pb-2 align-middle">
+            <table class="min-w-full">
+                <thead>
+                <tr class="bg-primary-500">
+                    <th scope="col" class="!py-3.5 !p-2.5 !pl-4 border-none text-left font-semibold max-w-fit text-white">Nom</th>
+                    <th scope="col" class="p-2.5 !pl-8 border-none text-left font-semibold text-white">code</th>
+                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Status</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                        <span class="sr-only">Actions</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="pt-3 divide-y-2 divide-gray-300">
+                <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
+                    <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">Hématologie</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary uppercase">hmt</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="'actif' | checkUserStatusSvgdf" />
+                        </svg>                                                                                                    
+                    </td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                        <a [routerLink]="['/medicine/specialities', i, 'update']" class="mr-3" type="button">
+                            <span class="sr-only">Modifier</span>
+                            <span class="">
+                                <svg class="w-5 h-5 fill-black" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.5344 5.84277L17.5344 2.84277C17.3922 2.70193 17.2001 2.62292 17 2.62292C16.7999 2.62292 16.6078 2.70193 16.4656 2.84277L7.46563 11.8428C7.32633 11.9856 7.24888 12.1776 7.25 12.3771V15.3771C7.25 15.5761 7.32902 15.7668 7.46967 15.9075C7.61032 16.0481 7.80109 16.1271 8 16.1271H11C11.1995 16.1283 11.3915 16.0508 11.5344 15.9115L20.5344 6.91152C20.6752 6.76932 20.7542 6.57728 20.7542 6.37714C20.7542 6.17701 20.6752 5.98496 20.5344 5.84277ZM10.6906 14.6271H8.75V12.6865L14.75 6.68652L16.6906 8.62714L10.6906 14.6271ZM17.75 7.56777L15.8094 5.62714L17 4.43652L18.9406 6.37714L17.75 7.56777ZM20 11.6271V19.8771C20 20.275 19.842 20.6565 19.5607 20.9378C19.2794 21.2191 18.8978 21.3771 18.5 21.3771H3.5C3.10218 21.3771 2.72064 21.2191 2.43934 20.9378C2.15804 20.6565 2 20.275 2 19.8771V4.87714C2 4.47932 2.15804 4.09779 2.43934 3.81648C2.72064 3.53518 3.10218 3.37714 3.5 3.37714H11.75C11.9489 3.37714 12.1397 3.45616 12.2803 3.59681C12.421 3.73747 12.5 3.92823 12.5 4.12714C12.5 4.32606 12.421 4.51682 12.2803 4.65747C12.1397 4.79813 11.9489 4.87714 11.75 4.87714H3.5V19.8771H18.5V11.6271C18.5 11.4282 18.579 11.2375 18.7197 11.0968C18.8603 10.9562 19.0511 10.8771 19.25 10.8771C19.4489 10.8771 19.6397 10.9562 19.7803 11.0968C19.921 11.2375 20 11.4282 20 11.6271Z"/>
+                                </svg>                                                                                                                                                                                                              
+                            </span>
+                        </a>
+                        <button class="mr-3" type="button" (click)="toggleDeleteSpecialityForm()">
+                            <span class="sr-only">Supprimer</span>
+                            <span class="">
+                                <svg class="w-5 h-5 fill-red-600" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.75391 21C7.20391 21 6.73291 20.804 6.34091 20.412C5.94891 20.02 5.75324 19.5493 5.75391 19V6H4.75391V4H9.75391V3H15.7539V4H20.7539V6H19.7539V19C19.7539 19.55 19.5579 20.021 19.1659 20.413C18.7739 20.805 18.3032 21.0007 17.7539 21H7.75391ZM17.7539 6H7.75391V19H17.7539V6ZM9.75391 17H11.7539V8H9.75391V17ZM13.7539 17H15.7539V8H13.7539V17Z"/>
+                                </svg>                                                                                                                                                                                                                                                
+                            </span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <nav class="flex items-center justify-between border-t border-gray-200 bg-white py-3 pt-8" aria-label="Pagination">
+                <div class="hidden sm:block">
+                  <p class="text-sm text-gray-700 !m-0">
+                    Affichage de
+                    <span class="font-medium">1</span>
+                    à
+                    <span class="font-medium">20</span>
+                    sur
+                    <span class="font-medium">200</span>
+                    résultats
+                  </p>
+                </div>
+                <div class="flex flex-1 justify-between sm:justify-end gap-3">
+                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Précédent</button>
+                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Suivant</button>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Delete establishmet form -->
+    <app-modal [visible]="deleteSpecialityForm" position="fixed" class="my-auto">
+        <div class="sm:flex sm:items-start">
+            <div
+                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Supprimer
+                    cette spécialité ?</h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500">Êtes-vous sûre de vouloir supprimer cette spécialité ? <br> Cet action est irréversible.</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 sm:mt-4 flex justify-end gap-4">
+            <button (click)="toggleDeleteSpecialityForm()" type="button"
+                class="max-w-fit inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">Annuler</button>
+            <button type="button"
+                class="inline-flex w-full max-w-fit justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Supprimer</button>
+        </div>
+    </app-modal>
+
+</div>
