@@ -11,6 +11,7 @@ import { LimitationsComponent } from './pages/general/limitations/limitations.co
 import { SharedModule } from '@app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { CONFIGURATIONS_ROUTES } from './routes/configurations.routes';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -27,6 +28,8 @@ import { CONFIGURATIONS_ROUTES } from './routes/configurations.routes';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild(CONFIGURATIONS_ROUTES)
   ]

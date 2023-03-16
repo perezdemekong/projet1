@@ -1,1 +1,56 @@
-<p>general-setting works!</p>
+<div class="py-8">
+
+    <!-- Form -->
+    <form class="sm:p-5 space-y-8 max-w-3xl">
+
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="lg:w-56 w-32 max-sm:w-56">Nom de l'application</div>
+            <div class="flex-1">
+                <app-big-input labelFor="name" [(ngModel)]="appName" label="nom de l'application" name="name" [class]="'w-full'"></app-big-input>
+            </div>
+        </div>
+
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="lg:w-56 w-32 max-sm:w-56">Devise par défaut</div>
+            <div class="flex-1">
+                <app-big-select labelFor="currency" label="devise par défaut" name="currency" [options]="currencies" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+            </div>
+        </div>
+
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="lg:w-56 w-32 max-sm:w-56">Pays par défaut</div>
+            <div class="flex-1">
+                <app-big-select labelFor="country" label="pays par défaut" name="country" [options]="countries" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+            </div>
+        </div>
+
+        <div class="flex sm:items-center gap-6 max-sm:flex-col">
+            <div class="lg:w-56 w-32 max-sm:w-56">Logo de l'application</div>
+            <div class="max-w-fit">
+                <img class="w-28 h-10 object-contain" src="assets/svg/logo.svg" alt="">
+            </div>
+            <app-button type="button" (click)="logoInput.click()" class="max-w-fit" [class]="'max-w-fit text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                Changer l'image
+            </app-button>
+            <input type="file" class="sr-only" #logoInput>
+        </div>
+
+        <div class="flex sm:items-center gap-6 max-sm:flex-col">
+            <div class="lg:w-56 w-32 max-sm:w-56">Favicon de l'application</div>
+            <div class="max-w-fit">
+                <img class="w-28 h-10 object-contain" src="assets/img/icon.png" alt="">
+            </div>
+            <app-button type="button" (click)="favInput.click()" class="max-w-fit" [class]="'max-w-fit text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                Changer l'image
+            </app-button>
+            <input type="file" class="sr-only" #favInput>
+        </div>
+
+        <div class="flex justify-end">
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                Modifier
+            </app-button>
+        </div>
+    </form>
+
+</div>
