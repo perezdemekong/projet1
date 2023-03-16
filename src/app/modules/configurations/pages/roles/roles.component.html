@@ -1,1 +1,90 @@
-<p>roles works!</p>
+<div class="lg:px-10 px-4 py-8">
+
+    <!-- Heading -->
+    <app-page-heading title="Rôles" description="Tous les rôles de l'application Tabiblib"></app-page-heading>
+
+    <!-- Actions -->
+    <div class="flex justify-between mb-5 max-lg:flex-col max-lg:gap-2.5">
+
+        <div class="flex flex-wrap gap-2.5">
+
+            <app-select label="perPage" name="perPage" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
+            
+            <app-select label="activity" name="activity" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
+
+            <app-select label="code" name="code" [options]="codesList" [(ngModel)]="code"></app-select>
+
+        </div>
+
+        <form [formGroup]="searchForm" (submit)="chang()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
+
+            <app-search-bar placeholder="Rechercher par libellé" formControlName="search"></app-search-bar>
+
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">Rechercher</app-button>
+
+        </form>
+
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+        <div class="inline-block min-w-full pb-2 align-middle">
+            <table class="min-w-full">
+                <thead>
+                <tr class="bg-primary-500">
+                    <th scope="col" class="!py-3.5 !p-2.5 !pl-4 border-none text-left font-semibold max-w-fit text-white">Libellé</th>
+                    <th scope="col" class="p-2.5 !pl-8 border-none text-left font-semibold text-white">Code</th>
+                    <th scope="col" class="p-2.5 !pl-0 border-none text-left font-semibold text-white">Accès</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Description</th>
+                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Status</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                        <span class="sr-only">Actions</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="pt-3 divide-y-2 divide-gray-300">
+                <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
+                    <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">Super admin</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">root</td>
+                    <td class="pt-1.5 pb-1 text-tertiary">Api</td>
+                    <td class="pt-1.5 pb-1 text-tertiary capitalize">Gérer les agendas, Gérer les rdv</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="'actif' | checkUserStatusSvgdf" />
+                        </svg>                                                                                                    
+                    </td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                        <a [routerLink]="['/configurations/roles', i, 'update']" class="mr-3" type="button">
+                            <span class="sr-only">Modifier</span>
+                            <span class="">
+                                <svg class="w-5 h-5 fill-black" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.5344 5.84277L17.5344 2.84277C17.3922 2.70193 17.2001 2.62292 17 2.62292C16.7999 2.62292 16.6078 2.70193 16.4656 2.84277L7.46563 11.8428C7.32633 11.9856 7.24888 12.1776 7.25 12.3771V15.3771C7.25 15.5761 7.32902 15.7668 7.46967 15.9075C7.61032 16.0481 7.80109 16.1271 8 16.1271H11C11.1995 16.1283 11.3915 16.0508 11.5344 15.9115L20.5344 6.91152C20.6752 6.76932 20.7542 6.57728 20.7542 6.37714C20.7542 6.17701 20.6752 5.98496 20.5344 5.84277ZM10.6906 14.6271H8.75V12.6865L14.75 6.68652L16.6906 8.62714L10.6906 14.6271ZM17.75 7.56777L15.8094 5.62714L17 4.43652L18.9406 6.37714L17.75 7.56777ZM20 11.6271V19.8771C20 20.275 19.842 20.6565 19.5607 20.9378C19.2794 21.2191 18.8978 21.3771 18.5 21.3771H3.5C3.10218 21.3771 2.72064 21.2191 2.43934 20.9378C2.15804 20.6565 2 20.275 2 19.8771V4.87714C2 4.47932 2.15804 4.09779 2.43934 3.81648C2.72064 3.53518 3.10218 3.37714 3.5 3.37714H11.75C11.9489 3.37714 12.1397 3.45616 12.2803 3.59681C12.421 3.73747 12.5 3.92823 12.5 4.12714C12.5 4.32606 12.421 4.51682 12.2803 4.65747C12.1397 4.79813 11.9489 4.87714 11.75 4.87714H3.5V19.8771H18.5V11.6271C18.5 11.4282 18.579 11.2375 18.7197 11.0968C18.8603 10.9562 19.0511 10.8771 19.25 10.8771C19.4489 10.8771 19.6397 10.9562 19.7803 11.0968C19.921 11.2375 20 11.4282 20 11.6271Z"/>
+                                </svg>                                                                                                                                                                                                              
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <nav class="flex items-center justify-between border-t border-gray-200 bg-white py-3 pt-8" aria-label="Pagination">
+                <div class="hidden sm:block">
+                  <p class="text-sm text-gray-700 !m-0">
+                    Affichage de
+                    <span class="font-medium">1</span>
+                    à
+                    <span class="font-medium">20</span>
+                    sur
+                    <span class="font-medium">200</span>
+                    résultats
+                  </p>
+                </div>
+                <div class="flex flex-1 justify-between sm:justify-end gap-3">
+                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Précédent</button>
+                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Suivant</button>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+</div>
