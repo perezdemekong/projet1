@@ -3,7 +3,7 @@
     <app-breadscrumb [breadcrumb]="breadscrumbs"></app-breadscrumb>
 
     <!-- Heading -->
-    <app-page-heading title="Spécialités" description="Créer une spécialité"></app-page-heading>
+    <app-page-heading title="Pays" description="Créer un pays"></app-page-heading>
 
     <!-- Form -->
     <form class="sm:p-5 space-y-8 max-w-3xl">
@@ -14,12 +14,18 @@
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
-            <div class="w-40">Adresse</div>
+            <div class="w-40">Code</div>
             <div class="flex-1">
                 <app-big-input labelFor="code" label="code" name="code" placeholder="Entrez le code" [class]="'w-full'"></app-big-input>
             </div>
         </div>
-        <div class="flex sm:items-center max-sm:gap-2.5">
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Indicatif téléphonique</div>
+            <div class="flex-1">
+                <app-big-input labelFor="indicatif" label="indicatif" name="indicatif" placeholder="Entrez l'indicatif" [class]="'w-full'"></app-big-input>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Status</div>
             <div class="flex-1">
                 <app-toggle (click)="toggleStatus()" [toggled]="status" [backgroundClass]="!status ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>

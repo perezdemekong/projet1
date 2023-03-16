@@ -23,6 +23,20 @@ export const ROUTES: Routes = [
             )
     },
     {
+        path: 'location',
+        loadChildren: () => 
+            import('@modules/location/location.module').then(
+                m => m.LocationModule
+            )
+    },
+    {
+        path: 'configurations',
+        loadChildren: () => 
+            import('@modules/configurations/configurations.module').then(
+                m => m.ConfigurationsModule
+            )
+    },
+    {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
