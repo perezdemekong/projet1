@@ -7,6 +7,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { BigInputComponent } from './big-input/big-input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { BigSelectComponent } from './big-select/big-select.component';
+import { BigPasswordComponent } from './big-password/big-password.component';
 
 
 
@@ -17,7 +18,8 @@ import { BigSelectComponent } from './big-select/big-select.component';
     CheckboxComponent,
     BigInputComponent,
     TextareaComponent,
-    BigSelectComponent
+    BigSelectComponent,
+    BigPasswordComponent
   ],
   imports: [
     FormsModule,
@@ -30,6 +32,7 @@ import { BigSelectComponent } from './big-select/big-select.component';
     BigInputComponent,
     TextareaComponent,
     BigSelectComponent,
+    BigPasswordComponent,
   ]
 })
 export class InputModule { }
