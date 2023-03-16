@@ -55,7 +55,7 @@ export const CONFIGURATIONS_ROUTES: Routes = [
                 component: GeneralComponent,
                 children: [
                     {
-                        path: '',
+                        path: 'settings',
                         component: GeneralSettingComponent,
                         data: {
                             title: 'Paramétres généraux'
@@ -67,12 +67,18 @@ export const CONFIGURATIONS_ROUTES: Routes = [
                         data: {
                             title: 'Limitations'
                         }
+                    },
+                    {
+                        path: '',
+                        redirectTo: '/configurations/general/settings',
+                        pathMatch: 'full'
                     }
                 ]
             },
             {
                 path: '',
-                redirectTo: '/configurations/employees'
+                redirectTo: 'configurations/employees',
+                pathMatch: 'full'
             }
         ]
     }

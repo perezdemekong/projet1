@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuTabs } from '@app/shared/components/tabs/menu-tabs/interfaces/menu-tabs.interface';
 
 @Component({
   selector: 'app-general',
@@ -6,6 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./general.component.scss']
 })
 export class GeneralComponent implements OnInit {
+
+  routeParams!: string;
+
+  menuTabs: MenuTabs[] = [
+    {
+      name: 'Général',
+      link: '/configurations/general/settings'
+    },
+    {
+      name: 'Limitations',
+      link: '/configurations/general/limitations'
+    }
+  ]
 
   constructor() { }
 

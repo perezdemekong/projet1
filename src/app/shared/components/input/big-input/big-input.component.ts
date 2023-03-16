@@ -8,7 +8,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
       <label [for]="labelFor" class="sr-only">{{label}}</label>
       <div class="px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg">
         <input 
-          type="text" 
+          [type]="type" 
           [name]="name" 
           [id]="name" 
           [placeholder]="placeholder" 
@@ -30,11 +30,12 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class BigInputComponent {
 
-  @Input() label!: string;
   @Input() labelFor!: string;
+  @Input() label!: string;
+  @Input() type: string = 'text';
   @Input() name!: string;
   @Input() class!: string;
-  @Input() placeholder!: string;
+  @Input() placeholder: string = '';
 
   value: string = '';
 
