@@ -18,7 +18,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
           [value]="value"
           (input)="onChange($any($event.target).value)"
           (blur)="onTouched()"
-          class="p-0 h-full sm:min-w-[364px] min-w-[220px] block w-full text-slate-700 placeholder:text-sm text-sm bg-primary-100 placeholder:text-gray-400  rounded-md border-transparent focus:border-primary-100 focus:ring-primary-100"
+          [ngClass]="InputClass"
+          class="p-0 h-full sm:min-w-[300px] min-w-[220px] block w-full text-slate-700 placeholder:text-sm text-sm bg-primary-100 placeholder:text-gray-400  rounded-md border-transparent focus:border-primary-100 focus:ring-primary-100"
           >
       </div>
     </div>
@@ -35,6 +36,7 @@ export class SearchBarComponent {
   
   @Input() placeholder!: string;
   @Input() class!: string;
+  @Input() InputClass!: string;
 
   value: string = '';
 
