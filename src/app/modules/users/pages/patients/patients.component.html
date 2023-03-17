@@ -42,19 +42,23 @@
                 </tr>
                 </thead>
                 <tbody class="pt-3 divide-y-2 divide-gray-300">
-                <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
-                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">Belaouier</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">Mohamed</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 pl-10 text-tertiary capitalize">16/09/1983</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">+07 456 890 678</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary">belaouier.mohamed@gmail.com</td>
+                <tr *ngFor="let patient of patients | paginate : {
+                    itemsPerPage: perPage,
+                    currentPage: 2,
+                    totalItems: patients.length
+                }" class="cursor-pointer border-gray-400">
+                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">{{patient.name}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">{{patient.surname}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 pl-10 text-tertiary capitalize">{{patient.birthDate | date: 'dd/mmmm/yyyy'}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">{{patient.phone}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary">{{patient.email}}</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="'actif' | checkUserStatusSvgdf" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="patient.status| checkUserStatusColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="patient.status | checkUserStatusSvgdf" />
                         </svg>                                                                                                    
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                        <a [routerLink]="['/users/patients', i, 'antecedents']" class="mr-3" type="button">
+                        <a [routerLink]="['/users/patients', patient.id, 'antecedents']" class="mr-3" type="button">
                             <span class="sr-only">Options</span>
                             <span class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 fill-black">
@@ -68,23 +72,52 @@
                 </tbody>
             </table>
 
-            <nav class="flex items-center justify-between border-t border-gray-200 bg-white py-3 pt-8" aria-label="Pagination">
-                <div class="hidden sm:block">
-                  <p class="text-sm text-gray-700 !m-0">
-                    Affichage de
-                    <span class="font-medium">1</span>
-                    à
-                    <span class="font-medium">20</span>
-                    sur
-                    <span class="font-medium">200</span>
-                    résultats
-                  </p>
+            <pagination-template #p="paginationApi" (pageChange)="onPageChange($event)" class="flex items-center justify-center gap-1 mt-6">
+
+                <div class="">
+                    <button type="button" *ngIf="p.isFirstPage()" [class.disabled]="p.isFirstPage()" disabled class="cursor-not-allowed text-[#E8E8E8] w-8 h-8 flex justify-center text-sm items-center rounded-md border-neutral-100 border bg-white">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g opacity="0.7">
+                                <path d="M9.71211 2.93333L4.91211 7.73333L9.71211 12.5333L11.0881 11.1733L7.64811 7.73333L11.0881 4.29333L9.71211 2.93333Z"/>
+                            </g>
+                        </svg>                                             
+                    </button>
+
+                    <button type="button" *ngIf="!p.isFirstPage()" (click)="p.previous()" class="text-black w-8 h-8 flex justify-center text-sm items-center rounded-md border-neutral-200 border bg-white">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g opacity="0.7">
+                                <path d="M9.71211 2.93333L4.91211 7.73333L9.71211 12.5333L11.0881 11.1733L7.64811 7.73333L11.0881 4.29333L9.71211 2.93333Z"/>
+                            </g>
+                        </svg>                                             
+                    </button>
                 </div>
-                <div class="flex flex-1 justify-between sm:justify-end gap-3">
-                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Précédent</button>
-                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Suivant</button>
+
+                <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value" class="">
+                    <button *ngIf="p.getCurrent() !== page.value" (click)="p.setCurrent(page.value)" class="w-8 h-8 flex justify-center text-black text-sm items-center rounded-md border-neutral-200 border bg-white">
+                        {{page.label}}                                         
+                    </button>
+
+                    <div *ngIf="p.getCurrent() === page.value" class="w-8 h-8 flex justify-center text-white text-sm items-center rounded-md bg-primary-500" aria-current="page">
+                        {{page.label}}
+                    </div>
                 </div>
-            </nav>
+
+                <div class="">
+                    <button *ngIf="p.isLastPage()" class="w-8 h-8 flex justify-center text-black cursor-not-allowed text-sm items-center rounded-md border-neutral-200 border bg-white">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.28811 12.5333L11.0881 7.73333L6.28811 2.93333L4.92811 4.29333L8.35211 7.73333L4.91211 11.1733L6.28811 12.5333Z" fill="#52575C"/>
+                        </svg>                                                                   
+                    </button>
+                    
+                    <button *ngIf="!p.isLastPage()" (click)="p.next()" class="w-8 h-8 flex justify-center text-black text-sm items-center rounded-md border-neutral-200 border bg-white">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.28811 12.5333L11.0881 7.73333L6.28811 2.93333L4.92811 4.29333L8.35211 7.73333L4.91211 11.1733L6.28811 12.5333Z" fill="#52575C"/>
+                        </svg>                                                                   
+                    </button>
+                </div>
+
+            </pagination-template>
+
         </div>
     </div>
 

@@ -9,6 +9,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { PatientDetailsComponent } from './pages/patients/patient-details/patient-details.component';
 import { AntecedentComponent } from './pages/patients/patient-details/antecedent/antecedent.component';
 import { DocumentsComponent } from './pages/patients/patient-details/documents/documents.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 

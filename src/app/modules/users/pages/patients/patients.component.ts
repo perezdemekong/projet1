@@ -17,9 +17,1310 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PatientsComponent implements OnInit {
 
+  patients = [
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },{
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },{
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    },
+    {
+      id: 1,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'actif'
+    },
+    {
+      id: 2,
+      name: 'Belaiouer',
+      surname: 'mohamed',
+      birthDate: new Date(1983, 8, 16),
+      phone: '+07 456 890 678',
+      email: 'Belaiouer@gmail.com',
+      status: 'inactif'
+    }
+  ]
+
   searchForm: FormGroup = this.fb.group({
     search: ['', Validators.required]
   })
+
+  filters = {
+    perPage: 10,
+  }
 
   perPage: number = 10;
   activity: "actif" | "inactif" = "actif";
@@ -40,6 +1341,20 @@ export class PatientsComponent implements OnInit {
     console.log(this.searchForm.getRawValue());
     console.log(this.activity);
     console.log(this.perPage);
+  }
+
+  onPageChange(value: number) {
+    this.filters = Object.assign({}, {...this.filters, perPage: this.perPage})
+    console.log(this.filters);
+    console.log(this.patients.length);
+  }
+
+  handlePageSizeChange(event: any): void {
+    this.filters = Object.assign(
+      {},
+      { ...this.filters, per_page: event.target.value, page: 1 }
+    );
+    console.log(this.filters);
   }
 
 }

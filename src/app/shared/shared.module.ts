@@ -12,6 +12,7 @@ import { CheckUserStatusSvgdfPipe } from './pipes/check-user-status-svgdf.pipe';
 import { BreadscrumbModule } from './components/breadscrumb/breadscrumb.module';
 import { TabsModule } from './components/tabs/tabs.module';
 import { ModalModule } from './components/modal/modal.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -29,7 +30,8 @@ import { ModalModule } from './components/modal/modal.module';
     ToggleModule,
     BreadscrumbModule,
     TabsModule,
-    ModalModule
+    ModalModule,
+    NgxPaginationModule,
   ],
   exports: [
     ThemeModule,
@@ -40,6 +42,7 @@ import { ModalModule } from './components/modal/modal.module';
     BreadscrumbModule,
     TabsModule,
     ModalModule,
+    NgxPaginationModule,
 
 
     CheckUserStatusColorPipe,
