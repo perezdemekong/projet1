@@ -37,6 +37,13 @@ export const ROUTES: Routes = [
             )
     },
     {
+        path: 'account',
+        loadChildren: () => 
+            import('@modules/account/account.module').then(
+                m => m.AccountModule
+            )
+    },
+    {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
