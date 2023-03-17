@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { AuthComponent } from './layouts/auth/auth.component';
 import { TpanelComponent } from './layouts/tpanel/tpanel.component';
 import { RouterModule } from '@angular/router';
+import { AuthPanelComponent } from './layouts/auth/auth.component';
 
 
 
@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    AuthComponent,
+    AuthPanelComponent,
     TpanelComponent
   ],
   imports: [
