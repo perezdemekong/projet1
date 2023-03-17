@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-tpanel',
@@ -20,6 +20,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TpanelComponent implements OnInit {
 
+  @ViewChild('responsiveSideBar') responsiveSideBar!: ElementRef;
+
   showMobileMenu: boolean = false;
   showAnimationResponsiveSideBar: boolean = false;
 
@@ -33,6 +35,17 @@ export class TpanelComponent implements OnInit {
       this.showMobileMenu = !this.showMobileMenu;
       setTimeout(() => this.showAnimationResponsiveSideBar = !this.showAnimationResponsiveSideBar, 100);
     }else {
+      this.showAnimationResponsiveSideBar = !this.showAnimationResponsiveSideBar;
+      setTimeout(() => this.showMobileMenu = !this.showMobileMenu, 200);
+    }
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  public onPageClick(targetElement: HTMLElement): void {
+    const clickedInside =
+      this.responsiveSideBar?.nativeElement.contains(targetElement);
+
+    if (clickedInside) {
       this.showAnimationResponsiveSideBar = !this.showAnimationResponsiveSideBar;
       setTimeout(() => this.showMobileMenu = !this.showMobileMenu, 200);
     }
