@@ -2,7 +2,7 @@
 
     <app-page-heading title="Tableau de bord" description="Tous les éléments de l'application Tabiblib"></app-page-heading>
 
-    <div class="space-y-6">
+    <div *ngIf="!loading" class="space-y-6">
 
         <div class="">
 
@@ -208,4 +208,7 @@
         </div>
 
     </div>
+
+    <app-dashboard-loader *ngIf="loading"></app-dashboard-loader>
+
 </div>

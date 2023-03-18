@@ -35,7 +35,7 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto">
+    <div *ngIf="!loading" class="overflow-x-auto">
         <div class="inline-block min-w-full pb-2 align-middle">
             <table class="min-w-full">
                 <thead>
@@ -50,11 +50,11 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody class="pt-3 divide-y-2 divide-gray-300">
+                <tbody class="pt-3 divide-y-2 divide-gray-100">
                 <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
-                    <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">Belaouier</td>
+                    <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">Belaiouer</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">Mohamed</td>
-                    <td class="pt-1.5 pb-1 text-tertiary">belaouier.mohamed@gmail.com</td>
+                    <td class="pt-1.5 pb-1 text-tertiary">Belaiouer.mohamed@gmail.com</td>
                     <td class="pt-1.5 pb-1 text-tertiary capitalize">Gestionnaire</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
@@ -102,6 +102,9 @@
             </nav>
         </div>
     </div>
+
+    <!-- Loader -->
+    <app-table-loader *ngIf="loading"></app-table-loader>
 
     <!-- Delete establishmet form -->
     <app-modal [visible]="deleteEmployeeForm" position="fixed" class="my-auto">
