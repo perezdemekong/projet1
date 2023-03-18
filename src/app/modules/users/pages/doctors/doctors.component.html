@@ -27,7 +27,7 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto">
+    <div *ngIf="!loading" class="overflow-x-auto">
         <div class="inline-block min-w-full pb-2 align-middle">
             <table class="min-w-full">
                 <thead>
@@ -44,14 +44,14 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody class="pt-3 divide-y-2 divide-gray-300">
+                <tbody class="pt-3 divide-y-2 divide-gray-100">
                 <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
-                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">Belaouier</td>
+                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">Belaiouer</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">Mohamed</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">Médecin Généraliste</td>
                     <td class="pt-1.5 pb-1 text-tertiary capitalize min-w-[140px]">11 Rue Rouget de Lisle, 92800 Puteaux</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">+07 456 890 678</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary">belaouier.mohamed@gmail.com</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary">Belaiouer.mohamed@gmail.com</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
                             <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="'actif' | checkUserStatusSvgdf" />
@@ -91,5 +91,8 @@
             </nav>
         </div>
     </div>
+
+    <!-- Loader -->
+    <app-table-loader *ngIf="loading"></app-table-loader>
 
 </div>
