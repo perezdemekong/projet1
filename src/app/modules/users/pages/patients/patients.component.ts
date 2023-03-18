@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -1330,11 +1330,14 @@ export class PatientsComponent implements OnInit {
 
   search!: string;
 
+  loading: boolean = true;
+
   constructor(
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    setTimeout(() => this.loading = !this.loading, 3000);
   }
 
   chang() {

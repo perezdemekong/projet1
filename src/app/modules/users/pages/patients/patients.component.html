@@ -25,7 +25,7 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto">
+    <div *ngIf="!loading" class="overflow-x-auto">
         <div class="inline-block min-w-full pb-2 align-middle">
             <table class="min-w-full">
                 <thead>
@@ -41,12 +41,12 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody class="pt-3 divide-y-2 divide-gray-300">
+                <tbody class="pt-3 divide-y-2 divide-gray-100">
                 <tr *ngFor="let patient of patients | paginate : {
                     itemsPerPage: perPage,
                     currentPage: 2,
                     totalItems: patients.length
-                }" class="cursor-pointer border-gray-400">
+                }" class="cursor-pointer">
                     <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">{{patient.name}}</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">{{patient.surname}}</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 pl-10 text-tertiary capitalize">{{patient.birthDate | date: 'dd/mmmm/yyyy'}}</td>
@@ -120,5 +120,8 @@
 
         </div>
     </div>
+
+    <!-- Loader -->
+    <app-table-loader *ngIf="loading"></app-table-loader>
 
 </div>

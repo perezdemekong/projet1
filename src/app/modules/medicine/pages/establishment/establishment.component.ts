@@ -25,11 +25,14 @@ export class EstablishmentComponent implements OnInit {
 
   search!: string;
 
+  loading: boolean = true;
+
   constructor(
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    setTimeout(() => this.loading = !this.loading, 3000);
   }
 
   chang() {

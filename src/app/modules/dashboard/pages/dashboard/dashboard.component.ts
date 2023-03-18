@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  loading: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
+    setTimeout(() => this.loading = !this.loading, 3000);
   }
 
 }
