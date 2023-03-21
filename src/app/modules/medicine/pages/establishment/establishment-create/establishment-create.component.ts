@@ -26,6 +26,9 @@ export class EstablishmentCreateComponent implements OnInit {
   establishmentTypeTable = ['hopital publique', 'clinique privée'];
   establishmentType!: string;
 
+  adminTypeTable = ['Mohamed Belaiouer', 'Mohamed Belaiouer'];
+  admin!: string;
+
   constructor() { }
 
   ngOnInit(): void {
