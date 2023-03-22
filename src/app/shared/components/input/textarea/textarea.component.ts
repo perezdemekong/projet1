@@ -13,6 +13,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
         [value]="value"
         (input)="onChange($any($event.target).value)"
         (blur)="onTouched()"
+        [placeholder]="placeholder"
         class="block rounded-lg w-full bg-primary-100 resize-y border-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 text-sm sm:leading-6"
         >
       </textarea>
@@ -32,6 +33,7 @@ export class TextareaComponent {
   @Input() label!: string;
   @Input() rows!: number;
   @Input() name!: string;
+  @Input() placeholder!: string;
   @Input() class!: string;
 
   value: string = '';
