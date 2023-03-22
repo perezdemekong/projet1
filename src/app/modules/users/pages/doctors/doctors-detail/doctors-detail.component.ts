@@ -4,21 +4,21 @@ import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breads
 import { MenuTabs } from '@app/shared/components/tabs/menu-tabs/interfaces/menu-tabs.interface';
 
 @Component({
-  selector: 'app-patient-details',
-  templateUrl: './patient-details.component.html',
-  styleUrls: ['./patient-details.component.scss']
+  selector: 'app-doctors-detail',
+  templateUrl: './doctors-detail.component.html',
+  styleUrls: ['./doctors-detail.component.scss']
 })
-export class PatientDetailsComponent implements OnInit {
+export class DoctorsDetailComponent implements OnInit {
 
   breadscrumbs: Breadscrump[] = [
     {
       reference: {
-        name: 'Patient',
-        link: '/users/patients'
+        name: 'Doctor',
+        link: '/users/doctors'
       },
       referees: [
         {
-          name: "Informations du patient",
+          name: "Informations du médecin",
           link: ''
         }
       ]
@@ -26,7 +26,8 @@ export class PatientDetailsComponent implements OnInit {
   ]
 
   routeParams!: string | null;
-  route!: string;
+
+  validateDoctorAccountForm: boolean = false;
 
   menuTabs!: MenuTabs[];
 
@@ -41,18 +42,24 @@ export class PatientDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeParams = this.activatedRoute.snapshot.paramMap.get('id');
-    this.route = `/users/patients/${this.routeParams}/historical`;
     this.menuTabs = [
       {
-        name: 'Historiques des rendez-vous',
-        link: this.route
+        name: 'Lieux de consultation',
+        link: `/users/doctors/${this.routeParams}/place-of-consultation`
       },
+      {
+        name: 'Historiques des rendez-vous',
+        link: `/users/doctors/${this.routeParams}/historical`
+      }
     ];
-    console.log(this.route);
   }
 
   toggleActivityToggled() {
     this.activityToggled = !this.activityToggled;
+  }
+
+  toggleValidateDoctorAccountForm() {
+    this.validateDoctorAccountForm = !this.validateDoctorAccountForm;
   }
 
 }

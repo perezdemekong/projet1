@@ -6,6 +6,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TpanelComponent } from './layouts/tpanel/tpanel.component';
 import { RouterModule } from '@angular/router';
 import { AuthPanelComponent } from './layouts/auth/auth.component';
+import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
 
 
@@ -15,6 +16,7 @@ import { AuthPanelComponent } from './layouts/auth/auth.component';
     SidebarComponent,
     AuthPanelComponent,
     TpanelComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

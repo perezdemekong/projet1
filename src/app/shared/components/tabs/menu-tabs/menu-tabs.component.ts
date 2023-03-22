@@ -30,7 +30,17 @@ import { MenuTabs } from './interfaces/menu-tabs.interface';
 })
 export class MenuTabsComponent {
 
-  @Input() tabs!: MenuTabs[];
+  _tabs!: MenuTabs[];
+
+  get tabs(): MenuTabs[] {
+    return this._tabs;
+  }
+
+  @Input() set tabs(tabs: MenuTabs[]){
+    this._tabs = tabs;
+  }
+
+  
   @Input() class!: string;
 
   page!: string;

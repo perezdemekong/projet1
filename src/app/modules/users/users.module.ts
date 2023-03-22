@@ -7,9 +7,10 @@ import { USERSROUTES } from './routes/users.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 import { PatientDetailsComponent } from './pages/patients/patient-details/patient-details.component';
-import { AntecedentComponent } from './pages/patients/patient-details/antecedent/antecedent.component';
-import { DocumentsComponent } from './pages/patients/patient-details/documents/documents.component';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { HistoricalComponent as PatientHistorical } from './pages/patients/patient-details/historical/historical.component';
+import { DoctorsDetailComponent } from './pages/doctors/doctors-detail/doctors-detail.component';
+import { PlaceOfConsultationComponent } from './pages/doctors/doctors-detail/place-of-consultation/place-of-consultation.component';
+import { HistoricalComponent as DoctorHistorical } from './pages/doctors/doctors-detail/historical/historical.component';
 
 
 
@@ -18,8 +19,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PatientsComponent,
     DoctorsComponent,
     PatientDetailsComponent,
-    AntecedentComponent,
-    DocumentsComponent
+    PatientHistorical,
+    DoctorHistorical,
+    DoctorsDetailComponent,
+    PlaceOfConsultationComponent
   ],
   imports: [
     CommonModule,
