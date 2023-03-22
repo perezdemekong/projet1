@@ -15,7 +15,7 @@
 
         <form [formGroup]="searchForm" (submit)="chang()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
 
-            <app-search-bar placeholder="Rechercher un praticien" formControlName="search"></app-search-bar>
+            <app-search-bar placeholder="Rechercher un patient" formControlName="search"></app-search-bar>
 
             <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">Rechercher</app-button>
 
@@ -23,25 +23,35 @@
 
     </div>
 
-    <!-- List and pagination-->
-    <div *ngIf="!loading" class="">
-
-        <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-    
-            <div *ngFor="let i of status" class="rounded-xl shadow-md">
-    
-                <div class="bg-primary-500 rounded-tl-xl rounded-tr-xl p-2.5">
-                    <h3 class="font-bold text-white text-lg">Mercredi 1 mars 2023-10h40</h3>
-                </div>
-    
-                <div class="p-5 space-y-2.5 border-b border-gray-200">
-                    <h4 class="font-semibold text-lg">Première consultation de médecine générale</h4>
-                    <p class="font-light text-lg">Résidence la Rouvière 13009 <br> Alger</p>
-                    <div class="flex items-center gap-2.5">
-                        <span *ngIf="i === 'canceled'" class="px-2.5 py-1 inline-flex text-red-600 bg-red-200 items-center capitalize rounded-3xl">Annuler</span>
-                        <span *ngIf="i === 'ended'" class="px-2.5 text-secondary bg-[rgba(247,147,30,0.2)] py-1 inline-flex items-center capitalize rounded-3xl">Terminé</span>
-                        <span *ngIf="i === 'confirmed'" class="px-2.5 py-1 text-primary-500 bg-primary-100 inline-flex items-center capitalize rounded-3xl">Confirmé</span>
-                        <button *ngIf="i === 'confirmed'" type="button" (click)="toggleCreateReminderForm()">
+    <!-- Table -->
+    <div *ngIf="!loading" class="overflow-x-auto">
+        <div class="inline-block min-w-full pb-2 align-middle">
+            <table class="min-w-full">
+                <thead>
+                <tr class="bg-primary-500">
+                    <th scope="col" class="!py-3.5 !p-2.5 !pl-4 border-none text-left font-semibold max-w-fit text-white">Patient</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Date</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Motif de consultation</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Type de RDV</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Status</th>
+                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Lieu de consultation</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                        <span class="sr-only">Actions</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="pt-3 divide-y-2 divide-gray-100">
+                <tr *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer">
+                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">Belaiouer</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">26/05/2023</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 pl-10 text-tertiary capitalize">Première consultation de médecine générale</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">à venir</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary">
+                        <span class="px-2.5 py-1 inline-flex items-center capitalize rounded-3xl text-primary-500 bg-primary-100">Confirmé</span>
+                    </td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">Cabinet de pédiatrie de Vertou</td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                        <button type="button" (click)="toggleCreateReminderForm()">
                             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_2046_15766)">
                                 <path d="M6.7174 1.97813C7.12365 2.78438 6.79865 3.76876 5.99084 4.17501C5.18302 4.58126 4.20021 4.25626 3.7924 3.44845C3.38459 2.64063 3.71115 1.65626 4.51896 1.25001C5.32677 0.843758 6.31115 1.17032 6.7174 1.97813Z" fill="white"/>
@@ -75,117 +85,18 @@
                                 </defs>
                             </svg>
                         </button>
-                    </div>
-                </div>
-    
-                <div class="flex p-5 gap-2.5">
-    
-                    <div class="">
-                        <img src="assets/img/profile.png" class="w-14 h-14 rounded-full" alt="">
-                    </div>
-    
-                    <div class="flex flex-col">
-    
-                        <h6 class="font-bold text-xl">Dr Belaiouer Mohamed</h6>
-    
-                        <p class="font-light">Médecin généraliste</p>
-    
-                    </div>
-                    
-                </div>
-    
-            </div>
-    
-        </div>
-
-        <div class="flex items-center justify-center gap-1 mt-10 mx-auto">
-
-            <div class="">
-                <div type="button" class="text-black w-8 h-8 flex justify-center text-sm items-center rounded-md border-neutral-200 border bg-white">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g opacity="0.7">
-                            <path d="M9.71211 2.93333L4.91211 7.73333L9.71211 12.5333L11.0881 11.1733L7.64811 7.73333L11.0881 4.29333L9.71211 2.93333Z"/>
-                        </g>
-                    </svg>                                             
-                </div>
-            </div>
-
-            <div *ngFor="let page of [1, 2, 3, 4]" class="">
-                <button class="w-8 h-8 flex justify-center text-black text-sm items-center rounded-md border-neutral-200 border bg-white">
-                    {{page}}                                         
-                </button>
-            </div>
-
-            <div class="">
-                <button class="w-8 h-8 flex justify-center text-black cursor-not-allowed text-sm items-center rounded-md border-neutral-200 border bg-white">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.28811 12.5333L11.0881 7.73333L6.28811 2.93333L4.92811 4.29333L8.35211 7.73333L4.91211 11.1733L6.28811 12.5333Z" fill="#52575C"/>
-                    </svg>                                                                   
-                </button>
-            </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
         </div>
-
     </div>
 
 
     <!-- Loader -->
-    <div *ngIf="loading" class="">
+    <app-table-loader *ngIf="loading"></app-table-loader>
 
-        <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-    
-            <div *ngFor="let i of status" class="rounded-xl shadow-md">
-    
-                <div class="bg-primary-500 rounded-tl-xl rounded-tr-xl p-2.5">
-                    <h3 class="font-bold text-white text-lg">
-                        <ngx-skeleton-loader class="w-full"></ngx-skeleton-loader>
-                    </h3>
-                </div>
-    
-                <div class="p-5 space-y-2.5 border-b border-gray-200">
-                    <h4 class="font-semibold text-lg">
-                        <ngx-skeleton-loader class="w-full"></ngx-skeleton-loader>
-                    </h4>
-                    <p class="font-light text-lg">
-                        <ngx-skeleton-loader class="w-full"></ngx-skeleton-loader>
-                    </p>
-                    <div class="flex items-center gap-2.5">
-                        <span class="w-14 h-5">
-                            <ngx-skeleton-loader class="w-full"></ngx-skeleton-loader>
-                        </span>
-                        <div class="w-5 h-5">
-                            <ngx-skeleton-loader class="w-full"></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="flex p-5 gap-2.5">
-    
-                    <div class="">
-                        <div>
-                            <ngx-skeleton-loader [theme]="{height: '56px', width: '56px'}" appearance="circle"></ngx-skeleton-loader>
-                        </div>
-                    </div>
-    
-                    <div class="flex flex-col justify-between flex-1">
-    
-                        <div class="">
-                            <ngx-skeleton-loader class="w-full"></ngx-skeleton-loader>
-                        </div>
-    
-                        <div class="">
-                            <ngx-skeleton-loader class="w-full"></ngx-skeleton-loader>
-                        </div>
-    
-                    </div>
-                    
-                </div>
-    
-            </div>
-    
-        </div>
-
-    </div>
 </div>
 
 <!-- Create reminder form -->
