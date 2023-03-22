@@ -20,6 +20,9 @@ export class EstablishmentComponent implements OnInit {
   typeOfEstablishment: string = "clinique privée"
   typesOfEstablishment: string[] = ["clinique privée", "Hopital public"];
 
+  adminTypeTable = ['Mohamed Belaiouer', 'Mohamed Belaiouer'];
+  admin!: string;
+
   perPageRange: number[] = [10, 20, 30, 40, 50];
   activitiesRange: string[] = ["actif", "inactif"];
 
@@ -40,6 +43,7 @@ export class EstablishmentComponent implements OnInit {
     console.log(this.activity);
     console.log(this.perPage);
     console.log(this.typeOfEstablishment);
+    console.log(this.admin);
   }
 
   toggleDeleteEstablishmentForm() {
