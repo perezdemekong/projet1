@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { NotFoundComponent } from "@app/shared/theme/layouts/not-found/not-found.component";
 
 export const ROUTES: Routes = [
     {
@@ -54,5 +55,12 @@ export const ROUTES: Routes = [
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
+    },
+    {
+        path: '**',
+        component: NotFoundComponent,
+        data: {
+            title: 'Page introuvable'
+        }
     }
 ]

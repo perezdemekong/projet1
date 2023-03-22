@@ -20,6 +20,18 @@
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Ville</div>
+            <div class="flex-1">
+                <app-big-select labelFor="city" label="ville" name="city" [options]="villeTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Praticien admin</div>
+            <div class="flex-1">
+                <app-big-select labelFor="admin" label="administrateur" name="admin" [options]="adminTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Adresse</div>
             <div class="flex-1">
                 <app-big-input labelFor="address" label="adresse" name="address" placeholder="Entrez l'adresse" [class]="'w-full'"></app-big-input>

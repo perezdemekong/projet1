@@ -1,0 +1,141 @@
+<div class="px-4">
+
+    <!-- Actions -->
+    <div class="flex justify-between mb-5 max-lg:flex-col max-lg:gap-2.5">
+
+        <div class="flex gap-2.5">
+
+            <app-select label="perPage" name="perPage" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
+
+            <app-select label="rdv" name="rdv" [options]="rdvRange" [(ngModel)]="rdv"></app-select>
+
+            <app-select label="confirm" name="confirm" [options]="confirmation" [(ngModel)]="confirm"></app-select>
+
+        </div>
+
+        <form [formGroup]="searchForm" (submit)="chang()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
+
+            <app-search-bar placeholder="Rechercher un patient" formControlName="search"></app-search-bar>
+
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">Rechercher</app-button>
+
+        </form>
+
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="!loading" class="overflow-x-auto">
+        <div class="inline-block min-w-full pb-2 align-middle">
+            <table class="min-w-full">
+                <thead>
+                <tr class="bg-primary-500">
+                    <th scope="col" class="!py-3.5 !p-2.5 !pl-4 border-none text-left font-semibold max-w-fit text-white">Patient</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Date</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Motif de consultation</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Type de RDV</th>
+                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Status</th>
+                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Lieu de consultation</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                        <span class="sr-only">Actions</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="pt-3 divide-y-2 divide-gray-100">
+                <tr *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer">
+                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">Belaiouer</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">26/05/2023</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 pl-10 text-tertiary capitalize">Première consultation de médecine générale</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">à venir</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary">
+                        <span class="px-2.5 py-1 inline-flex items-center capitalize rounded-3xl text-primary-500 bg-primary-100">Confirmé</span>
+                    </td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">Cabinet de pédiatrie de Vertou</td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                        <button type="button" (click)="toggleCreateReminderForm()">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_2046_15766)">
+                                <path d="M6.7174 1.97813C7.12365 2.78438 6.79865 3.76876 5.99084 4.17501C5.18302 4.58126 4.20021 4.25626 3.7924 3.44845C3.38459 2.64063 3.71115 1.65626 4.51896 1.25001C5.32677 0.843758 6.31115 1.17032 6.7174 1.97813Z" fill="white"/>
+                                <path d="M17.8154 8.95314C17.4513 8.49376 16.9529 8.1547 16.417 7.85158C15.9982 7.61408 15.617 7.3922 15.1576 7.11251C14.5123 6.72033 13.9263 6.21408 13.3873 5.70939C13.0685 5.41095 12.7623 5.10158 12.4545 4.7922C11.8295 4.16408 11.181 3.51251 10.4435 2.95314C9.54509 2.27345 8.41696 1.89845 7.25602 1.88283C7.23571 1.83439 7.22321 1.78283 7.19977 1.73595C7.01923 1.3749 6.74148 1.07142 6.39779 0.85969C6.05411 0.647956 5.65813 0.536376 5.25446 0.537515C4.91696 0.537515 4.57946 0.617202 4.27634 0.770327C3.23571 1.29376 2.80602 2.54376 3.27321 3.59689C2.96071 3.94689 2.39665 4.63752 2.15602 5.33439C1.95915 5.90314 1.8529 6.58283 1.85602 7.24533C1.85915 8.15314 1.9154 9.06252 1.97009 9.9422C2.04665 11.1985 2.12634 12.4969 2.04821 13.7766C2.0404 13.9016 2.03102 14.0391 2.02009 14.186C1.96696 14.8922 1.90759 15.7938 2.01696 16.625C2.09509 17.475 2.39509 18.2922 3.07009 19.0516C4.92634 20.7375 8.98415 21.2453 13.4685 18.7313C17.606 16.4125 18.3091 13.9297 18.667 12.3219C18.9154 11.1891 18.6966 10.0656 17.8154 8.95314Z" fill="#FCC21B"/>
+                                <path d="M14.503 10.3078C12.8171 10.3656 10.7546 11.0406 8.85929 12.1281C7.16242 13.1031 5.80148 14.2953 4.98117 15.4844C4.26242 16.5375 4.06085 17.4828 4.40929 18.0922C4.77648 18.7297 5.87492 19.1391 7.28429 19.1609C8.85773 19.1891 10.6687 18.7422 12.2827 17.9234C13.989 17.0594 15.4405 15.8109 16.3609 14.4016C17.1796 13.1516 17.4452 11.9531 17.053 11.2203C16.7155 10.5875 15.803 10.2641 14.503 10.3078Z" fill="#2F2F2F"/>
+                                <mask id="mask0_2046_15766" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="4" y="10" width="14" height="10">
+                                <path d="M14.503 10.3078C12.8171 10.3656 10.7546 11.0406 8.85929 12.1281C7.16242 13.1031 5.80148 14.2953 4.98117 15.4844C4.26242 16.5375 4.06085 17.4828 4.40929 18.0922C4.77648 18.7297 5.87492 19.1391 7.28429 19.1609C8.85773 19.1891 10.6687 18.7422 12.2827 17.9234C13.989 17.0594 15.4405 15.8109 16.3609 14.4016C17.1796 13.1516 17.4452 11.9531 17.053 11.2203C16.7155 10.5875 15.803 10.2641 14.503 10.3078Z" fill="white"/>
+                                </mask>
+                                <g mask="url(#mask0_2046_15766)">
+                                <path d="M13.4091 11.6547C14.0763 12.9813 13.5419 14.6 12.2138 15.2672C10.8856 15.936 9.26844 15.4016 8.59813 14.0735C7.93094 12.7469 8.46375 11.1281 9.79188 10.4594C11.1216 9.79064 12.7388 10.3266 13.4091 11.6547Z" fill="#FCC21B"/>
+                                <mask id="mask1_2046_15766" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="10" width="6" height="6">
+                                <path d="M13.4091 11.6547C14.0763 12.9813 13.5419 14.6 12.2138 15.2672C10.8856 15.936 9.26844 15.4016 8.59813 14.0735C7.93094 12.7469 8.46375 11.1281 9.79188 10.4594C11.1216 9.79064 12.7388 10.3266 13.4091 11.6547Z" fill="white"/>
+                                </mask>
+                                <g mask="url(#mask1_2046_15766)">
+                                <path d="M12.3109 10.1547C12.8718 10.3453 13.203 11.0219 13.2234 11.3453C12.2874 10.8578 10.9593 11.2813 10.0796 12.0531C9.22961 12.8 8.84367 13.9359 8.93429 14.5844C7.96554 14.1922 7.62336 12.3641 8.34992 11.8203L12.3109 10.1547Z" fill="#B89278"/>
+                                </g>
+                                </g>
+                                <mask id="mask2_2046_15766" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="4" y="10" width="14" height="10">
+                                <path d="M14.503 10.3078C12.8171 10.3656 10.7546 11.0406 8.85929 12.1281C7.16242 13.1031 5.80148 14.2953 4.98117 15.4844C4.26242 16.5375 4.06085 17.4828 4.40929 18.0922C4.77648 18.7297 5.87492 19.1391 7.28429 19.1609C8.85773 19.1891 10.6687 18.7422 12.2827 17.9234C13.989 17.0594 15.4405 15.8109 16.3609 14.4016C17.1796 13.1516 17.4452 11.9531 17.053 11.2203C16.7155 10.5875 15.803 10.2641 14.503 10.3078Z" fill="white"/>
+                                </mask>
+                                <g mask="url(#mask2_2046_15766)">
+                                <path d="M10.935 14.6626C11.3498 14.454 11.517 13.9487 11.3084 13.5339C11.0998 13.1191 10.5945 12.952 10.1797 13.1606C9.76495 13.3691 9.59779 13.8745 9.80637 14.2892C10.0149 14.704 10.5203 14.8712 10.935 14.6626Z" fill="white"/>
+                                </g>
+                                <path d="M4.76074 1.73438C4.91543 1.65625 5.08105 1.61719 5.25293 1.61719C5.45762 1.61719 5.65137 1.675 5.81855 1.775C5.87637 1.82031 5.91699 1.88281 5.88262 1.96094C5.85918 2.01875 5.7998 2.05156 5.73418 2.07813C5.42949 2.1625 5.13574 2.27344 4.85605 2.40781C4.75605 2.45156 4.65918 2.5 4.56387 2.5375C4.41387 2.59687 4.23887 2.70781 4.22168 2.475C4.22168 2.46094 4.22949 2.37969 4.24355 2.30469C4.3373 2.06563 4.51387 1.85781 4.76074 1.73438Z" fill="#2F2F2F"/>
+                                <path d="M4.90484 8.45469C4.27046 6.34219 4.23296 4.98438 4.48609 4.05157C4.5189 3.93282 4.50328 3.78438 4.36578 3.89375C4.07984 4.12188 3.6064 4.53282 3.40171 4.88282C3.3439 4.97969 3.31109 5.08282 3.28609 5.19063C3.28609 5.19063 2.92359 6.32344 3.1939 7.825C3.44546 9.23282 3.85796 11.3516 3.41421 13.9844C3.38453 14.1609 3.39078 14.425 3.52046 14.2719C3.84703 13.8906 4.49546 13.1391 5.04234 12.5641C5.07359 12.5313 5.1564 12.4016 5.1814 12.2781C5.28453 11.7859 5.47984 10.3719 4.90484 8.45469Z" fill="white"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_2046_15766">
+                                <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+    <!-- Loader -->
+    <app-table-loader *ngIf="loading"></app-table-loader>
+
+</div>
+
+<!-- Create reminder form -->
+<app-modal [visible]="createReminderForm" position="fixed" class="my-auto lg:min-w-[800px] md:min-w-[600px] sm:min-w-[300px]">
+    <div class="bg-white rounded-3xl">
+        <div class="flex justify-end px-3.5 pb-3 mb-3 border-b border-gray-100">
+            <button (click)="toggleCreateReminderForm()">
+                <svg aria-hidden="true" class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="#111111"/>
+                </svg>   
+            </button>                 
+        </div>
+
+        <h3 class="font-bold text-2xl">Rappel de rendez-vous</h3>
+        <p class="text-xl font-light mt-3">Envoyez un message de rappel au patient/ praticien</p>
+
+        <form class="mt-6">
+
+            <app-textarea placeholder="Envoyez un message au praticien..." labelFor="praticianMessage" label="praticianMessage" name="praticianMessage" [rows]="6" [class]="'w-full'"></app-textarea>
+
+            <div class="flex justify-end mt-4">
+                <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                    Notifier
+                </app-button>
+            </div>
+            
+        </form>
+
+        <form class="mt-6">
+
+            <app-textarea placeholder="Envoyez un message au patient..." labelFor="praticianMessage" label="praticianMessage" name="praticianMessage" [rows]="6" [class]="'w-full'"></app-textarea>
+
+            <div class="flex justify-end mt-4">
+                <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                    Notifier
+                </app-button>
+            </div>
+            
+        </form>
+
+    </div>
+</app-modal>

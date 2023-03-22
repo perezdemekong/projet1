@@ -48,7 +48,7 @@
                 </tr>
                 </thead>
                 <tbody class="pt-3 divide-y-2 divide-gray-100">
-                <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
+                <tr class="cursor-pointer border-gray-400">
                     <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">Algérie</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">Alg</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary uppercase">+01</td>
@@ -58,7 +58,7 @@
                         </svg>                                                                                                    
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                        <a [routerLink]="['/location/countries', i, 'update']" class="mr-3" type="button">
+                        <a [routerLink]="['/location/countries', 1, 'update']" class="mr-3" type="button">
                             <span class="sr-only">Modifier</span>
                             <span class="">
                                 <svg class="w-5 h-5 fill-black" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,8 +1,11 @@
 import { Routes } from "@angular/router";
+
 import { TpanelComponent } from "@app/shared/theme/layouts/tpanel/tpanel.component";
+import { DoctorsDetailComponent } from "../pages/doctors/doctors-detail/doctors-detail.component";
+import { HistoricalComponent as DoctorHistoricalComponent } from "../pages/doctors/doctors-detail/historical/historical.component";
+import { PlaceOfConsultationComponent } from "../pages/doctors/doctors-detail/place-of-consultation/place-of-consultation.component";
 import { DoctorsComponent } from "../pages/doctors/doctors.component";
-import { AntecedentComponent } from "../pages/patients/patient-details/antecedent/antecedent.component";
-import { DocumentsComponent } from "../pages/patients/patient-details/documents/documents.component";
+import { HistoricalComponent as PatientHistoricalComponent } from "../pages/patients/patient-details/historical/historical.component";
 import { PatientDetailsComponent } from "../pages/patients/patient-details/patient-details.component";
 import { PatientsComponent } from "../pages/patients/patients.component";
 
@@ -26,17 +29,10 @@ export const USERSROUTES: Routes = [
                 },
                 children: [
                     {
-                        path: 'antecedents',
-                        component: AntecedentComponent,
+                        path: 'historical',
+                        component: PatientHistoricalComponent,
                         data: {
-                            title: "Antécédents du patient"
-                        }
-                    },
-                    {
-                        path: 'documents',
-                        component: DocumentsComponent,
-                        data: {
-                            title: 'Documents du patient'
+                            title: "Historiques des RDV"
                         }
                     },
                     {
@@ -52,6 +48,29 @@ export const USERSROUTES: Routes = [
                 data: {
                     title: 'Praticiens'
                 }
+            },
+            {
+                path: 'doctors/:id',
+                component: DoctorsDetailComponent,
+                data: {
+                    title: 'Détails du médecin'
+                },
+                children: [
+                    {
+                        path: 'place-of-consultation',
+                        component: PlaceOfConsultationComponent,
+                        data: {
+                            title: 'Lieux de consultation'
+                        }
+                    },
+                    {
+                        path: 'historical',
+                        component: DoctorHistoricalComponent,
+                        data: {
+                            title: 'Historique des RDV'
+                        }
+                    }
+                ]
             },
             {
                 path: '',
