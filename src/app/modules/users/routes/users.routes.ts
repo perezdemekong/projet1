@@ -1,8 +1,8 @@
 import { Routes } from "@angular/router";
+
 import { TpanelComponent } from "@app/shared/theme/layouts/tpanel/tpanel.component";
 import { DoctorsComponent } from "../pages/doctors/doctors.component";
-import { AntecedentComponent } from "../pages/patients/patient-details/antecedent/antecedent.component";
-import { DocumentsComponent } from "../pages/patients/patient-details/documents/documents.component";
+import { HistoricalComponent } from "../pages/patients/patient-details/historical/historical.component";
 import { PatientDetailsComponent } from "../pages/patients/patient-details/patient-details.component";
 import { PatientsComponent } from "../pages/patients/patients.component";
 
@@ -26,17 +26,10 @@ export const USERSROUTES: Routes = [
                 },
                 children: [
                     {
-                        path: 'antecedents',
-                        component: AntecedentComponent,
+                        path: 'historical',
+                        component: HistoricalComponent,
                         data: {
-                            title: "Antécédents du patient"
-                        }
-                    },
-                    {
-                        path: 'documents',
-                        component: DocumentsComponent,
-                        data: {
-                            title: 'Documents du patient'
+                            title: "Historiques des RDV"
                         }
                     },
                     {

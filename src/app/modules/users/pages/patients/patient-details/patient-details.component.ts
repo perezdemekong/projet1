@@ -25,18 +25,10 @@ export class PatientDetailsComponent implements OnInit {
     }
   ]
 
-  routeParams!: string;
+  routeParams!: string | null;
+  route!: string;
 
-  menuTabs: MenuTabs[] = [
-    {
-      name: 'Antécédents',
-      link: '/users/patients/0/antecedents'
-    },
-    {
-      name: 'Documents',
-      link: '/users/patients/0/documents'
-    }
-  ]
+  menuTabs!: MenuTabs[];
 
   activityToggled: boolean = false;
 
@@ -48,10 +40,15 @@ export class PatientDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.routeParams = params['id'];
-      console.log(this.routeParams);
-    });
+    this.routeParams = this.activatedRoute.snapshot.paramMap.get('id');
+    this.route = `/users/patients/${this.routeParams}/historical`;
+    this.menuTabs = [
+      {
+        name: 'Historiques des rendez-vous',
+        link: this.route
+      },
+    ];
+    console.log(this.route);
   }
 
   toggleActivityToggled() {
