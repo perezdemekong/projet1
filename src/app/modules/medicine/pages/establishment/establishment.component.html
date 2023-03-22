@@ -42,6 +42,7 @@
                 <tr class="bg-primary-500">
                     <th scope="col" class="!py-3.5 !p-2.5 !pl-4 border-none text-left font-semibold max-w-fit text-white">Noms</th>
                     <th scope="col" class="p-2.5 !pl-8 border-none text-left font-semibold text-white">Type</th>
+                    <th scope="col" class="p-2.5 !pl-8 border-none text-left font-semibold text-white">Admin</th>
                     <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Adresse</th>
                     <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Status</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
@@ -53,6 +54,7 @@
                 <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
                     <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">Centre Gratuit d'Information, de Dépistage et de Diagnostic (CeGIDD) La Ciotat</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">Hôpital Public</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">Mohamed Belaiouer</td>
                     <td class="pt-1.5 pb-1 text-tertiary capitalize min-w-[140px]">11 Rue Rouget de Lisle, 92800 Puteaux</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
