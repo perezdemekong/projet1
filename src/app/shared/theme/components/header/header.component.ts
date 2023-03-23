@@ -1,5 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
+import { User } from '@app/modules/authentication/pages/interfaces/auth.interface';
+
+import { LocalStorageService } from '@app/modules/authentication/services/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -20,19 +23,22 @@ export class HeaderComponent implements OnInit {
   @ViewChild('menuDropdown') menuDropdown!: ElementRef;
 
   mobileMenuOpen: boolean = false;
+  user!: User;
 
   get openCloseTrigger() {
     return this.mobileMenuOpen ? 'open' : 'closed';
   }
 
-  constructor() { }
+  constructor(
+    private localStorageService: LocalStorageService
+  ) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(this.localStorageService.getLocalStorage('user') || '');
   }
 
   toggleMobileMenuOpen() {
     this.mobileMenuOpen = !this.mobileMenuOpen;
-    console.log(this.mobileMenuOpen);
   }
 
   sendRequestToShowMobileMenu() {

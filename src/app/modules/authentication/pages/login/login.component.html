@@ -6,11 +6,11 @@
 
     <h1 class="font-bold max-w-fit text-3xl relative after:absolute after:h-3 after:w-full after:bg-primary-500 after:bottom-0 after:inset-x-0 after:-z-10">Se connecter</h1>
 
-    <form class="space-y-10 sm:pr-5">
+    <form [formGroup]="loginForm" (submit)="login()" class="space-y-10 sm:pr-5">
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="flex-1">
-                <app-big-input placeholder="Email" labelFor="email" label="email" name="email" [type]="'email'" [class]="'w-full'"></app-big-input>
+                <app-big-input formControlName="email" placeholder="Email" labelFor="email" label="email" name="email" [type]="'email'" [class]="'w-full'"></app-big-input>
             </div>
         </div>
 
@@ -19,7 +19,7 @@
                 <a href="/auth/forgot-password" class="text-secondary max-w-fit text-sm">Mot de passe oublié</a>
             </div>
             <div class="flex-1 relative">
-                <app-big-password placeholder="Mot de passe" labelFor="password" label="mot de passe" name="password" [toggled]="passwordToggled" [class]="'w-full'"></app-big-password>
+                <app-big-password formControlName="password" placeholder="Mot de passe" labelFor="password" label="mot de passe" name="password" [toggled]="passwordToggled" [class]="'w-full'"></app-big-password>
                 
                 <button type="button" (click)="togglePasswordToggled()" class="absolute top-3.5 right-5">
 
@@ -40,7 +40,7 @@
         </div>
 
         <div class="flex justify-center">
-            <app-button type="submit" [class]="'text-white bg-primary-500 hover:bg-primary-500 focus:ring-primary-500 float-right'">              
+            <app-button [disabled]="!loginForm.valid || loading" [loading]="loading" type="submit" [class]="'text-white bg-primary-500 hover:bg-primary-500 focus:ring-primary-500 float-right'">              
                 Se connecter
             </app-button>
         </div>
