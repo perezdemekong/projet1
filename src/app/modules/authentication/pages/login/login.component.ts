@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private localStorageService: LocalStorageService,
-    private stopLoadingService: StopLoadingService,
     private notificationService: NotificationService
   ) { }
 
@@ -43,7 +42,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.loading = true;
-      this.authService.login(this.loginForm.getRawValue()).toPromise()
+      this.authService.login(this.loginForm.getRawValue())
         .then((data) => {
           this.populateLocalStorage(data);
           this.router.navigateByUrl('/dashboard');

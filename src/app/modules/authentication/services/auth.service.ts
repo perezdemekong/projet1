@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ErrorAuthResponse, LoginData, SuccessAuthResponse } from '../pages/interfaces/auth.interface';
 
@@ -13,11 +13,11 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
-  login(data: LoginData): Observable<SuccessAuthResponse | any> {
-    return this.http.post<SuccessAuthResponse | any>(
+  async login(data: LoginData): Promise<SuccessAuthResponse | any> {
+    return await firstValueFrom( this.http.post<SuccessAuthResponse | any>(
       `${environment.apiUrl}/login`,
       data
-    )
+    ))
   }
 
 }
