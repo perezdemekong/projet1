@@ -14,6 +14,7 @@ import { LoaderModule } from './components/loader/loader.module';
 
 import { CheckUserStatusColorPipe } from './pipes/check-user-status-color.pipe';
 import { CheckUserStatusSvgdfPipe } from './pipes/check-user-status-svgdf.pipe';
+import { NotificationModule } from './components/notification/notification.module';
 
 
 
@@ -34,6 +35,7 @@ import { CheckUserStatusSvgdfPipe } from './pipes/check-user-status-svgdf.pipe';
     ModalModule,
     NgxPaginationModule,
     LoaderModule,
+    NotificationModule,
   ],
   exports: [
     ThemeModule,
@@ -46,6 +48,7 @@ import { CheckUserStatusSvgdfPipe } from './pipes/check-user-status-svgdf.pipe';
     ModalModule,
     NgxPaginationModule,
     LoaderModule,
+    NotificationModule,
 
 
     CheckUserStatusColorPipe,
