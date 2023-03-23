@@ -9,10 +9,11 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
       <select 
         [name]="name" 
         [id]="name"
+        [disabled]="disabled"
         [value]="value"
         (input)="onChange($any($event.target).value)"
         (blur)="onTouched()"
-        class="block w-full focus:!border-transparent border-transparent bg-primary-100 rounded-md py-1 px-1 outline-none focus:!ring-transparent sm:text-sm"
+        class="block w-full focus:!border-transparent border-transparent bg-primary-100 disabled:bg-gray-200 disabled:cursor-not-allowed rounded-md py-1 px-1 outline-none focus:!ring-transparent sm:text-sm"
         >
           <option *ngFor="let item of items" [value]="item">{{item}}</option>
       </select>
@@ -31,6 +32,7 @@ export class BigSelectComponent {
   @Input() labelFor!: string;
   @Input() label!: string;
   @Input() name!: string;
+  @Input() disabled: boolean = false;
   @Input() class!: string;
   @Input('options') items: any[] = []
 
