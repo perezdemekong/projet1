@@ -73,7 +73,7 @@
     </div>
     <div class="md:flex hidden gap-2.5 items-center" #menuDropdown>
         <div class="flex flex-col justify-between items-end">
-            <h3 class="text-xl font-bold text-secondary">Dr Mohamed</h3>
+            <h3 class="text-xl font-bold text-secondary">{{ user.gender === 'Male' ? 'Mr' : 'Mme' }} {{user.first_name}}</h3>
             <p class="text-secondary text-sm">Administrateur</p>
         </div>
         <button type="button" class="" (click)="toggleMobileMenuOpen()">
@@ -92,7 +92,7 @@
             <p
               class="text-sm font-medium truncate text-slate-900"
               role="none">
-              Mohamed Belaiouer
+              {{user.last_name}} {{user.first_name}}
             </p>
           </div>
           <div class="py-1" role="none">
