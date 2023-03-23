@@ -43,6 +43,17 @@
                 <app-toggle (click)="toggleStatus()" [toggled]="status" [backgroundClass]="!status ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
             </div>
         </div>
+
+        <div class="flex justify-end">
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                Modifier
+            </app-button>
+        </div>
+
+    </form>
+
+    <form class="sm:p-5 space-y-8 max-w-3xl">
+
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Mot de passe</div>
             <div class="flex-1 relative">
@@ -71,6 +82,7 @@
                 Modifier
             </app-button>
         </div>
+
     </form>
 
 </div>
