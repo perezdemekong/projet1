@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Roles } from '@app/core/enums/roles';
 import { StopLoadingService } from '@app/core/services/stop-loading.service';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 
@@ -43,11 +44,8 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.loading = true;
       this.authService.login(this.loginForm.getRawValue())
-        .then((data) => {
-          this.populateLocalStorage(data);
-          this.router.navigateByUrl('/dashboard');
-          this.pushSuccesNotif();
-          this.loading = false;
+        .then((data: SuccessAuthResponse) => {
+          this.checkUserStatus(data);
         })
         .catch((err) => {
           this.loading = false;
@@ -56,6 +54,17 @@ export class LoginComponent implements OnInit {
       ;
       
     }
+  }
+
+  checkUserStatus(data: SuccessAuthResponse) {
+    if (data.data.user.roles.includes(Roles.Admin)) {
+      this.populateLocalStorage(data);
+      this.router.navigateByUrl('/dashboard');
+      this.pushSuccesNotif();
+    }else {
+      this.pushErrorNotif('Adresse e-mail ou mot de passe invalide!');
+    }
+    this.loading = false;
   }
 
   pushSuccesNotif() {
