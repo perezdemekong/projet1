@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Country } from '@app/modules/location/interfaces/country.interface';
+import { LocationService } from '@app/modules/location/services/location.service';
 import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breadscrumb.interface';
+import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 
 @Component({
   selector: 'app-country-update',
@@ -23,15 +27,53 @@ export class CountryUpdateComponent implements OnInit {
     }
   ]
 
+  country!: Country;
+
+  code!: string;
+  name!: string;
+  indicatif!: string[];
   status: boolean = false;
 
-  constructor() { }
+  constructor(
+    private locationService: LocationService,
+    private activatedRoute: ActivatedRoute,
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit(): void {
+    this.getCountry();
+  }
+
+  getCountry() {
+    this.locationService.getCountry(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''))
+      .then((country) => {
+        this.country = country.data[0];
+        this.code = this.country.cca3;
+        this.name = this.country.name;
+        this.status = this.country.is_active;
+        this.indicatif = this.country.callingCodes
+      }).catch((error) => {
+        this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
+      })
+    ;
   }
 
   toggleStatus() {
     this.status = !this.status;
+  }
+
+  pushErrorNotif(message: string) {
+    this.notificationService.notificationController.next({
+      isOpen: true,
+      title: 'Érreur',
+      message,
+      type: 'error'
+    })
+    setTimeout(() => {
+      this.notificationService.notificationController.next({
+        isOpen: false
+      })
+    }, 3000)
   }
 
 }

@@ -31,6 +31,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.stopLoadingService.LoadingController.next({load: false, message: 'Email ou mot de passe incorrect'});
         }
 
+        if ([500].includes(response.status)) {
+          console.log('ds');
+        }
+
         const error = response.error.message || response.statusText || response.message;
 
         return of(error);
