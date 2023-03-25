@@ -6,16 +6,17 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   template: `
     <div [ngClass]="class" class="flex">
       <label [for]="labelFor" class="sr-only">{{label}}</label>
-      <div class="px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg">
+      <div [ngClass]="{'!bg-gray-200 !cursor-not-allowed': disabled}" class="px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg">
         <input 
           [type]="type" 
           [name]="name" 
           [id]="name" 
+          [disabled]="disabled"
           [placeholder]="placeholder" 
           [value]="value"
           (input)="onChange($any($event.target).value)"
           (blur)="onTouched()"
-          class="focus:border-transparent px-2 py-1 w-full focus:ring-transparent border-transparent block bg-transparent outline-none placeholder:text-[#E4E5E7] text-tertiary sm:text-sm"
+          class="focus:border-transparent px-2 py-1 w-full disabled:cursor-not-allowed focus:ring-transparent border-transparent block bg-transparent outline-none placeholder:text-[#E4E5E7] text-tertiary sm:text-sm"
           >
       </div>
     </div>
@@ -34,6 +35,7 @@ export class BigInputComponent {
   @Input() label!: string;
   @Input() type: string = 'text';
   @Input() name!: string;
+  @Input() disabled: boolean = false;
   @Input() class!: string;
   @Input() placeholder: string = '';
 

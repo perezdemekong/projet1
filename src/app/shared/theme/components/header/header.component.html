@@ -77,7 +77,7 @@
             <p class="text-secondary text-sm">Administrateur</p>
         </div>
         <button type="button" class="" (click)="toggleMobileMenuOpen()">
-          <img class="w-10 h-10 rounded-full border-4 border-gray-200" src="assets/img/profile.png" alt="Profile photo">
+          <img class="w-10 h-10 rounded-full border-4 border-gray-200" [src]="user.profile_image" alt="Profile photo">
         </button>
         <div
           [@openClose]="openCloseTrigger"

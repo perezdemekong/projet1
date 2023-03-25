@@ -14,6 +14,7 @@ export interface User {
     can_login: boolean;
     parent_id: number;
     antecedents_id: number;
+    profile_image: string | null;
     timezone: string;
     roles: string[];
     permissions: string[];
