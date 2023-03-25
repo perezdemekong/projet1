@@ -5,17 +5,17 @@
         description="Ces informations sont visibles par les autres et peuvent être modifiées"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl">
+    <form class="sm:p-5 space-y-8 max-w-3xl" [formGroup]="userForm" (submit)="submitUserForm()">
 
         <div class="flex flex-wrap gap-5 p-5 justify-between items-center rounded-lg border border-gray-300 shadow-sm">
 
             <label for="profilePhoto">Image de profil</label>
 
             <div class="w-10 h-10 rounded-full">
-                <img src="assets/img/profile.png" alt="Profile photo" class="w-10 h-10 rounded-full object-contain">
+                <img [src]="photo" alt="Profile photo" class="w-10 h-10 rounded-full object-contain">
             </div>
 
-            <input type="file" class="sr-only" #fileInput>
+            <input type="file" class="sr-only" (change)="onFileChange($event)" #fileInput formControlName="photo">
 
             <div class="flex gap-3">
                 <app-button type="button" (click)="fileInput.click()"
@@ -33,21 +33,21 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Nom</div>
             <div class="flex-1">
-                <app-big-input labelFor="name" label="nom" name="name" [class]="'w-full'"></app-big-input>
+                <app-big-input formControlName="first_name" labelFor="name" label="nom" name="name" [class]="'w-full'"></app-big-input>
             </div>
         </div>
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Prénom</div>
             <div class="flex-1">
-                <app-big-input labelFor="surname" label="prénom" name="surname" [class]="'w-full'"></app-big-input>
+                <app-big-input formControlName="last_name" labelFor="surname" label="prénom" name="surname" [class]="'w-full'"></app-big-input>
             </div>
         </div>
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Email</div>
             <div class="flex-1">
-                <app-big-input labelFor="email" label="email" name="email" [type]="'email'"
+                <app-big-input formControlName="email" labelFor="email" label="email" name="email" [type]="'email'"
                     [class]="'w-full'"></app-big-input>
             </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Rôle</div>
             <div class="flex-1">
-                <app-big-select [disabled]="true" labelFor="role" label="rôle" name="role" [options]="rolesList"
+                <app-big-select [disabled]="true" labelFor="rule" label="rôle" name="rule" [options]="user.roles"
                     [class]="'px-2 py-2.5 border border-gray-200 bg-gray-200 w-full rounded-lg'"></app-big-select>
             </div>
         </div>
@@ -63,7 +63,7 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Adresse</div>
             <div class="flex-1">
-                <app-big-input labelFor="address" label="Adresse" name="address" [class]="'w-full'"></app-big-input>
+                <app-big-input formControlName="address" labelFor="address" label="Adresse" name="address" [class]="'w-full'"></app-big-input>
             </div>
         </div>
 
