@@ -55,7 +55,6 @@ export class CountryComponent implements OnInit {
         this.loading = false;
         this.countries = data.data['countries'].data;
         this.pagination = data.data['countries'].pagination;
-        console.log(data);
       })
       .catch((error) => {
         this.loading = false;

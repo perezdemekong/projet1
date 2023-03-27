@@ -6,52 +6,58 @@
     <app-page-heading title="Établissments" description="Mettre à jour un établissement"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl">
+    <form [formGroup]="establishmentForm" (submit)="updateEstablishment()" class="sm:p-5 space-y-8 max-w-3xl">
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Nom</div>
             <div class="flex-1">
-                <app-big-input labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
+                <app-big-input formControlName="name" labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Type</div>
             <div class="flex-1">
-                <app-big-select labelFor="type" label="type" name="type" [options]="establishmentTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-select formControlName="type" labelFor="type" label="type" name="type" [options]="establishmentTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Ville</div>
             <div class="flex-1">
-                <app-big-select labelFor="city" label="ville" name="city" [options]="villeTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-select formControlName="city" labelFor="city" label="ville" name="city" [options]="villeTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Praticien admin</div>
             <div class="flex-1">
-                <app-big-select labelFor="admin" label="administrateur" name="admin" [options]="adminTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-select formControlName="admin_practician" labelFor="admin" label="administrateur" name="admin" [default]="true" [options]="adminTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Adresse</div>
             <div class="flex-1">
-                <app-big-input labelFor="address" label="adresse" name="address" placeholder="Entrez l'adresse" [class]="'w-full'"></app-big-input>
+                <app-big-input formControlName="address" labelFor="address" label="adresse" name="address" placeholder="Entrez l'adresse" [class]="'w-full'"></app-big-input>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Code postal</div>
             <div class="flex-1">
-                <app-big-input labelFor="postalCode" label="code postal" name="postalCode" placeholder="Entrez le code postal" [class]="'w-full'"></app-big-input>
+                <app-big-input formControlName="postal_code" labelFor="postalCode" label="code postal" name="postalCode" placeholder="Entrez le code postal" [class]="'w-full'"></app-big-input>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40">Status</div>
+            <div class="flex-1">
+                <app-toggle (click)="toggleStatus()" [toggled]="establishmentForm.get('status')?.value" [backgroundClass]="!establishmentForm.get('status')?.value ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
             </div>
         </div>
         <div class="flex max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Description</div>
             <div class="flex-1">
-                <app-textarea labelFor="description" label="description" name="description" [rows]="4" [class]="'w-full'"></app-textarea>
+                <app-textarea formControlName="description" labelFor="description" label="description" name="description" [rows]="4" [class]="'w-full'"></app-textarea>
             </div>
         </div>
 
         <div class="flex justify-end">
-            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+            <app-button type="submit" [disabled]="!establishmentForm.valid" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
                 Modifier
             </app-button>
         </div>

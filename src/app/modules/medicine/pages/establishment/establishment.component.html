@@ -16,17 +16,17 @@
 
         <div class="flex flex-wrap gap-2.5">
 
-            <app-select label="perPage" name="perPage" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
+            <app-select label="perPage" name="perPage" (change)="handlePageSizeChange()" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
             
-            <app-select label="activity" name="activity" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
+            <app-select label="activity" name="activity" (change)="handleStatusChange()" [default]="true" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
 
-            <app-select label="typeOfEstablishment" name="typeOfEstablishment" [options]="typesOfEstablishment" [(ngModel)]="typeOfEstablishment"></app-select>
+            <app-select label="typeOfEstablishment" (change)="handleTypeChange()" name="typeOfEstablishment" [default]="true" [options]="typesOfEstablishment" [(ngModel)]="typeOfEstablishment"></app-select>
 
-            <app-select label="praticien" name="praticien" [options]="adminTypeTable" [(ngModel)]="admin"></app-select>
+            <app-select label="praticien" (change)="handleAdminChange()" name="praticien" [options]="adminTypeTable" [(ngModel)]="admin"></app-select>
 
         </div>
 
-        <form [formGroup]="searchForm" (submit)="chang()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
+        <form [formGroup]="searchForm" (submit)="searchFunc()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
 
             <app-search-bar placeholder="Rechercher par nom" formControlName="search"></app-search-bar>
 
@@ -53,15 +53,20 @@
                 </tr>
                 </thead>
                 <tbody class="pt-3 divide-y-2 divide-gray-100">
-                <tr *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" class="cursor-pointer border-gray-400">
-                    <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">Centre Gratuit d'Information, de Dépistage et de Diagnostic (CeGIDD) La Ciotat</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">Hôpital Public</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">Mohamed Belaiouer</td>
-                    <td class="pt-1.5 pb-1 text-tertiary capitalize min-w-[140px]">11 Rue Rouget de Lisle, 92800 Puteaux</td>
+                <tr *ngFor="let establishment of establishments | paginate : {
+                    itemsPerPage: perPage,
+                    currentPage: pagination?.current_page,
+                    totalItems: pagination?.total
+                }" class="cursor-pointer border-gray-400">
+                    <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">{{establishment.name}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">{{establishment.type}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">{{establishment.admin_practician || 'Non défini'}}</td>
+                    <td class="pt-1.5 pb-1 text-tertiary capitalize min-w-[140px]">{{establishment.address}}</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="'actif' | checkUserStatusSvgdf" />
-                        </svg>                                                                                                    
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="{'stroke-red-500': !establishment.status, 'stroke-primary-500': establishment.status}">
+                            <path *ngIf="establishment.status" stroke-linecap="round" stroke-linejoin="round" d='M4.5 12.75l6 6 9-13.5' />
+                            <path *ngIf="!establishment.status" stroke-linecap="round" stroke-linejoin="round" d='M6 18L18 6M6 6l12 12' />
+                        </svg>                                                                                                     
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                         <!-- <a [routerLink]="['/medicine/establishments', i]" class="mr-3" type="button">
@@ -73,7 +78,7 @@
                                 </svg>                                                                                                                                                                            
                             </span>
                         </a> -->
-                        <a [routerLink]="['/medicine/establishments', i, 'update']" class="mr-3" type="button">
+                        <a [routerLink]="['/medicine/establishments', establishment.id, 'update']" class="mr-3" type="button">
                             <span class="sr-only">Modifier</span>
                             <span class="">
                                 <svg class="w-5 h-5 fill-black" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +86,7 @@
                                 </svg>                                                                                                                                                                                                              
                             </span>
                         </a>
-                        <button class="mr-3" type="button" (click)="toggleDeleteEstablishmentForm()">
+                        <button class="mr-3" type="button" (click)="toggleDeleteEstablishmentForm(establishment.id)">
                             <span class="sr-only">Supprimer</span>
                             <span class="">
                                 <svg class="w-5 h-5 fill-red-600" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,23 +99,52 @@
                 </tbody>
             </table>
 
-            <nav class="flex items-center justify-between border-t border-gray-200 bg-white py-3 pt-8" aria-label="Pagination">
-                <div class="hidden sm:block">
-                  <p class="text-sm text-gray-700 !m-0">
-                    Affichage de
-                    <span class="font-medium">1</span>
-                    à
-                    <span class="font-medium">20</span>
-                    sur
-                    <span class="font-medium">200</span>
-                    résultats
-                  </p>
+            <pagination-template #p="paginationApi" (pageChange)="onPageChange($event)" class="flex items-center justify-center gap-1 mt-6">
+
+                <div class="">
+                    <button type="button" *ngIf="p.isFirstPage()" [class.disabled]="p.isFirstPage()" disabled class="cursor-not-allowed text-[#E8E8E8] w-8 h-8 flex justify-center text-sm items-center rounded-md border-neutral-100 border bg-white">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g opacity="0.7">
+                                <path d="M9.71211 2.93333L4.91211 7.73333L9.71211 12.5333L11.0881 11.1733L7.64811 7.73333L11.0881 4.29333L9.71211 2.93333Z"/>
+                            </g>
+                        </svg>                                             
+                    </button>
+
+                    <button type="button" *ngIf="!p.isFirstPage()" (click)="p.previous()" class="text-black w-8 h-8 flex justify-center text-sm items-center rounded-md border-neutral-200 border bg-white">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g opacity="0.7">
+                                <path d="M9.71211 2.93333L4.91211 7.73333L9.71211 12.5333L11.0881 11.1733L7.64811 7.73333L11.0881 4.29333L9.71211 2.93333Z"/>
+                            </g>
+                        </svg>                                             
+                    </button>
                 </div>
-                <div class="flex flex-1 justify-between sm:justify-end gap-3">
-                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Précédent</button>
-                  <button class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Suivant</button>
+
+                <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value" class="">
+                    <button *ngIf="p.getCurrent() !== page.value" (click)="p.setCurrent(page.value)" class="w-8 h-8 flex justify-center text-black text-sm items-center rounded-md border-neutral-200 border bg-white">
+                        {{page.label}}                                         
+                    </button>
+
+                    <div *ngIf="p.getCurrent() === page.value" class="w-8 h-8 flex justify-center text-white text-sm items-center rounded-md bg-primary-500" aria-current="page">
+                        {{page.label}}
+                    </div>
                 </div>
-            </nav>
+
+                <div class="">
+                    <button *ngIf="p.isLastPage()" class="w-8 h-8 flex justify-center text-black cursor-not-allowed text-sm items-center rounded-md border-neutral-200 border bg-white">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.28811 12.5333L11.0881 7.73333L6.28811 2.93333L4.92811 4.29333L8.35211 7.73333L4.91211 11.1733L6.28811 12.5333Z" fill="#52575C"/>
+                        </svg>                                                                   
+                    </button>
+                    
+                    <button *ngIf="!p.isLastPage()" (click)="p.next()" class="w-8 h-8 flex justify-center text-black text-sm items-center rounded-md border-neutral-200 border bg-white">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.28811 12.5333L11.0881 7.73333L6.28811 2.93333L4.92811 4.29333L8.35211 7.73333L4.91211 11.1733L6.28811 12.5333Z" fill="#52575C"/>
+                        </svg>                                                                   
+                    </button>
+                </div>
+
+            </pagination-template>
+
         </div>
     </div>
 
@@ -139,7 +173,7 @@
         <div class="mt-5 sm:mt-4 flex justify-end gap-4">
             <button (click)="toggleDeleteEstablishmentForm()" type="button"
                 class="max-w-fit inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">Annuler</button>
-            <button type="button"
+            <button (click)="deleteEstablishment()" type="button"
                 class="inline-flex w-full max-w-fit justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Supprimer</button>
         </div>
     </app-modal>

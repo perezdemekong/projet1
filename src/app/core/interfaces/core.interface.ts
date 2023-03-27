@@ -21,6 +21,7 @@ export interface ComplexResponse<T> {
 export interface SimpleResponse<T> {
   message: string;
   data: T[];
+  pagination?: Pagination
 }
 
 export interface SimpleJsonResponse<T> {
