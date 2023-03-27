@@ -6,28 +6,28 @@
     <app-page-heading title="Ville" description="Mettre à jour une ville"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl">
+    <form [formGroup]="updateForm" (submit)="updateCity()" class="sm:p-5 space-y-8 max-w-3xl">
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Nom</div>
             <div class="flex-1">
-                <app-big-input labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
+                <app-big-input formControlName="name" labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Pays</div>
             <div class="flex-1">
-                <app-big-select labelFor="country" label="pays" name="country" [options]="countryList" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-input formControlName="country" labelFor="country" label="country" name="country" placeholder="Entrez le pays" [class]="'w-full'"></app-big-input>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5">
             <div class="w-40">Status</div>
             <div class="flex-1">
-                <app-toggle (click)="toggleStatus()" [toggled]="status" [backgroundClass]="!status ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
+                <app-toggle (click)="toggleStatus()" [toggled]="this.updateForm.get('is_active')?.value" [backgroundClass]="!this.updateForm.get('is_active')?.value ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
             </div>
         </div>
 
         <div class="flex justify-end">
-            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+            <app-button type="submit" [disabled]="!updateForm.valid" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
                 Valider
             </app-button>
         </div>

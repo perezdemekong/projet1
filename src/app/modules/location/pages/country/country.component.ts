@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IFilterParams, Pagination } from '@app/core/interfaces/core.interface';
+import { ComplexResponse, IFilterParams, Pagination } from '@app/core/interfaces/core.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
-import { ComplexResponse, Country } from '../../interfaces/country.interface';
+import { Country } from '../../interfaces/country.interface';
 import { LocationService } from '../../services/location.service';
 
 @Component({
@@ -53,8 +53,8 @@ export class CountryComponent implements OnInit {
     this.locationService.getCountries(params)
       .then((data: ComplexResponse<Country>) => {
         this.loading = false;
-        this.countries = data.data.countries.data;
-        this.pagination = data.data.countries.pagination;
+        this.countries = data.data['countries'].data;
+        this.pagination = data.data['countries'].pagination;
         console.log(data);
       })
       .catch((error) => {
@@ -79,12 +79,21 @@ export class CountryComponent implements OnInit {
   }
 
   searchFunc() {
-    this.filters = Object.assign({}, {...this.filters, name: this.searchForm.get('search')?.value})
+    this.filters = Object.assign({}, {...this.filters, name: this.searchForm.get('search')?.value, page: 1})
     this.getContries(this.filters);
   }
 
   toggleDeleteCountryForm() {
     this.deleteCountryForm = !this.deleteCountryForm;
+  }
+
+  reset() {
+    this.filters = {
+      perPage: 10,
+      page: 1
+    }
+    this.searchForm.reset();
+    this.getContries();
   }
 
   onPageChange(event: number) {

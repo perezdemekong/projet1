@@ -32,7 +32,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
-  @Input() type!: "submit" | "button";
+  @Input() type!: "submit" | "button" | "reset";
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
   @Input() class!: string;

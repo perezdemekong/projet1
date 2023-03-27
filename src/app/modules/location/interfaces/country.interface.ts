@@ -1,5 +1,3 @@
-import { PaginationResponse } from "@app/core/interfaces/core.interface";
-
 export interface Country {
     id: number;
     name: string;
@@ -15,14 +13,7 @@ export interface Country {
     callingCodes: string[];
 }
 
-export interface ComplexResponse<T> {
-    message: string;
-    data: {
-        countries: PaginationResponse<T>;
-    }
-}
-
-export interface SimpleResponse<T> {
-    message: string;
-    data: T[];
+export interface StatusData {
+    is_active: boolean;
+    is_enabled: boolean;
 }

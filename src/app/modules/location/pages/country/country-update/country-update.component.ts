@@ -59,7 +59,13 @@ export class CountryUpdateComponent implements OnInit {
   }
 
   toggleStatus() {
-    this.status = !this.status;
+    this.locationService.toggleStatusOfCountry(this.country.id, { is_active: !this.country.is_active, is_enabled: this.country.is_enabled })
+      .then((country) => {
+        this.getCountry();
+      }).catch((error) => {
+        this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
+      })
+    ;
   }
 
   pushErrorNotif(message: string) {

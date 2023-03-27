@@ -8,7 +8,7 @@ export interface SimpleCurrencyResponse<T> {
 export interface SimpleCurrencyOnlyResponse<T> {
     message: string;
     data: {
-        currencies: T;
+        currency: T;
     };
 }
 
@@ -18,6 +18,10 @@ export interface Currency {
     code: string;
     symbol: string;
     format: string;
-    is_active: boolean;
+    is_active?: boolean;
     exchange_rate: string | number;
+}
+
+export interface CurrencyStatus {
+    is_active: boolean;
 }

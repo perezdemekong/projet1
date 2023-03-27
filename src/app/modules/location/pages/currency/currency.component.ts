@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IFilterParams } from '@app/core/interfaces/core.interface';
+import { ComplexResponse, IFilterParams, Pagination } from '@app/core/interfaces/core.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 import { Currency } from '../../interfaces/currency.interface';
 import { LocationService } from '../../services/location.service';
@@ -23,15 +23,18 @@ export class CurrencyComponent implements OnInit {
     page: 1
   }
 
-  perPage: number = 10;
+  page: number = 1;
+
   activity: "actif" | "inactif" = "actif";
 
   perPageRange: number[] = [10, 20, 30, 40, 50];
   activitiesRange: string[] = ["actif", "inactif"];
 
   search!: string;
+  perPage: number = 10;
 
   currencies: Currency[] = [];
+  pagination!: Pagination;
 
   loading: boolean = true;
 
@@ -45,14 +48,20 @@ export class CurrencyComponent implements OnInit {
     this.getCurrencies();
   }
 
-  getCurrencies() {
-    this.locationService.getCurrencies()
-      .then((currencies) => {
+  getCurrencies(filter?: IFilterParams) {
+    if (this.loading === false) {
+      this.loading = true;
+    }
+    this.locationService.getCurrencies(filter)
+      .then((data: ComplexResponse<Currency>) => {
         this.loading = false;
-        this.currencies = currencies.data.currencies;
+        this.currencies = data.data['currencies'].data;
         console.log(this.currencies);
+        this.pagination = data.data['currencies'].pagination;
       }).catch((err) => {
         this.loading = false;
+        console.log(err);
+        
         this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!')
       })
     ;
@@ -72,26 +81,41 @@ export class CurrencyComponent implements OnInit {
     }, 3000)
   }
 
-  chang() {
-    console.log(this.searchForm.getRawValue());
-    console.log(this.activity);
-    console.log(this.perPage);
+  searchByName() {
+    this.filters = Object.assign({}, {...this.filters, name: this.searchForm.get('search')?.value, page: 1})
+    this.getCurrencies(this.filters);
   }
 
   toggleDeleteCurrencyForm() {
     this.deleteCurrencyForm = !this.deleteCurrencyForm;
   }
 
+  reset() {
+    this.filters = {
+      perPage: 10,
+      page: 1
+    }
+    this.searchForm.reset();
+    this.getCurrencies();
+  }
 
-  // handlePageSizeChange() {
-  //   this.filters = Object.assign({}, {...this.filters, per_page: this.perPage})
-  //   this.getCurrencies(this.filters);
-  // }
+  onPageChange(event: number) {
+    this.filters = Object.assign(
+      {},
+      { ...this.filters, page: event }
+    );
+    this.getCurrencies(this.filters);
+  }
 
-  // handleStatusChange() {
-  //   const NEW_VALUE = this.activity === 'actif' ? true : false;
-  //   this.filters = Object.assign({}, {...this.filters, is_active: NEW_VALUE});
-  //   this.getCurrencies(this.filters);
-  // }
+  handlePageSizeChange() {
+    this.filters = Object.assign({}, {...this.filters, per_page: this.perPage})
+    this.getCurrencies(this.filters);
+  }
+
+  handleStatusChange() {
+    const NEW_VALUE = this.activity === 'actif' ? true : false;
+    this.filters = Object.assign({}, {...this.filters, is_active: NEW_VALUE});
+    this.getCurrencies(this.filters);
+  }
 
 }
