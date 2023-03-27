@@ -5,6 +5,7 @@ import { LocalStorageService } from '@app/modules/authentication/services/local-
 import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Establishment, EstablishmentData, EstablishmentStatus } from '../interfaces/establishments.interface';
+import { Speciality, SpecialityData, SpecialityStatus } from '../interfaces/speciality.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +86,70 @@ export class MedecineService {
   async toggleStatusOfEstablishment(id: number, data: EstablishmentStatus): Promise<SimpleJsonResponse<Establishment>> {
     return await firstValueFrom(this.http.put<SimpleJsonResponse<Establishment>>(
       `${environment.apiUrl}/establishments/${id}/status`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ))
+  }
+
+
+
+  // Speciality
+
+  async getSpecialities(
+    params?: IFilterParams
+  ): Promise<SimpleResponse<Speciality>> {
+    return await firstValueFrom(this.http.get<SimpleResponse<Speciality>>(
+      `${environment.apiUrl}/specialities`,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+        params: this.getQueryParams(params)
+      }
+    ))
+  }
+
+  async getSpeciality(id: number): Promise<SimpleJsonResponse<Speciality>> {
+    return await firstValueFrom(this.http.get<SimpleJsonResponse<Speciality>>(
+      `${environment.apiUrl}/specialities/${id}`,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ))
+  }
+
+  async postSpeciality(data: SpecialityData): Promise<SimpleJsonResponse<SpecialityData>> {
+    return await firstValueFrom(this.http.post<SimpleJsonResponse<SpecialityData>>(
+      `${environment.apiUrl}/specialities`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ))
+  }
+
+  async putSpeciality(id: number, data: SpecialityData): Promise<SimpleJsonResponse<Speciality>> {
+    return await firstValueFrom(this.http.put<SimpleJsonResponse<Speciality>>(
+      `${environment.apiUrl}/specialities/${id}`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ))
+  }
+
+  async deleteSpeciality(id: number): Promise<any> {
+    return await firstValueFrom(this.http.delete<any>(
+      `${environment.apiUrl}/specialities/${id}`,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ))
+  }
+
+  async toggleStatusOfSpeciality(id: number, data: SpecialityStatus): Promise<SimpleJsonResponse<Speciality>> {
+    return await firstValueFrom(this.http.put<SimpleJsonResponse<Speciality>>(
+      `${environment.apiUrl}/specialities/${id}/status`,
       data,
       {
         headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },

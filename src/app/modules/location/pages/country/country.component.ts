@@ -58,7 +58,7 @@ export class CountryComponent implements OnInit {
       })
       .catch((error) => {
         this.loading = false;
-        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!')
+        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
       })
     ;
   }
