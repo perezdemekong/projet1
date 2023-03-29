@@ -77,7 +77,7 @@ export class EstablishmentComponent implements OnInit {
       this.medecineService.deleteEstablishment(this.idOfEstablishmentToDelete)
         .then((data) => {
           this.getEstablishments();
-          this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
+          this.pushSuccessNotif('Cet établissement a été supprimée avec succès!');
           this.toggleDeleteEstablishmentForm();
         }).catch((err) => {
           this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
@@ -89,7 +89,7 @@ export class EstablishmentComponent implements OnInit {
   pushSuccessNotif(message: string) {
     this.notificationService.notificationController.next({
       isOpen: true,
-      title: 'Siccès',
+      title: 'Succès',
       message,
       type: 'success'
     })

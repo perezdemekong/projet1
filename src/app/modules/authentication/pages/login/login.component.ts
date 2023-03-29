@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
 
   populateLocalStorage(data: SuccessAuthResponse) {
     this.localStorageService.setAccessToken(
-      data.data.token,
+      data.data.token ? data.data.token : '',
     );
     this.localStorageService.setLocalStorage(
       'user',

@@ -5,7 +5,7 @@
         description="Ces informations sont visibles par les autres et peuvent être modifiées"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl" [formGroup]="userForm" (submit)="submitUserForm()">
+    <form class="sm:p-5 space-y-8 max-w-3xl" [formGroup]="userPhotoForm" (submit)="submitUserPhotoForm()">
 
         <div class="flex flex-wrap gap-5 p-5 justify-between items-center rounded-lg border border-gray-300 shadow-sm">
 
@@ -15,20 +15,37 @@
                 <img [src]="photo" alt="Profile photo" class="w-10 h-10 rounded-full object-contain">
             </div>
 
-            <input type="file" class="sr-only" (change)="onFileChange($event)" #fileInput formControlName="photo">
+            <input type="file" class="sr-only" (change)="onFileChange($event)" #fileInput>
 
-            <div class="flex gap-3">
+            <div *ngIf="!userPhotoForm.valid" class="flex gap-3">
                 <app-button type="button" (click)="fileInput.click()"
                     [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">
                     Changer
                 </app-button>
-                <app-button type="button"
+                <!-- <app-button type="button"
                     [class]="'bg-gray-300 text-black hover:bg-gray-300 focus:ring-gray-300 float-right'">
                     Supprimer
+                </app-button> -->
+            </div>
+
+            <div *ngIf="userPhotoForm.valid" class="flex gap-3">
+                <app-button type="submit"
+                    [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">
+                    Confirmer
+                </app-button>
+
+                <app-button (click)="resetUserPhotoForm()" type="button"
+                    [class]="'bg-gray-300 text-black hover:bg-gray-300 focus:ring-gray-300 float-right'">
+                    Annuler
                 </app-button>
             </div>
 
         </div>
+
+    </form>
+
+    <!-- Form -->
+    <form class="sm:p-5 space-y-8 max-w-3xl" [formGroup]="userForm" (submit)="submitUserForm()">
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Nom</div>
