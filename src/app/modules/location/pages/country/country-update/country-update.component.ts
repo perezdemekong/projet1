@@ -62,6 +62,7 @@ export class CountryUpdateComponent implements OnInit {
     this.locationService.toggleStatusOfCountry(this.country.id, { is_active: !this.country.is_active, is_enabled: this.country.is_enabled })
       .then((country) => {
         this.getCountry();
+        this.pushSuccessNotif('Le status du pays a été modifié avec succés!');
       }).catch((error) => {
         this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
       })
@@ -74,6 +75,20 @@ export class CountryUpdateComponent implements OnInit {
       title: 'Érreur',
       message,
       type: 'error'
+    })
+    setTimeout(() => {
+      this.notificationService.notificationController.next({
+        isOpen: false
+      })
+    }, 3000)
+  }
+
+  pushSuccessNotif(message: string) {
+    this.notificationService.notificationController.next({
+      isOpen: true,
+      title: 'Succés',
+      message,
+      type: 'success'
     })
     setTimeout(() => {
       this.notificationService.notificationController.next({

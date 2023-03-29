@@ -137,7 +137,7 @@ export class EstablishmentComponent implements OnInit {
   onPageChange(event: number) {
     this.filters = Object.assign(
       {},
-      { ...this.filters, page: event }
+      { ...this.filters, page: event, per_page: this.perPage }
     );
     this.getEstablishments(this.filters);
   }
@@ -149,17 +149,17 @@ export class EstablishmentComponent implements OnInit {
 
   handleStatusChange() {
     const NEW_VALUE = this.activity === 'actif' ? true : false;
-    this.filters = Object.assign({}, {...this.filters, status: NEW_VALUE});
+    this.filters = Object.assign({}, {...this.filters, status: NEW_VALUE, per_page: this.perPage});
     this.getEstablishments(this.filters);
   }
 
   handleTypeChange() {
-    this.filters = Object.assign({}, {...this.filters, type: this.typeOfEstablishment});
+    this.filters = Object.assign({}, {...this.filters, type: this.typeOfEstablishment, per_page: this.perPage});
     this.getEstablishments(this.filters);
   }
 
   handleAdminChange() {
-    this.filters = Object.assign({}, {...this.filters, admin_practician: this.admin});
+    this.filters = Object.assign({}, {...this.filters, admin_practician: this.admin, per_page: this.perPage});
     this.getEstablishments(this.filters);
   }
 

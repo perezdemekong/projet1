@@ -102,7 +102,7 @@ export class CurrencyComponent implements OnInit {
   onPageChange(event: number) {
     this.filters = Object.assign(
       {},
-      { ...this.filters, page: event }
+      { ...this.filters, page: event, per_page: this.perPage }
     );
     this.getCurrencies(this.filters);
   }
@@ -114,7 +114,7 @@ export class CurrencyComponent implements OnInit {
 
   handleStatusChange() {
     const NEW_VALUE = this.activity === 'actif' ? true : false;
-    this.filters = Object.assign({}, {...this.filters, is_active: NEW_VALUE});
+    this.filters = Object.assign({}, {...this.filters, is_active: NEW_VALUE, per_page: this.perPage});
     this.getCurrencies(this.filters);
   }
 
