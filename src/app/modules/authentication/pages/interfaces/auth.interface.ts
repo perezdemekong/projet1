@@ -58,3 +58,9 @@ export interface ErrorAuthResponse {
     status_code: number;
     error: any
 }
+
+export interface UpdatePasswordData {
+    old_password: string;
+    new_password: string;
+    new_password_confirmation: string;
+}

@@ -8,17 +8,19 @@
 
         <div class="flex gap-2.5">
 
-            <app-select label="perPage" name="perPage" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
+            <app-select label="perPage" name="perPage" [options]="perPageRange" (change)="handlePageSizeChange()" [(ngModel)]="perPage"></app-select>
 
-            <app-select label="activity" name="activity" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
+            <app-select label="activity" name="activity" (change)="handleStatusChange()" [default]="true" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
 
         </div>
 
-        <form [formGroup]="searchForm" (submit)="chang()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
+        <form [formGroup]="searchForm" (submit)="customSearch()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
 
             <app-search-bar placeholder="Rechercher par nom, prénom, email..." formControlName="search"></app-search-bar>
 
             <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">Rechercher</app-button>
+
+            <app-button type="reset" (click)="reset()" [class]="'bg-gray-100 hover:bg-gray-200 focus:ring-gray-300 text-slate-500'">Reinitialiser</app-button>
 
         </form>
 
@@ -44,18 +46,19 @@
                 <tbody class="pt-3 divide-y-2 divide-gray-100">
                 <tr *ngFor="let patient of patients | paginate : {
                     itemsPerPage: perPage,
-                    currentPage: 2,
-                    totalItems: patients.length
+                    currentPage: pagination?.current_page,
+                    totalItems: pagination?.total
                 }" class="cursor-pointer">
-                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">{{patient.name}}</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">{{patient.surname}}</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 pl-10 text-tertiary capitalize">{{patient.birthDate | date: 'dd/mmmm/yyyy'}}</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">{{patient.phone}}</td>
+                    <td class="whitespace-nowrap !py-3 pl-2 pr-3 max-w-fit text-tertiary capitalize">{{patient.first_name}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">{{patient.last_name}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 pl-10 text-tertiary capitalize">{{patient.birthdate | date: 'dd/MM/yyyy'}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">{{patient.phone_number}}</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary">{{patient.email}}</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="patient.status| checkUserStatusColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="patient.status | checkUserStatusSvgdf" />
-                        </svg>                                                                                                    
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="{'stroke-red-500': !patient.status, 'stroke-primary-500': patient.status}">
+                            <path *ngIf="patient.status" stroke-linecap="round" stroke-linejoin="round" d='M4.5 12.75l6 6 9-13.5' />
+                            <path *ngIf="!patient.status" stroke-linecap="round" stroke-linejoin="round" d='M6 18L18 6M6 6l12 12' />
+                        </svg>                                                                                                       
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                         <a [routerLink]="['/users/patients', patient.id, 'historical']" class="mr-3" type="button">

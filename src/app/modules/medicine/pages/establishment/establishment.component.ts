@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IFilterParams, Pagination } from '@app/core/interfaces/core.interface';
+import { RequestLoaderService } from '@app/core/services/request-loader.service';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 import { Establishment } from '../../interfaces/establishments.interface';
 import { MedecineService } from '../../services/medecine.service';
@@ -48,6 +49,7 @@ export class EstablishmentComponent implements OnInit {
     private fb: FormBuilder,
     private medecineService: MedecineService,
     private notificationService: NotificationService,
+    private requestLoaderService: RequestLoaderService,
   ) { }
 
   ngOnInit(): void {
@@ -74,12 +76,15 @@ export class EstablishmentComponent implements OnInit {
 
   deleteEstablishment() {
     if (this.idOfEstablishmentToDelete) {
+      this.toggleDeleteEstablishmentForm();
+      this.requestLoaderService.startLoading();
       this.medecineService.deleteEstablishment(this.idOfEstablishmentToDelete)
         .then((data) => {
+          this.requestLoaderService.stopLoader();
           this.getEstablishments();
           this.pushSuccessNotif('Cet établissement a été supprimée avec succès!');
-          this.toggleDeleteEstablishmentForm();
         }).catch((err) => {
+          this.requestLoaderService.stopLoader();
           this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
         })
       ;

@@ -24,6 +24,16 @@ export class AuthService {
     ))
   }
 
+  async logOut() {
+    return await firstValueFrom(this.http.post(
+      `${environment.apiUrl}/logout`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ))
+  }
+
   async updateProfile(id: number, data: UserData): Promise<SuccessAuthResponse> {
     return await firstValueFrom(this.http.post<SuccessAuthResponse>(
       `${environment.apiUrl}/user/profile/${id}`,

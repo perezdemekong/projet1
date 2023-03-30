@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { RequestLoaderService } from '@app/core/services/request-loader.service';
 import { MedecineService } from '@app/modules/medicine/services/medecine.service';
 import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breadscrumb.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
@@ -52,6 +53,7 @@ export class EstablishmentUpdateComponent implements OnInit {
     private medecineService: MedecineService,
     private notificationService: NotificationService,
     private activatedRoute: ActivatedRoute,
+    private requestLoaderService: RequestLoaderService
     ) { }
 
   ngOnInit(): void {
@@ -59,8 +61,10 @@ export class EstablishmentUpdateComponent implements OnInit {
   }
 
   getEstablishment() {
+    this.requestLoaderService.startLoading();
     this.medecineService.getEstablishment(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''))
       .then((data) => {
+        this.requestLoaderService.stopLoader();
         this.establishmentForm.get('name')?.setValue(data.data['establishment'].name);
         this.establishmentForm.get('type')?.setValue(data.data['establishment'].type);
         this.establishmentForm.get('city')?.setValue(data.data['establishment'].city);
@@ -70,25 +74,32 @@ export class EstablishmentUpdateComponent implements OnInit {
         this.establishmentForm.get('description')?.setValue(data.data['establishment'].description);
         this.establishmentForm.get('status')?.setValue(data.data['establishment'].status);
       }).catch((err) => {
+        this.requestLoaderService.stopLoader();
         this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
       })
     ;
   }
 
   toggleStatus() {
+    this.requestLoaderService.startLoading();
     this.medecineService.toggleStatusOfEstablishment(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''), { status: !this.establishmentForm.get('status')?.value })
       .then((data) => {
+        this.requestLoaderService.stopLoader();
         this.establishmentForm.get('status')?.setValue(data.data['establishment'].status);
       }).catch((err) => {
+        this.requestLoaderService.stopLoader();
         this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
       });
   }
 
   updateEstablishment() {
+    this.requestLoaderService.startLoading();
     this.medecineService.putEstablishment(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''), this.establishmentForm.getRawValue())
       .then((data) => {
+        this.requestLoaderService.stopLoader();
         this.pushSuccesNotif('Établissement modifié avec succès!');
       }).catch((err) => {
+        this.requestLoaderService.stopLoader();
         this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
       })
     ;

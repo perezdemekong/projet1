@@ -4,12 +4,12 @@
     <app-page-heading title="Connexion et sécurité" description="Mettre à jour votre mot de passe"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl">
+    <form [formGroup]="passwordForm" (submit)="changePassword()" class="sm:p-5 space-y-8 max-w-3xl">
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-60">Ancien mot de passe</div>
             <div class="flex-1 relative">
-                <app-big-password labelFor="password" label="mot de passe" name="password" [toggled]="oldPasswordToggled" [class]="'w-full'"></app-big-password>
+                <app-big-password formControlName="old_password" labelFor="password" label="mot de passe" name="password" [toggled]="oldPasswordToggled" [class]="'w-full'"></app-big-password>
                 
                 <button type="button" (click)="toggleOldPassword()" class="absolute top-3.5 right-5">
 
@@ -32,7 +32,7 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-60">Nouveau mot de passe</div>
             <div class="flex-1 relative">
-                <app-big-password labelFor="password" label="mot de passe" name="password" [toggled]="newPasswordToggled" [class]="'w-full'"></app-big-password>
+                <app-big-password formArrayName="new_password" labelFor="password" label="mot de passe" name="password" [toggled]="newPasswordToggled" [class]="'w-full'"></app-big-password>
                 
                 <button type="button" (click)="toggleNewPassword()" class="absolute top-3.5 right-5">
 
@@ -55,7 +55,7 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-60">Confirmation du mot de passe</div>
             <div class="flex-1 relative">
-                <app-big-password labelFor="password" label="mot de passe" name="password" [toggled]="newPasswordConfirmToggled" [class]="'w-full'"></app-big-password>
+                <app-big-password formControlName="new_password_confirm" labelFor="password" label="mot de passe" name="password" [toggled]="newPasswordConfirmToggled" [class]="'w-full'"></app-big-password>
                 
                 <button type="button" (click)="toggleNewPasswordConfirmToggled()" class="absolute top-3.5 right-5">
 
@@ -76,7 +76,7 @@
         </div>
 
         <div class="flex justify-end">
-            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+            <app-button type="submit" [disabled]="!passwordForm.valid" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
                 Modifier
             </app-button>
         </div>
