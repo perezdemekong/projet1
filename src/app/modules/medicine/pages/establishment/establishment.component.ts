@@ -62,8 +62,8 @@ export class EstablishmentComponent implements OnInit {
     }
     this.medecineService.getEstablishments(filter)
       .then((data) => {
-        this.establishments = data.data;
-        this.pagination = data.pagination;
+        this.establishments = data.data['establishment'].data;
+        this.pagination = data.data['establishment'].pagination;
         this.loading = false;
         console.log(data);
         console.log(this.establishments);

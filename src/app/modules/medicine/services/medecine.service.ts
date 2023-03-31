@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IFilterParams, SimpleJsonResponse, SimpleResponse } from '@app/core/interfaces/core.interface';
+import { IFilterParams, SimpleJsonResponse, ComplexResponse } from '@app/core/interfaces/core.interface';
 import { LocalStorageService } from '@app/modules/authentication/services/local-storage.service';
 import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -35,8 +35,8 @@ export class MedecineService {
 
   async getEstablishments(
     params?: IFilterParams
-  ): Promise<SimpleResponse<Establishment>> {
-    return await firstValueFrom(this.http.get<SimpleResponse<Establishment>>(
+  ): Promise<ComplexResponse<Establishment>> {
+    return await firstValueFrom(this.http.get<ComplexResponse<Establishment>>(
       `${environment.apiUrl}/establishments`,
       {
         headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
@@ -99,8 +99,8 @@ export class MedecineService {
 
   async getSpecialities(
     params?: IFilterParams
-  ): Promise<SimpleResponse<Speciality>> {
-    return await firstValueFrom(this.http.get<SimpleResponse<Speciality>>(
+  ): Promise<ComplexResponse<Speciality>> {
+    return await firstValueFrom(this.http.get<ComplexResponse<Speciality>>(
       `${environment.apiUrl}/specialities`,
       {
         headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },

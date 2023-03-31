@@ -4,7 +4,7 @@ import { firstValueFrom } from 'rxjs';
 
 
 import { environment } from 'src/environments/environment';
-import { Data, LoginData, SuccessAuthResponse, UserData, UserDataImage } from '../pages/interfaces/auth.interface';
+import { Data, LoginData, SuccessAuthResponse, UpdatePasswordData, UserData, UserDataImage } from '../pages/interfaces/auth.interface';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
@@ -47,6 +47,16 @@ export class AuthService {
   async updateProfileImage(id: number, data: UserDataImage): Promise<SuccessAuthResponse> {
     return await firstValueFrom(this.http.post<SuccessAuthResponse>(
       `${environment.apiUrl}/user/profile/${id}`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ))
+  }
+
+  async updatePassword(data: UpdatePasswordData): Promise<any> {
+    return await firstValueFrom(this.http.put<any>(
+      `${environment.apiUrl}/user/password`,
       data,
       {
         headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },

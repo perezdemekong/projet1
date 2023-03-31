@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RequestLoaderService } from '@app/core/services/request-loader.service';
 import { MedecineService } from '@app/modules/medicine/services/medecine.service';
 import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breadscrumb.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
@@ -35,17 +36,21 @@ export class SpecialityCreateComponent implements OnInit {
   constructor(
     private medecineService: MedecineService,
     private notificationService: NotificationService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private requestLoaderService: RequestLoaderService,
   ) { }
 
   ngOnInit(): void {
   }
 
   createSpeciality() {
+    this.requestLoaderService.startLoading();
     this.medecineService.postSpeciality(this.specialityForm.getRawValue())
       .then((data) => {
+        this.requestLoaderService.stopLoader();
         this.pushSuccessNotif('Spécialité crée avec succès!');
       }).catch((error) => {
+        this.requestLoaderService.stopLoader();
         this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
       })
     ;

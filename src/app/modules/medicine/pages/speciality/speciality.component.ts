@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IFilterParams, Pagination } from '@app/core/interfaces/core.interface';
+import { RequestLoaderService } from '@app/core/services/request-loader.service';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 import { Speciality } from '../../interfaces/speciality.interface';
 import { MedecineService } from '../../services/medecine.service';
@@ -19,7 +20,7 @@ export class SpecialityComponent implements OnInit {
   deleteSpecialityForm: boolean = false;
 
   perPage: number = 10;
-  activity: "actif" | "inactif" = "actif";
+  activity!: "actif" | "inactif";
 
   perPageRange: number[] = [10, 20, 30, 40, 50];
   activitiesRange: string[] = ["actif", "inactif"];
@@ -41,7 +42,8 @@ export class SpecialityComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private notificationService: NotificationService,
-    private medecineService: MedecineService
+    private medecineService: MedecineService,
+    private requestLoaderService: RequestLoaderService,
   ) { }
 
   ngOnInit(): void {
@@ -55,8 +57,8 @@ export class SpecialityComponent implements OnInit {
     this.medecineService.getSpecialities(filter)
       .then((data) => {
         this.loading = false;
-        this.specialities = data.data;
-        this.pagination = data.pagination;
+        this.specialities = data.data['speciality'].data;
+        this.pagination = data.data['speciality'].pagination;
         console.log(this.specialities);
       }).catch((err) => {
         this.loading = false;
@@ -67,14 +69,18 @@ export class SpecialityComponent implements OnInit {
 
   deleteSpeciality() {
     if (this.idOfSpecialityToDelete) {
+      this.deleteSpecialityForm = !this.deleteSpecialityForm;
+      this.requestLoaderService.startLoading();
       this.medecineService.deleteSpeciality(this.idOfSpecialityToDelete)
         .then((data) => {
+          this.requestLoaderService.stopLoader();
+          this.idOfSpecialityToDelete = undefined;
           this.getSpecialities();
-          this.toggleDeleteSpecialityForm();
           this.pushSuccessNotif('Cette spécialité a été supprimée avec succès!');
         }).catch((error) => {
+          this.requestLoaderService.stopLoader();
           this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
-          this.toggleDeleteSpecialityForm();
+          this.idOfSpecialityToDelete = undefined;
         })
       ;
     }

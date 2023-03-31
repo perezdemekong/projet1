@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/dashboard');
       this.pushSuccesNotif();
     }else {
-      this.pushErrorNotif('Adresse e-mail ou mot de passe invalide!');
+      this.pushErrorNotif('Adresse e-mail et/ou mot de passe incorrecte(s)!');
     }
     this.loading = false;
   }
