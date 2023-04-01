@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Roles } from '@app/core/enums/roles';
-import { StopLoadingService } from '@app/core/services/stop-loading.service';
-import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 
+
+import { Roles } from '@app/core/enums/roles';
+import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { ErrorAuthResponse, SuccessAuthResponse } from '../interfaces/auth.interface';
+import { SuccessAuthResponse } from '../interfaces/auth.interface';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   loginForm: FormGroup = this.fb.group({
     email: [null, [Validators.required, Validators.email]],
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
 
   passwordToggled: boolean = false;
   loading: boolean = false;
+  loginFormSubmitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,20 +33,18 @@ export class LoginComponent implements OnInit {
     private notificationService: NotificationService
   ) { }
 
-  ngOnInit(): void {
-    
-  }
-
   togglePasswordToggled(): void {
     this.passwordToggled = !this.passwordToggled;
   }
 
   login() {
+    this.loginFormSubmitted = true;
     if (this.loginForm.valid) {
       this.loading = true;
       this.authService.login(this.loginForm.getRawValue())
         .then((data: SuccessAuthResponse) => {
           this.checkUserStatus(data);
+          this.loading = false;
         })
         .catch((err) => {
           this.loading = false;
@@ -60,14 +59,14 @@ export class LoginComponent implements OnInit {
     if (data.data.user.roles.includes(Roles.Admin)) {
       this.populateLocalStorage(data);
       this.router.navigateByUrl('/dashboard');
-      this.pushSuccesNotif();
+      this.pushSuccessNotif();
     }else {
       this.pushErrorNotif('Adresse e-mail et/ou mot de passe incorrecte(s)!');
     }
     this.loading = false;
   }
 
-  pushSuccesNotif() {
+  pushSuccessNotif() {
     this.notificationService.notificationController.next({
       isOpen: true,
       title: 'Succès',

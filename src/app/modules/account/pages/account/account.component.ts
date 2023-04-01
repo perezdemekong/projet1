@@ -25,6 +25,9 @@ export class AccountComponent implements OnInit {
 
   user!: User;
   photo!: string;
+  userFormSubmitted: boolean = false;
+  loading: boolean = false;
+  loadingPhoto: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,21 +43,29 @@ export class AccountComponent implements OnInit {
   }
 
   submitUserForm() {
-    this.authService.updateProfile(this.user.id, this.userForm.getRawValue())
-      .then((data) => {
-        this.setValueOnUserForm(data.data.user);
-        this.pushSuccessNotif('Votre profil a été mis à jour avec succés!');
-        this.localStorageService.setLocalStorage(
-          'user',
-          JSON.stringify(data.data.user)
-        );
-      }).catch((error) => {
-        this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
-      })
-    ;
+    this.userFormSubmitted = true;
+
+    if (this.userForm.valid) {
+      this.loading = true;
+      this.authService.updateProfile(this.user.id, this.userForm.getRawValue())
+        .then((data) => {
+          this.setValueOnUserForm(data.data.user);
+          this.pushSuccessNotif('Votre profil a été mis à jour avec succés!');
+          this.localStorageService.setLocalStorage(
+            'user',
+            JSON.stringify(data.data.user)
+          );
+          this.loading = false;
+        }).catch((error) => {
+          this.loading = false;
+          this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
+        })
+      ;
+    }
   }
 
   submitUserPhotoForm() {
+    this.loadingPhoto = true;
     this.authService.updateProfileImage(this.user.id, this.userPhotoForm.getRawValue())
       .then((data) => {
         this.setValueOnUserForm(data.data.user);
@@ -62,8 +73,10 @@ export class AccountComponent implements OnInit {
           'user',
           JSON.stringify(data.data.user)
         );
+        this.loadingPhoto = false;
         this.pushSuccessNotif('Votre photo de profil a été mis à jour avec succés!');
       }).catch((error) => {
+        this.loadingPhoto = false;
         this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
       })
     ;

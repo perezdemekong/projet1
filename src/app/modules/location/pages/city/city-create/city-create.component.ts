@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
 import { ComplexResponse } from '@app/core/interfaces/core.interface';
+import { RequestLoaderService } from '@app/core/services/request-loader.service';
 import { Country } from '@app/modules/location/interfaces/country.interface';
 import { LocationService } from '@app/modules/location/services/location.service';
 import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breadscrumb.interface';
@@ -33,15 +36,16 @@ export class CityCreateComponent implements OnInit {
       ]
     }
   ]
-
   countries: Country[] = [];
+
   loading: boolean = true;
   cityFormSubmitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private locationService: LocationService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private requestLoaderService: RequestLoaderService
   ) { }
 
   ngOnInit(): void {
@@ -65,10 +69,13 @@ export class CityCreateComponent implements OnInit {
     this.cityFormSubmitted = true;
     
     if (this.cityForm.valid) {
+      this.requestLoaderService.startLoading();
       this.locationService.postCity(this.cityForm.getRawValue())
         .then((response) => {
+          this.requestLoaderService.stopLoader();
           this.pushSuccesNotif('Ville crée avec succès!');
         }).catch((error) => {
+          this.requestLoaderService.stopLoader();
           this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!')
         })
       ;

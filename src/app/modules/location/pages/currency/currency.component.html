@@ -4,13 +4,13 @@
     <app-page-heading title="Devises" description="Liste des devises sur l'application Tabiblib"></app-page-heading>
 
     <!-- Actions -->
-    <div class="flex justify-between mb-5 max-lg:flex-col max-lg:gap-2.5">
+    <!-- <div class="flex justify-between mb-5 max-lg:flex-col max-lg:gap-2.5">
 
         <div class="flex gap-2.5">
 
             <app-select label="perPage" name="perPage" (change)="handlePageSizeChange()" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
             
-            <app-select label="activity" name="activity" (change)="handleStatusChange()" [options]="activitiesRange" (change)="handleStatusChange()" [(ngModel)]="activity"></app-select>
+            <app-select label="activity" name="activity" (change)="handleStatusChange()" [default]="true" [options]="activitiesRange" (change)="handleStatusChange()" [(ngModel)]="activity"></app-select>
 
         </div>
 
@@ -24,7 +24,7 @@
 
         </form>
 
-    </div>
+    </div> -->
 
     <!-- Table -->
     <div *ngIf="!loading" class="overflow-x-auto">
@@ -43,8 +43,8 @@
                 <tbody class="pt-3 divide-y-2 divide-gray-100">
                 <tr *ngFor="let currency of currencies | paginate : {
                     itemsPerPage: perPage,
-                    currentPage: page,
-                    totalItems: currencies.length
+                    currentPage: pagination.current_page,
+                    totalItems: pagination.total
                 }" class="cursor-pointer border-gray-400">
                     <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary capitalize">{{currency.name}}</td>
                     <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary uppercase">{{currency.symbol}}</td>

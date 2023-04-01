@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
 import { ComplexResponse, IFilterParams, Pagination } from '@app/core/interfaces/core.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 import { Country } from '../../interfaces/country.interface';
@@ -12,29 +14,25 @@ import { LocationService } from '../../services/location.service';
 })
 export class CountryComponent implements OnInit {
 
-  deleteCountryForm: boolean = false;
-
   searchForm: FormGroup = this.fb.group({
     search: ['', Validators.required],
   })
 
   countries: Country[] = [];
-  pagination!: Pagination;
-
-  perPage: number = 10;
-  activity!: "actif" | "inactif";
-
   perPageRange: number[] = [10, 20, 30, 40, 50];
   activitiesRange = ["actif", "inactif"];
 
-  search!: string;
-
-  loading: boolean = true;
-
+  pagination!: Pagination;
   filters: IFilterParams = {
     perPage: 10,
     page: 1
   }
+
+  perPage: number = 10;
+  activity!: "actif" | "inactif";
+  search!: string;
+  loading: boolean = true;
+  deleteCountryForm: boolean = false;
 
   constructor(
     private fb: FormBuilder,

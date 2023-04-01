@@ -39,16 +39,15 @@ export class EstablishmentCreateComponent implements OnInit {
       ]
     }
   ]
-
-  establishmentTypeTable = ['public', 'prive'];
-  establishmentType!: string;
-
   adminTypeTable = ['Mohamed Belaiouer', 'Mohamed Belaiouer1', 'Mohamed Belaiouer2'];
-  admin!: string;
-
+  establishmentTypeTable = ['public', 'prive'];
   cities: City[] = [];
 
+  
+  establishmentType!: string;
+  admin!: string;
   loading: boolean = true;
+  establishmentFormSubmitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -80,16 +79,20 @@ export class EstablishmentCreateComponent implements OnInit {
   }
 
   createEstablishment() {
-    this.requestLoaderService.startLoading();
-    this.medecineService.postEstablishment(this.establishmentForm.getRawValue())
-      .then((data) => {
-        this.pushSuccesNotif('Établissement crée avec succès!');
-        this.requestLoaderService.stopLoader();
-      }).catch((error) => {
-        this.requestLoaderService.stopLoader();
-        this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
-      })
-    ;
+    this.establishmentFormSubmitted = true;
+
+    if (this.establishmentForm.valid) {
+      this.requestLoaderService.startLoading();
+      this.medecineService.postEstablishment(this.establishmentForm.getRawValue())
+        .then((data) => {
+          this.pushSuccesNotif('Établissement crée avec succès!');
+          this.requestLoaderService.stopLoader();
+        }).catch((error) => {
+          this.requestLoaderService.stopLoader();
+          this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
+        })
+      ;
+    }
   }
 
   pushSuccesNotif(message: string) {

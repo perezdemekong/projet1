@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
 import { RequestLoaderService } from '@app/core/services/request-loader.service';
 import { AuthService } from '@app/modules/authentication/services/auth.service';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
@@ -20,8 +22,8 @@ export class SecurityComponent implements OnInit {
   oldPasswordToggled: boolean = false;
   newPasswordToggled: boolean = false;
   newPasswordConfirmToggled: boolean = false;
-
   passwordFormSubmitted: boolean = false;
+  doesNotMatch: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +32,14 @@ export class SecurityComponent implements OnInit {
     private requestLoaderService: RequestLoaderService,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  checkPassword(){
+    if (this.passwordForm.get('new_password')?.value !== this.passwordForm.get('new_password_confirm')?.value) {
+      this.doesNotMatch = true;
+    }else {
+      this.doesNotMatch = false;
+    }
   }
 
   changePassword() {

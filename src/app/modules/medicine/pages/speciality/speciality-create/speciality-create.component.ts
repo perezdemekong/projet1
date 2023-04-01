@@ -33,6 +33,8 @@ export class SpecialityCreateComponent implements OnInit {
     }
   ]
 
+  specialityFormSubmitted: boolean = false;
+
   constructor(
     private medecineService: MedecineService,
     private notificationService: NotificationService,
@@ -44,16 +46,20 @@ export class SpecialityCreateComponent implements OnInit {
   }
 
   createSpeciality() {
-    this.requestLoaderService.startLoading();
-    this.medecineService.postSpeciality(this.specialityForm.getRawValue())
-      .then((data) => {
-        this.requestLoaderService.stopLoader();
-        this.pushSuccessNotif('Spécialité crée avec succès!');
-      }).catch((error) => {
-        this.requestLoaderService.stopLoader();
-        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
-      })
-    ;
+    this.specialityFormSubmitted = true;
+
+    if (this.specialityForm.valid) {
+      this.requestLoaderService.startLoading();
+      this.medecineService.postSpeciality(this.specialityForm.getRawValue())
+        .then((data) => {
+          this.requestLoaderService.stopLoader();
+          this.pushSuccessNotif('Spécialité crée avec succès!');
+        }).catch((error) => {
+          this.requestLoaderService.stopLoader();
+          this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
+        })
+      ;
+    }
   }
 
   pushSuccessNotif(message: string) {

@@ -35,8 +35,8 @@ export class CityUpdateComponent implements OnInit {
       ]
     }
   ]
-
   countries: Country[] = [];
+  
   loading: boolean = true;
   updateFormSubmitted: boolean = false;
 

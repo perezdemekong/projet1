@@ -10,13 +10,13 @@
 
             <app-select label="perPage" name="perPage" (change)="handlePageSizeChange()" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
             
-            <app-select label="activity" name="activity" (change)="handleStatusChange()" [default]="true" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
+            <!-- <app-select label="activity" name="activity" (change)="handleStatusChange()" [default]="true" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
 
-            <app-select label="code" name="code" [options]="codesList" (change)="handleRoleCodeChange()" [default]="true" [(ngModel)]="code"></app-select>
+            <app-select label="code" name="code" [options]="codesList" (change)="handleRoleCodeChange()" [default]="true" [(ngModel)]="code"></app-select> -->
 
         </div>
 
-        <form [formGroup]="searchForm" (submit)="searchByLibelle()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
+        <!-- <form [formGroup]="searchForm" (submit)="searchByLibelle()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
 
             <app-search-bar placeholder="Rechercher par libellé" formControlName="search"></app-search-bar>
 
@@ -24,7 +24,7 @@
 
             <app-button type="reset" (click)="reset()" [class]="'bg-gray-100 hover:bg-gray-200 focus:ring-gray-300 text-slate-500'">Reinitialiser</app-button>
 
-        </form>
+        </form> -->
 
     </div>
 
@@ -37,8 +37,8 @@
                     <th scope="col" class="!py-3.5 !p-2.5 !pl-4 border-none text-left font-semibold max-w-fit text-white">Libellé</th>
                     <th scope="col" class="p-2.5 !pl-8 border-none text-left font-semibold text-white">Code</th>
                     <th scope="col" class="p-2.5 !pl-0 border-none text-left font-semibold text-white">Accès</th>
-                    <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Description</th>
-                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Status</th>
+                    <!-- <th scope="col" class="p-2.5 !pl-4 border-none text-left font-semibold text-white">Description</th> -->
+                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Statut</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                         <span class="sr-only">Actions</span>
                     </th>
@@ -53,7 +53,7 @@
                     <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary">{{role.display_name}}</td>
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary">{{role.name}}</td>
                     <td class="pt-1.5 pb-1 text-tertiary">{{role.guard_name}}</td>
-                    <td class="pt-1.5 pb-1 text-tertiary capitalize">{{role.description}}</td>
+                    <!-- <td class="pt-1.5 pb-1 text-tertiary capitalize">{{role.description}}</td> -->
                     <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="{'stroke-red-500': !role.status, 'stroke-primary-500': role.status}">
                             <path *ngIf="role.status" stroke-linecap="round" stroke-linejoin="round" d='M4.5 12.75l6 6 9-13.5' />

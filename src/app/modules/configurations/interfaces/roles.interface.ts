@@ -11,6 +11,6 @@ export interface Role {
 }
 
 export interface UpdateRoleData {
-    status: boolean;
-    description: string;
+    status: boolean | number;
+    description?: string;
 }

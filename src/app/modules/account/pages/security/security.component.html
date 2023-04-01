@@ -64,14 +64,14 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-60">Confirmation du mot de passe</div>
             <div class="flex-1 relative">
-                <app-big-password formControlName="new_password_confirm" labelFor="password" label="Confirmation du nouveau mot de passe" name="new_password_confirm" [toggled]="newPasswordConfirmToggled" [class]="'w-full'"></app-big-password>
+                <app-big-password (keyup)="checkPassword()" formControlName="new_password_confirm" labelFor="password" label="Confirmation du nouveau mot de passe" name="new_password_confirm" [toggled]="newPasswordConfirmToggled" [class]="'w-full'"></app-big-password>
                 <div class="flex flex-col">
                     <span class="text-sm font-light italic text-red-600"
                         *ngIf="(passwordForm.get('new_password_confirm')?.touched || passwordFormSubmitted) && !passwordForm.get('new_password_confirm')?.valid">
                         Le mot de passe de confirmation est requis!
                     </span>
                     <span class="text-sm font-light italic text-red-600"
-                        *ngIf="(passwordForm.get('new_password_confirm')?.touched || passwordFormSubmitted) && !passwordForm.get('new_password_confirm')?.valid || passwordForm.get('new_password_confirm')?.value !== passwordForm.get('new_password')?.value">
+                        *ngIf="doesNotMatch">
                         Le mot de passe de confirmation doit être similaire au nouveau mot de passe!
                     </span>
                 </div>

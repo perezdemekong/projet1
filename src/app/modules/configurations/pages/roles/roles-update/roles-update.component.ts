@@ -15,7 +15,7 @@ import { NotificationService } from '@app/shared/components/notification/service
 export class RolesUpdateComponent implements OnInit {
 
   updateRoleForm: FormGroup = this.fb.group({
-    description: [null, Validators.required],
+    // description: [null, Validators.required],
     status: [null, Validators.required],
   });
 
@@ -69,19 +69,21 @@ export class RolesUpdateComponent implements OnInit {
   }
 
   updateRole() {
-    this.requestLoaderService.startLoading();
-    this.configService.UpdateRole(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''), this.updateRoleForm.getRawValue())
-      .then((data) => {
-        this.requestLoaderService.stopLoader();
-        this.role = data.data['role'];
-        this.updateRoleForm.get('description')?.setValue(this.role.description);
-        this.updateRoleForm.get('status')?.setValue(this.role.status);
-        this.pushSuccessNotif('Ce rôle a été modifié avec succès!');
-      }).catch((err) => {
-        this.requestLoaderService.stopLoader();
-        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
-      })
-    ;
+    // const value = this.updateRoleForm.get('status')?.value ? 1 : 0;
+    // this.requestLoaderService.startLoading();
+    // this.configService.UpdateRole(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''), { status: value })
+    //   .then((data) => {
+    //     this.requestLoaderService.stopLoader();
+    //     this.role = data.data['role'];
+    //     this.updateRoleForm.get('description')?.setValue(this.role.description);
+    //     this.updateRoleForm.get('status')?.setValue(this.role.status);
+    //     this.pushSuccessNotif('Ce rôle a été modifié avec succès!');
+    //   }).catch((err) => {
+    //     this.requestLoaderService.stopLoader();
+    //     this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
+    //   })
+    // ;
+    this.pushinfoNotif('Cette fonctionnalité sera bientôt disponible!');
   }
 
   pushSuccessNotif(message: string) {
@@ -90,6 +92,20 @@ export class RolesUpdateComponent implements OnInit {
       title: 'Succès',
       message,
       type: 'success'
+    })
+    setTimeout(() => {
+      this.notificationService.notificationController.next({
+        isOpen: false
+      })
+    }, 3000)
+  }
+
+  pushinfoNotif(message: string) {
+    this.notificationService.notificationController.next({
+      isOpen: true,
+      title: 'Information',
+      message,
+      type: 'info'
     })
     setTimeout(() => {
       this.notificationService.notificationController.next({

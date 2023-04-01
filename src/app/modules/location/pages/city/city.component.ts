@@ -13,15 +13,9 @@ import { LocationService } from '../../services/location.service';
 })
 export class CityComponent implements OnInit {
 
-  deleteCityForm: boolean = false;
-
   searchForm: FormGroup = this.fb.group({
     search: ['', Validators.required],
   })
-
-  perPage: number = 10;
-  activity!: "actif" | "inactif";
-
   filters: IFilterParams = {
     perPage: 10,
     page: 1
@@ -29,15 +23,15 @@ export class CityComponent implements OnInit {
 
   perPageRange: number[] = [10, 20, 30, 40, 50];
   activitiesRange: string[] = ["actif", "inactif"];
-
   cities: City[] = [];
+
   pagination!: Pagination;
-
+  perPage: number = 10;
+  activity!: "actif" | "inactif";
   idOfCityToDelete!: number | null;
-
   search!: string;
-
   loading: boolean = true;
+  deleteCityForm: boolean = false;
 
   constructor(
     private fb: FormBuilder,

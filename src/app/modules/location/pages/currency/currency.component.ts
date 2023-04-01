@@ -12,32 +12,30 @@ import { LocationService } from '../../services/location.service';
 })
 export class CurrencyComponent implements OnInit {
 
-  deleteCurrencyForm: boolean = false;
-
   searchForm: FormGroup = this.fb.group({
     search: ['', Validators.required],
   })
-
   filters: IFilterParams = {
     perPage: 10,
-    page: 1
+    page: 1,
+    name: 'dinar',
+    is_active: true
   }
-
-  page: number = 1;
-
-  activity: "actif" | "inactif" = "actif";
-
+  pagination!: Pagination;
+  
   perPageRange: number[] = [10, 20, 30, 40, 50];
   activitiesRange: string[] = ["actif", "inactif"];
-
+  currencies: Currency[] = [];
+  
   search!: string;
   perPage: number = 10;
-
-  currencies: Currency[] = [];
-  pagination!: Pagination;
-
+  
+  
   loading: boolean = true;
-
+  page: number = 1;
+  activity!: "actif" | "inactif";
+  deleteCurrencyForm: boolean = false;
+  
   constructor(
     private fb: FormBuilder,
     private locationService: LocationService,
@@ -45,7 +43,7 @@ export class CurrencyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCurrencies();
+    this.getCurrencies(this.filters);
   }
 
   getCurrencies(filter?: IFilterParams) {
@@ -56,7 +54,6 @@ export class CurrencyComponent implements OnInit {
       .then((data: ComplexResponse<Currency>) => {
         this.loading = false;
         this.currencies = data.data['currencies'].data;
-        console.log(this.currencies);
         this.pagination = data.data['currencies'].pagination;
       }).catch((err) => {
         this.loading = false;

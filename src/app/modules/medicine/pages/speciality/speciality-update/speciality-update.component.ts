@@ -34,7 +34,6 @@ export class SpecialityUpdateComponent implements OnInit {
     }
   ]
 
-  // status: boolean = false;
   loading: boolean = true;
 
 
@@ -51,15 +50,14 @@ export class SpecialityUpdateComponent implements OnInit {
   }
 
   getSpeciality() {
-    this.requestLoaderService.startLoading();
     this.medecineService.getSpeciality(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''))
       .then((data) => {
         this.specialityForm.get('name')?.setValue(data.data['speciality'].name);
         this.specialityForm.get('code')?.setValue(data.data['speciality'].code);
         this.specialityForm.get('status')?.setValue(data.data['speciality'].status);
-        this.requestLoaderService.stopLoader();
+        this.loading = false;
       }).catch((err) => {
-        this.requestLoaderService.stopLoader();
+        this.loading = false;
         this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
       })
     ;
