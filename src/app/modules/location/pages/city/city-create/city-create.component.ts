@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ComplexResponse } from '@app/core/interfaces/core.interface';
+import { Country } from '@app/modules/location/interfaces/country.interface';
 import { LocationService } from '@app/modules/location/services/location.service';
 import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breadscrumb.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
@@ -32,6 +34,10 @@ export class CityCreateComponent implements OnInit {
     }
   ]
 
+  countries: Country[] = [];
+  loading: boolean = true;
+  cityFormSubmitted: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private locationService: LocationService,
@@ -39,18 +45,34 @@ export class CityCreateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getCountries();
+  }
+
+  getCountries() {
+    this.locationService.getCountries()
+      .then((data: ComplexResponse<Country>) => {
+        this.loading = false;
+        this.countries = data.data['countries'].data;
+      })
+      .catch((error) => {
+        this.loading = false;
+        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
+      })
+    ;
   }
 
   createCity() {
-    this.locationService.postCity(this.cityForm.getRawValue())
-      .then((response) => {
-        this.pushSuccesNotif('Ville crée avec succès!');
-      }).catch((error) => {
-        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!')
-      })
-    ;
-
-    console.log(this.cityForm.getRawValue());
+    this.cityFormSubmitted = true;
+    
+    if (this.cityForm.valid) {
+      this.locationService.postCity(this.cityForm.getRawValue())
+        .then((response) => {
+          this.pushSuccesNotif('Ville crée avec succès!');
+        }).catch((error) => {
+          this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!')
+        })
+      ;
+    }
     
   }
 

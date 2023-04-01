@@ -18,7 +18,7 @@
 
             <app-select label="perPage" name="perPage" (change)="handlePageSizeChange()" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
             
-            <app-select label="activity" name="activity" (change)="handleStatusChange()" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
+            <app-select label="activity" name="activity" (change)="handleStatusChange()" [default]="true" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
 
         </div>
 

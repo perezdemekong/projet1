@@ -6,7 +6,7 @@
     <app-page-heading title="Établissments" description="Mettre à jour un établissement"></app-page-heading>
 
     <!-- Form -->
-    <form [formGroup]="establishmentForm" (submit)="updateEstablishment()" class="sm:p-5 space-y-8 max-w-3xl">
+    <form *ngIf="!loading" [formGroup]="establishmentForm" (submit)="updateEstablishment()" class="sm:p-5 space-y-8 max-w-3xl">
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Nom</div>
             <div class="flex-1">
@@ -16,19 +16,19 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Type</div>
             <div class="flex-1">
-                <app-big-select formControlName="type" labelFor="type" label="type" name="type" [options]="establishmentTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-select [selected]="this.establishmentForm.get('type')?.value" formControlName="type" labelFor="type" label="type" [default]="true" name="type" [options]="establishmentTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Ville</div>
             <div class="flex-1">
-                <app-big-select formControlName="city" labelFor="city" label="ville" name="city" [options]="villeTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-complex-big-select [selected]="this.establishmentForm.get('city')?.value" formControlName="city" labelFor="city" label="city" [default]="true" name="city" [options]="cities" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-complex-big-select>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Praticien admin</div>
             <div class="flex-1">
-                <app-big-select formControlName="admin_practician" labelFor="admin" label="administrateur" name="admin" [default]="true" [options]="adminTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-select [selected]="this.establishmentForm.get('admin_practician')?.value" formControlName="admin_practician" labelFor="admin" label="administrateur" name="admin" [default]="true" [options]="adminTypeTable" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
@@ -62,5 +62,49 @@
             </app-button>
         </div>
     </form>
+
+    <!-- Form Loader -->
+    <div *ngIf="loading" class="sm:p-5 space-y-8 max-w-3xl">
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
 
 </div>

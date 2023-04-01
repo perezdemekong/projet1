@@ -6,17 +6,26 @@
     <app-page-heading title="Ville" description="Mettre à jour une ville"></app-page-heading>
 
     <!-- Form -->
-    <form [formGroup]="updateForm" (submit)="updateCity()" class="sm:p-5 space-y-8 max-w-3xl">
+    <form *ngIf="!loading" [formGroup]="updateForm" (submit)="updateCity()" class="sm:p-5 space-y-8 max-w-3xl">
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Nom</div>
-            <div class="flex-1">
+            <div class="flex-1 space-y-2">
                 <app-big-input formControlName="name" labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
+                <span class="text-sm font-light italic text-red-600"
+                    *ngIf="(updateForm.get('name')?.touched || updateFormSubmitted) && !updateForm.get('name')?.valid">
+                    Le nom est requis!
+                </span>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Pays</div>
             <div class="flex-1">
-                <app-big-input formControlName="country" labelFor="country" label="country" name="country" placeholder="Entrez le pays" [class]="'w-full'"></app-big-input>
+                <!-- <app-big-input formControlName="country" labelFor="country" label="country" name="country" placeholder="Entrez le pays" [class]="'w-full'"></app-big-input> -->
+                <app-big-input-datalist formControlName="country" labelFor="country" label="country" name="my_country" list="countries" [options]="countries" [class]="'w-full'"></app-big-input-datalist>
+                <span class="text-sm font-light italic text-red-600"
+                    *ngIf="(updateForm.get('country')?.touched || updateFormSubmitted) && !updateForm.get('country')?.valid">
+                    Le pays est requis!
+                </span>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5">
@@ -27,10 +36,56 @@
         </div>
 
         <div class="flex justify-end">
-            <app-button type="submit" [disabled]="!updateForm.valid" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
                 Valider
             </app-button>
         </div>
     </form>
+
+
+
+    <!-- Form Loader -->
+    <div *ngIf="loading" class="sm:p-5 space-y-8 max-w-3xl">
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
 
 </div>

@@ -8,7 +8,9 @@ import { NotificationService } from '@app/shared/components/notification/service
   selector: 'app-root',
   template: `
     <router-outlet></router-outlet>
+
     <app-request-loader *ngIf="load"></app-request-loader>
+    
     <app-notification [isOpen]="notification.isOpen">
       <div class="p-4">
         <div class="flex items-start">

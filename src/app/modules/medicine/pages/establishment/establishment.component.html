@@ -22,7 +22,7 @@
 
             <app-select label="typeOfEstablishment" (change)="handleTypeChange()" name="typeOfEstablishment" [default]="true" [options]="typesOfEstablishment" [(ngModel)]="typeOfEstablishment"></app-select>
 
-            <app-select label="praticien" (change)="handleAdminChange()" name="praticien" [options]="adminTypeTable" [(ngModel)]="admin"></app-select>
+            <!-- <app-select label="praticien" (change)="handleAdminChange()" name="praticien" [options]="adminTypeTable" [(ngModel)]="admin"></app-select> -->
 
         </div>
 
@@ -31,6 +31,8 @@
             <app-search-bar placeholder="Rechercher par nom" formControlName="search"></app-search-bar>
 
             <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">Rechercher</app-button>
+
+            <app-button type="reset" (click)="reset()" [class]="'bg-gray-100 hover:bg-gray-200 focus:ring-gray-300 text-slate-500'">Reinitialiser</app-button>
 
         </form>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IFilterParams, Pagination } from '@app/core/interfaces/core.interface';
+import { RequestLoaderService } from '@app/core/services/request-loader.service';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 import { City } from '../../interfaces/city.interface';
 import { LocationService } from '../../services/location.service';
@@ -19,7 +20,7 @@ export class CityComponent implements OnInit {
   })
 
   perPage: number = 10;
-  activity: "actif" | "inactif" = "actif";
+  activity!: "actif" | "inactif";
 
   filters: IFilterParams = {
     perPage: 10,
@@ -41,7 +42,8 @@ export class CityComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private locationService: LocationService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private requestLoaderService: RequestLoaderService,
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +59,6 @@ export class CityComponent implements OnInit {
         this.loading = false;
         this.cities = data.data['cities'].data;
         this.pagination = data.data['cities'].pagination;
-        console.log(this.cities);
       }).catch((error) => {
         this.loading = false;
         this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!')
@@ -105,12 +106,16 @@ export class CityComponent implements OnInit {
 
   deleteCity() {
     if (this.idOfCityToDelete) {
+      this.requestLoaderService.startLoading();
+      this.deleteCityForm = !this.deleteCityForm;
       this.locationService.deleteCity(this.idOfCityToDelete)
         .then((data) => {
+          this.idOfCityToDelete = null;
           this.getCities();
-          this.toggleDeleteCityForm()
+          this.requestLoaderService.stopLoader();
           this.pushSuccessNotif('Cette ville a été supprimée avec succès!');
         }).catch((error) => {
+          this.requestLoaderService.stopLoader();
           this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
         })
       ;

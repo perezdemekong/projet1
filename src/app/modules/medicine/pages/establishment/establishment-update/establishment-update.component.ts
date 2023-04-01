@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RequestLoaderService } from '@app/core/services/request-loader.service';
+import { City } from '@app/modules/location/interfaces/city.interface';
+import { LocationService } from '@app/modules/location/services/location.service';
 import { MedecineService } from '@app/modules/medicine/services/medecine.service';
 import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breadscrumb.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
@@ -40,20 +42,21 @@ export class EstablishmentUpdateComponent implements OnInit {
   ]
 
   establishmentTypeTable = ['public', 'prive'];
-  establishmentType!: string;
 
-  adminTypeTable = ['Mohamed Belaiouer', 'Mohamed Belaiouer1'];
+  adminTypeTable = ['Mohamed Belaiouer', 'Mohamed Belaiouer1', 'Mohamed Belaiouer2'];
   admin!: string;
 
-  villeTypeTable = ['Alger', 'Blida', 'Oran'];
-  ville!: string;
+  cities: City[] = [];
+
+  loading: boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private medecineService: MedecineService,
     private notificationService: NotificationService,
     private activatedRoute: ActivatedRoute,
-    private requestLoaderService: RequestLoaderService
+    private requestLoaderService: RequestLoaderService,
+    private locationService: LocationService
     ) { }
 
   ngOnInit(): void {
@@ -61,10 +64,9 @@ export class EstablishmentUpdateComponent implements OnInit {
   }
 
   getEstablishment() {
-    this.requestLoaderService.startLoading();
     this.medecineService.getEstablishment(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''))
       .then((data) => {
-        this.requestLoaderService.stopLoader();
+        this.getCities();
         this.establishmentForm.get('name')?.setValue(data.data['establishment'].name);
         this.establishmentForm.get('type')?.setValue(data.data['establishment'].type);
         this.establishmentForm.get('city')?.setValue(data.data['establishment'].city);
@@ -73,9 +75,21 @@ export class EstablishmentUpdateComponent implements OnInit {
         this.establishmentForm.get('postal_code')?.setValue(data.data['establishment'].postal_code);
         this.establishmentForm.get('description')?.setValue(data.data['establishment'].description);
         this.establishmentForm.get('status')?.setValue(data.data['establishment'].status);
+        this.loading = false;
       }).catch((err) => {
-        this.requestLoaderService.stopLoader();
+        this.loading = false;
         this.pushErrorNotif('Une érreur est survenue, veuillez reéssayer!');
+      })
+    ;
+  }
+
+  async getCities() {
+    await this.locationService.getCities()
+      .then((data) => {
+        this.cities = data.data['cities'].data;
+        console.log(this.cities);
+      }).catch((error) => {
+        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
       })
     ;
   }

@@ -125,12 +125,7 @@ export class SpecialityComponent implements OnInit {
   }
 
   reset() {
-    this.filters = {
-      perPage: 10,
-      page: 1
-    }
-    this.searchForm.reset();
-    this.getSpecialities();
+    this.ngOnInit();
   }
 
   onPageChange(event: number) {
@@ -147,7 +142,7 @@ export class SpecialityComponent implements OnInit {
   }
 
   handleStatusChange() {
-    const NEW_VALUE = this.activity === 'actif' ? true : false;
+    const NEW_VALUE = this.activity === 'actif' ? 'enabled' : 'disabled';
     this.filters = Object.assign({}, {...this.filters, status: NEW_VALUE, per_page: this.perPage});
     this.getSpecialities(this.filters);
   }

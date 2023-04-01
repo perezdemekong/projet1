@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestLoaderService } from '@app/core/services/request-loader.service';
+import { City } from '@app/modules/location/interfaces/city.interface';
+import { LocationService } from '@app/modules/location/services/location.service';
 import { MedecineService } from '@app/modules/medicine/services/medecine.service';
 import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breadscrumb.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
@@ -44,17 +46,33 @@ export class EstablishmentCreateComponent implements OnInit {
   adminTypeTable = ['Mohamed Belaiouer', 'Mohamed Belaiouer1', 'Mohamed Belaiouer2'];
   admin!: string;
 
-  villeTypeTable = ['Alger', 'Blida', 'Oran'];
-  ville!: string;
+  cities: City[] = [];
+
+  loading: boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private medecineService: MedecineService,
     private notificationService: NotificationService,
-    private requestLoaderService: RequestLoaderService
+    private requestLoaderService: RequestLoaderService,
+    private locationService: LocationService
   ) { }
 
   ngOnInit(): void {
+    this.getCities();
+  }
+
+  getCities() {
+    this.locationService.getCities()
+      .then((data) => {
+        this.loading = false;
+        this.cities = data.data['cities'].data;
+        console.log(this.cities);
+      }).catch((error) => {
+        this.loading = false;
+        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
+      })
+    ;
   }
 
   toggleStatus() {

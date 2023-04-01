@@ -14,7 +14,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
         (blur)="onTouched()"
         class="block border-primary-100 w-full rounded-md bg-primary-100 py-2 pl-3 pr-10 text-base focus:border-primary-100 focus:outline-none focus:ring-primary-100 sm:text-sm"
         >
-        <option *ngIf="default">Tous</option>
+        <option *ngIf="default">Choisir...</option>
         <option *ngFor="let item of items" [value]="item">{{item}}</option>
       </select>
     </div>

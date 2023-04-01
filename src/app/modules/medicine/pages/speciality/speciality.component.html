@@ -24,7 +24,7 @@
 
         <form [formGroup]="searchForm" (submit)="searchFunc()" class="flex lg:gap-2.5 max-lg:justify-between max-sm:flex-col max-sm:gap-2.5 sm:items-center">
 
-            <app-search-bar placeholder="Rechercher par nom" formControlName="search"></app-search-bar>
+            <app-search-bar placeholder="Rechercher par nom, code" formControlName="search"></app-search-bar>
 
             <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">Rechercher</app-button>
 

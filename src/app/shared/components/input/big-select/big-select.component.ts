@@ -16,7 +16,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
         class="block w-full focus:!border-transparent border-transparent bg-primary-100 disabled:bg-gray-200 disabled:cursor-not-allowed rounded-md py-1 px-1 outline-none focus:!ring-transparent sm:text-sm"
         >
           <option *ngIf="default">Choisir</option>
-          <option *ngFor="let item of items" [value]="item">{{item}}</option>
+          <option *ngFor="let item of items" [selected]="item === selected" [value]="item">{{item}}</option>
       </select>
     </div>
   `,
@@ -36,6 +36,7 @@ export class BigSelectComponent {
   @Input() disabled: boolean = false;
   @Input() class!: string;
   @Input() default: boolean = false;
+  @Input() selected!: any;
   @Input('options') items: any[] = []
 
   value: string = '';

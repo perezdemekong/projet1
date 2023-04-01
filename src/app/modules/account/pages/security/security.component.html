@@ -15,7 +15,7 @@
                     L'ancien mot de passe est requis!
                 </span>
                 
-                <button type="button" (click)="toggleOldPassword()" class="absolute top-3.5 right-5">
+                <button type="button" (click)="toggleOldPassword()" class="absolute top-1.5 right-5">
 
                     <svg *ngIf="oldPasswordToggled" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-gray-500">
                       <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
@@ -65,14 +65,16 @@
             <div class="w-60">Confirmation du mot de passe</div>
             <div class="flex-1 relative">
                 <app-big-password formControlName="new_password_confirm" labelFor="password" label="Confirmation du nouveau mot de passe" name="new_password_confirm" [toggled]="newPasswordConfirmToggled" [class]="'w-full'"></app-big-password>
-                <span class="text-sm font-light italic text-red-600"
-                    *ngIf="(passwordForm.get('new_password_confirm')?.touched || passwordFormSubmitted) && !passwordForm.get('new_password_confirm')?.valid">
-                    Le mot de passe de confirmation est requis!
-                </span>
-                <span class="text-sm font-light italic text-red-600"
-                    *ngIf="(passwordForm.get('new_password_confirm')?.touched || passwordFormSubmitted) && !passwordForm.get('new_password_confirm')?.valid || passwordForm.get('new_password_confirm')?.value !== passwordForm.get('new_password')?.value">
-                    Le mot de passe de confirmation doit être similaire au nouveau mot de passe!
-                </span>
+                <div class="flex flex-col">
+                    <span class="text-sm font-light italic text-red-600"
+                        *ngIf="(passwordForm.get('new_password_confirm')?.touched || passwordFormSubmitted) && !passwordForm.get('new_password_confirm')?.valid">
+                        Le mot de passe de confirmation est requis!
+                    </span>
+                    <span class="text-sm font-light italic text-red-600"
+                        *ngIf="(passwordForm.get('new_password_confirm')?.touched || passwordFormSubmitted) && !passwordForm.get('new_password_confirm')?.valid || passwordForm.get('new_password_confirm')?.value !== passwordForm.get('new_password')?.value">
+                        Le mot de passe de confirmation doit être similaire au nouveau mot de passe!
+                    </span>
+                </div>
 
                 <button type="button" (click)="toggleNewPasswordConfirmToggled()" class="absolute top-3.5 right-5">
 

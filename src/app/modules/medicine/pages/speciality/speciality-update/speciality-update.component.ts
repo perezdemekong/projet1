@@ -34,7 +34,8 @@ export class SpecialityUpdateComponent implements OnInit {
     }
   ]
 
-  status: boolean = false;
+  // status: boolean = false;
+  loading: boolean = true;
 
 
   constructor(

@@ -20,7 +20,7 @@ export class EstablishmentComponent implements OnInit {
   deleteEstablishmentForm: boolean = false;
 
   perPage: number = 10;
-  activity: "actif" | "inactif" = "actif";
+  activity!: "actif" | "inactif";
 
   typeOfEstablishment!: string;
   typesOfEstablishment: string[] = ["prive", "public"];
@@ -120,7 +120,7 @@ export class EstablishmentComponent implements OnInit {
   }
 
   searchFunc() {
-    this.filters = Object.assign({}, {...this.filters, name: this.searchForm.get('name')?.value})
+    this.filters = Object.assign({}, {...this.filters, name: this.searchForm.get('search')?.value})
     this.getEstablishments(this.filters);
   }
 
@@ -131,12 +131,7 @@ export class EstablishmentComponent implements OnInit {
   }
 
   reset() {
-    this.filters = {
-      perPage: 10,
-      page: 1
-    }
-    this.searchForm.reset();
-    this.getEstablishments();
+    this.ngOnInit();
   }
 
   onPageChange(event: number) {
@@ -153,7 +148,7 @@ export class EstablishmentComponent implements OnInit {
   }
 
   handleStatusChange() {
-    const NEW_VALUE = this.activity === 'actif' ? true : false;
+    const NEW_VALUE = this.activity === 'actif' ? 'enabled' : 'disabled';
     this.filters = Object.assign({}, {...this.filters, status: NEW_VALUE, per_page: this.perPage});
     this.getEstablishments(this.filters);
   }
