@@ -69,7 +69,7 @@ export class EstablishmentComponent implements OnInit {
         console.log(this.establishments);
       }).catch((error) => {
         this.loading = false;
-        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!')
+        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
       })
     ;
   }
