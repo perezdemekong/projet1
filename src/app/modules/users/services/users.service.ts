@@ -5,6 +5,7 @@ import { LocalStorageService } from '@app/modules/authentication/services/local-
 import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Patient, UpdatePatientData } from '../interfaces/patients.interface';
+import { Doctor } from '../interfaces/doctors.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -53,13 +54,58 @@ export class UsersService {
     ))
   }
 
-  async UpdatePatientStatus(id: number, data: UpdatePatientData): Promise<SimpleJsonResponse<Patient>> {
+  // , data: UpdatePatientData
+  async UpdatePatientStatus(id: number): Promise<SimpleJsonResponse<Patient>> {
     return await firstValueFrom(this.http.put<SimpleJsonResponse<Patient>>(
-      `${environment.apiUrl}/patients/${id}`,
-      data,
+      `${environment.apiUrl}/patients/activate/${id}`,
+      {},
       {
         headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
       }
     ))
+  }
+
+
+
+
+
+  async getDoctors(
+    params?: IFilterParams
+  ): Promise<ComplexResponse<Doctor>> {
+    return await firstValueFrom(this.http.get<ComplexResponse<Doctor>>(
+      `${environment.apiUrl}/practician`,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+        params: this.getQueryParams(params)
+      }
+    ));
+  }
+
+  async getDoctor(id: number): Promise<SimpleJsonResponse<Doctor>> {
+    return await firstValueFrom(this.http.get<SimpleJsonResponse<Doctor>>(
+      `${environment.apiUrl}/practician/${id}`,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ));
+  }
+
+  async activateDoctorAccount(id: number): Promise<SimpleJsonResponse<Doctor>> {
+    return await firstValueFrom(this.http.put<SimpleJsonResponse<Doctor>>(
+      `${environment.apiUrl}/practician/activate/${id}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ));
+  }
+
+  async getInactifDoctors(): Promise<ComplexResponse<Doctor>> {
+    return await firstValueFrom(this.http.get<ComplexResponse<Doctor>>(
+      `${environment.apiUrl}/practician/inactif`,
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ));
   }
 }

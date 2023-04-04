@@ -105,9 +105,23 @@ export class PatientDetailsComponent implements OnInit {
     }, 3000)
   }
 
+  pushInfosNotif(message: string) {
+    this.notificationService.notificationController.next({
+      isOpen: true,
+      title: 'Information',
+      message,
+      type: 'info'
+    })
+    setTimeout(() => {
+      this.notificationService.notificationController.next({
+        isOpen: false
+      })
+    }, 3000)
+  }
+
   togglePatientStatusToggled() {
     this.requestLoaderService.startLoading();
-    this.usersService.UpdatePatientStatus(this.patient.id, { status: this.patient.status})
+    this.usersService.UpdatePatientStatus(this.patient.id)
       .then((data) => {
         this.requestLoaderService.stopLoader();
         this.patient = data.data['patient'];
