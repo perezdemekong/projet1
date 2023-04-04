@@ -123,12 +123,25 @@ export class DoctorsDetailComponent implements OnInit {
     }, 3000)
   }
 
-  toggleActivityToggled() {
-    this.activityToggled = !this.activityToggled;
-  }
-
   toggleValidateDoctorAccountForm() {
     this.validateDoctorAccountForm = !this.validateDoctorAccountForm;
+  }
+
+  updateValidateAccount() {
+    this.validateDoctorAccountForm = !this.validateDoctorAccountForm;
+
+    this.requestLoaderService.startLoading();
+
+    this.usersService.validateDoctorAccount(parseInt(this.activatedRoute.snapshot.paramMap.get('id') || ''))
+      .then((data) => {
+        this.doctor = data.data['practician'];
+        this.pushSuccessNotif('ce compte a été modifié avec succès!')
+        this.requestLoaderService.stopLoader();
+      }).catch((err) => {
+        this.requestLoaderService.stopLoader();
+        this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');
+      })
+    ;
   }
 
 }

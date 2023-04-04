@@ -5,7 +5,7 @@
     <!-- Heading -->
     <app-page-heading *ngIf="!loading && doctor" [title]="name">
 
-        <app-toggle (click)="updateStatus()" [toggled]="doctor.is_active" [backgroundClass]="!doctor.is_active ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
+        <app-toggle *ngIf="doctor.is_valid" (click)="updateStatus()" [toggled]="doctor.is_active" [backgroundClass]="!doctor.is_active ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
         
         <div presentation class="flex max-w-full overflow-x-auto">
 
@@ -48,7 +48,7 @@
                 <p class="capitalize text-sm">inscrit le {{doctor.created_at| date: 'dd MMMM yyyy'}}</p>                  
             </div>
 
-            <div *ngIf="doctor.is_active" class="flex gap-2 5 p-2.5 whitespace-nowrap">
+            <div *ngIf="doctor.is_valid" class="flex gap-2 5 p-2.5 whitespace-nowrap">
                 <svg class="w-5 h-5" aria-hidden="true" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1985_11638)">
                     <path d="M5.8335 10.5L8.3335 13L14.1668 7.16671M16.6668 13C15.8335 13.8334 17.7085 16.125 16.6668 17.1667C15.6252 18.2084 13.3335 16.3334 12.5002 17.1667C11.6668 18 11.2502 19.6667 10.0002 19.6667C8.75016 19.6667 8.3335 18 7.50016 17.1667C6.66683 16.3334 4.37516 18.2084 3.3335 17.1667C2.29183 16.125 4.16683 13.8334 3.3335 13C2.50016 12.1667 0.833496 11.75 0.833496 10.5C0.833496 9.25004 2.50016 8.83337 3.3335 8.00004C4.16683 7.16671 2.29183 4.87504 3.3335 3.83337C4.37516 2.79171 6.66683 4.66671 7.50016 3.83337C8.3335 3.00004 8.75016 1.33337 10.0002 1.33337C11.2502 1.33337 11.6668 3.00004 12.5002 3.83337C13.3335 4.66671 15.6252 2.79171 16.6668 3.83337C17.7085 4.87504 15.8335 7.16671 16.6668 8.00004C17.5002 8.83337 19.1668 9.25004 19.1668 10.5C19.1668 11.75 17.5002 12.1667 16.6668 13Z" stroke="#27DEBF" stroke-width="1.66667"/>
@@ -62,19 +62,18 @@
                 <p class="capitalize text-sm">Validé</p>                  
             </div>
 
-            <div *ngIf="!doctor.is_active" class="flex gap-2 5 p-2.5 whitespace-nowrap">
+            <div *ngIf="!doctor.is_valid" class="flex gap-2 5 p-2.5 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 fill-red-600">
                     <path fill-rule="evenodd" d="M11.484 2.17a.75.75 0 011.032 0 11.209 11.209 0 007.877 3.08.75.75 0 01.722.515 12.74 12.74 0 01.635 3.985c0 5.942-4.064 10.933-9.563 12.348a.749.749 0 01-.374 0C6.314 20.683 2.25 15.692 2.25 9.75c0-1.39.223-2.73.635-3.985a.75.75 0 01.722-.516l.143.001c2.996 0 5.718-1.17 7.734-3.08zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zM12 15a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75v-.008a.75.75 0 00-.75-.75H12z" clip-rule="evenodd" />
                 </svg>                                  
                 <p class="capitalize text-sm">Non alidé</p>                  
-            </div>
-              
+            </div> 
 
-            <!-- <button type="button" (click)="toggleValidateDoctorAccountForm()" class="flex gap-2 5 p-2.5 whitespace-nowrap">
+            <button *ngIf="!doctor.is_valid" type="button" (click)="toggleValidateDoctorAccountForm()" class="flex gap-2 5 p-2.5 whitespace-nowrap">
                 <svg class="w-5 h-5" aria-hidden="true" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14.0335 2.77502C13.7085 2.77502 13.3918 2.90002 13.1418 3.14169L11.3752 4.90836L15.7918 9.33336L17.5585 7.58336C18.0585 7.07502 18.0585 6.28336 17.5585 5.80002L14.9168 3.14169C14.6668 2.90002 14.3502 2.77502 14.0335 2.77502ZM10.7835 5.50002L4.0335 12.2584L6.16683 12.4917L6.31683 14.4L8.21683 14.5417L8.4585 16.675L15.2085 9.91669M3.54183 13.0334L2.0835 18.6084L7.66683 17.1167L7.46683 15.3167L5.54183 15.175L5.39183 13.2417" fill="#111111"/>
                 </svg>                             
-            </button> -->
+            </button>
 
         </div>
 
@@ -115,17 +114,17 @@
 
         <h3 class="font-bold text-2xl">Validation du profil</h3>
 
-        <form class="mt-6">
+        <div class="mt-6">
 
-            <app-textarea placeholder="Entrez un commentaire" labelFor="praticianMessage" label="praticianMessage" name="praticianMessage" [rows]="6" [class]="'w-full'"></app-textarea>
+            <!-- <app-textarea placeholder="Entrez un commentaire" labelFor="praticianMessage" label="praticianMessage" name="praticianMessage" [rows]="6" [class]="'w-full'"></app-textarea> -->
 
             <div class="flex justify-end mt-4">
-                <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+                <app-button type="button" (click)="updateValidateAccount()" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
                     Valider le compte
                 </app-button>
             </div>
             
-        </form>
+        </div>
 
     </div>
 </app-modal>

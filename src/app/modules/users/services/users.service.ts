@@ -100,6 +100,16 @@ export class UsersService {
     ));
   }
 
+  async validateDoctorAccount(id: number): Promise<SimpleJsonResponse<Doctor>> {
+    return await firstValueFrom(this.http.put<SimpleJsonResponse<Doctor>>(
+      `${environment.apiUrl}/practician/validate/${id}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${this.localStorageService.getAccessToken()}` },
+      }
+    ));
+  }
+
   async getInactifDoctors(): Promise<ComplexResponse<Doctor>> {
     return await firstValueFrom(this.http.get<ComplexResponse<Doctor>>(
       `${environment.apiUrl}/practician/inactif`,
