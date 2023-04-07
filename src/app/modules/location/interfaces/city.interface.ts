@@ -1,8 +1,8 @@
 export interface City {
     id: number;
     name: string;
-    country: string;
-    is_active: boolean;
+    postal_code: string;
+    wilaya: boolean;
 }
 
 export interface cityForm {

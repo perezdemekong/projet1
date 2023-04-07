@@ -6,6 +6,7 @@ import { LocationService } from '@app/modules/location/services/location.service
 import { MedecineService } from '@app/modules/medicine/services/medecine.service';
 import { Breadscrump } from '@app/shared/components/breadscrumb/interface/breadscrumb.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-establishment-create',
@@ -42,6 +43,7 @@ export class EstablishmentCreateComponent implements OnInit {
   adminTypeTable = ['Mohamed Belaiouer', 'Mohamed Belaiouer1', 'Mohamed Belaiouer2'];
   establishmentTypeTable = ['public', 'prive'];
   cities: City[] = [];
+  filteredCities!: Observable<City[]> | undefined;
 
   
   establishmentType!: string;
@@ -59,10 +61,44 @@ export class EstablishmentCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCities();
+    this.filteredCities = this.establishmentForm.get('city')?.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+  }
+
+  private _filter(value: string): City[] {
+    return this.cities.filter(city => city.name.toLowerCase().includes(value)).sort((function(a, b) {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    }));
+  }
+
+  checkCity(value: string): boolean {
+    if (value) {
+      const city = this.cities.filter(city => city.name.toLowerCase() === value.toLowerCase());
+    
+      if (city.length === 1 && city[0].name === value) {
+        return true;
+      }
+        
+      return false;
+
+    }
+
+    return false
   }
 
   getCities() {
-    this.locationService.getCities()
+    const filters = {
+      per_page: 2000
+    }
+    this.locationService.getCities(filters)
       .then((data) => {
         this.loading = false;
         this.cities = data.data['cities'].data;
@@ -81,7 +117,7 @@ export class EstablishmentCreateComponent implements OnInit {
   createEstablishment() {
     this.establishmentFormSubmitted = true;
 
-    if (this.establishmentForm.valid) {
+    if (this.establishmentForm.valid && this.checkCity(this.establishmentForm.get('city')?.value)) {
       this.requestLoaderService.startLoading();
       this.medecineService.postEstablishment(this.establishmentForm.getRawValue())
         .then((data) => {

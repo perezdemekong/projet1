@@ -16,9 +16,9 @@ export class CityComponent implements OnInit {
   searchForm: FormGroup = this.fb.group({
     search: ['', Validators.required],
   })
+
   filters: IFilterParams = {
-    perPage: 10,
-    page: 1
+    per_page: 10,
   }
 
   perPageRange: number[] = [10, 20, 30, 40, 50];
@@ -41,7 +41,7 @@ export class CityComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCities();
+    this.getCities(this.filters);
   }
 
   getCities(filter?: IFilterParams) {
@@ -128,7 +128,7 @@ export class CityComponent implements OnInit {
   onPageChange(event: number) {
     this.filters = Object.assign(
       {},
-      { ...this.filters, page: event, per_page: this.perPage },
+      { ...this.filters, page: event, per_page: this.perPage},
     );
     this.getCities(this.filters);
   }

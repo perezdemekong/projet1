@@ -86,7 +86,15 @@ export class EstablishmentUpdateComponent implements OnInit {
   async getCities() {
     await this.locationService.getCities()
       .then((data) => {
-        this.cities = data.data['cities'].data;
+        this.cities = data.data['cities'].data.sort((function(a, b) {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
+          return 0;
+        }));
         console.log(this.cities);
       }).catch((error) => {
         this.pushErrorNotif('Une érreur est survenue, veuillez réessayer!');

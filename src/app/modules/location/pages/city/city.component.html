@@ -2,13 +2,13 @@
 
     <!-- Heading -->
     <app-page-heading title="Villes" description="Liste des villes sur l'application Tabiblib">
-        <app-button type="button" routerLink="/location/cities/create" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">
+        <!-- <app-button type="button" routerLink="/location/cities/create" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary'">
             <svg class="w-5 h-5 fill-current mr-2.5" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17 13.5H13V17.5H11V13.5H7V11.5H11V7.5H13V11.5H17M12 2.5C10.6868 2.5 9.38642 2.75866 8.17317 3.2612C6.95991 3.76375 5.85752 4.50035 4.92893 5.42893C3.05357 7.3043 2 9.84784 2 12.5C2 15.1522 3.05357 17.6957 4.92893 19.5711C5.85752 20.4997 6.95991 21.2362 8.17317 21.7388C9.38642 22.2413 10.6868 22.5 12 22.5C14.6522 22.5 17.1957 21.4464 19.0711 19.5711C20.9464 17.6957 22 15.1522 22 12.5C22 11.1868 21.7413 9.88642 21.2388 8.67317C20.7362 7.45991 19.9997 6.35752 19.0711 5.42893C18.1425 4.50035 17.0401 3.76375 15.8268 3.2612C14.6136 2.75866 13.3132 2.5 12 2.5Z"/>
             </svg>                
             <span class="sm:block hidden">Ajouter une ville</span>
             <span class="block sm:hidden">Ajouter</span>
-        </app-button>
+        </app-button> -->
     </app-page-heading>
 
     <!-- Actions -->
@@ -18,7 +18,7 @@
 
             <app-select label="perPage" name="perPage" (change)="handlePageSizeChange()" [options]="perPageRange" [(ngModel)]="perPage"></app-select>
             
-            <app-select label="activity" name="activity" (change)="handleStatusChange()" [default]="true" [options]="activitiesRange" [(ngModel)]="activity"></app-select>
+            <!-- <app-select label="activity" name="activity" (change)="handleStatusChange()" [default]="true" [options]="activitiesRange" [(ngModel)]="activity"></app-select> -->
 
         </div>
 
@@ -41,8 +41,8 @@
                 <thead>
                 <tr class="bg-primary-500">
                     <th scope="col" class="!py-3.5 !p-2.5 !pl-4 border-none text-left font-semibold max-w-fit text-white">Nom</th>
-                    <th scope="col" class="p-2.5 !pl-8 border-none text-left font-semibold text-white">Pays</th>
-                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Status</th>
+                    <th scope="col" class="p-2.5 !pl-8 border-none text-left font-semibold text-white">Code postal</th>
+                    <th scope="col" class="p-2.5 border-none text-left font-semibold text-white">Wilaya</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                         <span class="sr-only">Actions</span>
                     </th>
@@ -55,15 +55,10 @@
                     totalItems: pagination.total
                 }" class="cursor-pointer border-gray-400">
                     <td class="!py-3 pl-2 pr-3 max-w-[220px] text-tertiary capitalize">{{city.name}}</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">{{city.country}}</td>
-                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="{'stroke-red-500': !city.is_active, 'stroke-primary-500': city.is_active}">
-                            <path *ngIf="city.is_active" stroke-linecap="round" stroke-linejoin="round" d='M4.5 12.75l6 6 9-13.5' />
-                            <path *ngIf="!city.is_active" stroke-linecap="round" stroke-linejoin="round" d='M6 18L18 6M6 6l12 12' />
-                        </svg>                                                                                                   
-                    </td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-5 pl-8 text-tertiary capitalize">{{city.postal_code}}</td>
+                    <td class="whitespace-nowrap pt-1.5 pb-1 px-3 text-tertiary capitalize">{{city.wilaya}}</td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                        <a [routerLink]="['/location/cities', city.id, 'update']" class="mr-3" type="button">
+                        <!-- <a [routerLink]="['/location/cities', city.id, 'update']" class="mr-3" type="button">
                             <span class="sr-only">Modifier</span>
                             <span class="">
                                 <svg class="w-5 h-5 fill-black" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +73,7 @@
                                     <path d="M7.75391 21C7.20391 21 6.73291 20.804 6.34091 20.412C5.94891 20.02 5.75324 19.5493 5.75391 19V6H4.75391V4H9.75391V3H15.7539V4H20.7539V6H19.7539V19C19.7539 19.55 19.5579 20.021 19.1659 20.413C18.7739 20.805 18.3032 21.0007 17.7539 21H7.75391ZM17.7539 6H7.75391V19H17.7539V6ZM9.75391 17H11.7539V8H9.75391V17ZM13.7539 17H15.7539V8H13.7539V17Z"/>
                                 </svg>                                                                                                                                                                                                                                                
                             </span>
-                        </button>
+                        </button> -->
                     </td>
                 </tr>
                 </tbody>

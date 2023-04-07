@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { ThemeModule } from './theme/theme.module';
 import { PageHeadingModule } from './components/page-heading/page-heading.module';
@@ -36,6 +37,7 @@ import { NotificationModule } from './components/notification/notification.modul
     NgxPaginationModule,
     LoaderModule,
     NotificationModule,
+    MatAutocompleteModule,
   ],
   exports: [
     ThemeModule,
@@ -49,6 +51,7 @@ import { NotificationModule } from './components/notification/notification.modul
     NgxPaginationModule,
     LoaderModule,
     NotificationModule,
+    MatAutocompleteModule,
 
 
     CheckUserStatusColorPipe,
