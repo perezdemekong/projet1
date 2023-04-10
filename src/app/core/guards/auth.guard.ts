@@ -15,6 +15,13 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (!this.localStorageService.getAccessToken()) {
+      this.localStorageService.removeAccessToken();
+      this.router.navigateByUrl('/auth/login');
+      return false;
+    }
+
+    if (this.localStorageService.getAccessToken() && !JSON.parse(this.localStorageService.getLocalStorage('user') || '{}').roles.includes('admin')) {
+      this.localStorageService.removeAccessToken();
       this.router.navigateByUrl('/auth/login');
       return false;
     }
