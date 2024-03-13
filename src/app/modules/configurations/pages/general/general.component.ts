@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '@app/shared/components/notification/services/notification.service';
 import { MenuTabs } from '@app/shared/components/tabs/menu-tabs/interfaces/menu-tabs.interface';
 
 @Component({
@@ -21,9 +22,30 @@ export class GeneralComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit(): void {
+    this.unfuctionnal();
+  }
+
+  unfuctionnal() {
+    this.pushInfoNotif("Cet onglet n'est pas encore fonctionnel");
+  }
+
+  pushInfoNotif(message: string) {
+    this.notificationService.notificationController.next({
+      isOpen: true,
+      title: 'Information',
+      message,
+      type: 'info'
+    })
+    setTimeout(() => {
+      this.notificationService.notificationController.next({
+        isOpen: false
+      })
+    }, 3000)
   }
 
 }

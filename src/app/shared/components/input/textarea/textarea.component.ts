@@ -33,7 +33,7 @@ export class TextareaComponent {
   @Input() label!: string;
   @Input() rows!: number;
   @Input() name!: string;
-  @Input() placeholder!: string;
+  @Input() placeholder: string = '';
   @Input() class!: string;
 
   value: string = '';

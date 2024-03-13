@@ -14,6 +14,13 @@ module.exports = {
           button: "#F42186",
           tertiary: "#333333",
           background: "#f9f9f9",
+        },
+        zIndex: {
+          60: '60',
+          70: '70',
+          80: '80',
+          90: '90',
+          100: '100',
         }
       },
     },

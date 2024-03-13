@@ -6,11 +6,15 @@
 
     <h1 class="font-bold max-w-fit text-3xl relative after:absolute after:h-3 after:w-full after:bg-primary-500 after:bottom-0 after:inset-x-0 after:-z-10">Se connecter</h1>
 
-    <form class="space-y-10 sm:pr-5">
+    <form [formGroup]="loginForm" (submit)="login()" class="space-y-6 sm:pr-5">
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
-            <div class="flex-1">
-                <app-big-input placeholder="Email" labelFor="email" label="email" name="email" [type]="'email'" [class]="'w-full'"></app-big-input>
+            <div class="flex-1 space-y-2">
+                <app-big-input formControlName="email" placeholder="Email" labelFor="email" label="email" name="email" [type]="'email'" [class]="'w-full'"></app-big-input>
+                <span class="text-sm font-light italic text-red-600"
+                    *ngIf="(loginForm.get('email')?.touched || loginFormSubmitted) && !loginForm.get('email')?.valid">
+                    L'adresse email est requise!
+                </span>
             </div>
         </div>
 
@@ -18,10 +22,14 @@
             <div class="flex justify-end mb-2">
                 <a href="/auth/forgot-password" class="text-secondary max-w-fit text-sm">Mot de passe oublié</a>
             </div>
-            <div class="flex-1 relative">
-                <app-big-password placeholder="Mot de passe" labelFor="password" label="mot de passe" name="password" [toggled]="passwordToggled" [class]="'w-full'"></app-big-password>
+            <div class="flex-1 relative space-y-2">
+                <app-big-password formControlName="password" placeholder="Mot de passe" labelFor="password" label="mot de passe" name="password" [toggled]="passwordToggled" [class]="'w-full'"></app-big-password>
+                <span class="text-sm font-light italic text-red-600"
+                    *ngIf="(loginForm.get('password')?.touched || loginFormSubmitted) && !loginForm.get('password')?.valid">
+                    Le mot de passe est requis!
+                </span>
                 
-                <button type="button" (click)="togglePasswordToggled()" class="absolute top-3.5 right-5">
+                <button type="button" (click)="togglePasswordToggled()" class="absolute top-1.5 right-5">
 
                     <svg *ngIf="passwordToggled" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-gray-500">
                       <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
@@ -40,7 +48,7 @@
         </div>
 
         <div class="flex justify-center">
-            <app-button type="submit" [class]="'text-white bg-primary-500 hover:bg-primary-500 focus:ring-primary-500 float-right'">              
+            <app-button [disabled]="loading" [loading]="loading" type="submit" [class]="'text-white bg-primary-500 hover:bg-primary-500 focus:ring-primary-500 float-right'">              
                 Se connecter
             </app-button>
         </div>

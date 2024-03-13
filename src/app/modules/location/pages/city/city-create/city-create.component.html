@@ -6,23 +6,32 @@
     <app-page-heading title="Ville" description="Créer une ville"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl">
+    <form *ngIf="!loading" [formGroup]="cityForm" (submit)="createCity()" class="sm:p-5 space-y-8 max-w-3xl">
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Nom</div>
-            <div class="flex-1">
-                <app-big-input labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
+            <div class="flex-1 space-y-2">
+                <app-big-input formControlName="name" labelFor="name" label="nom" name="name" placeholder="Entrez le nom" [class]="'w-full'"></app-big-input>
+                <span class="text-sm font-light italic text-red-600"
+                    *ngIf="(cityForm.get('name')?.touched || cityFormSubmitted) && !cityForm.get('name')?.valid">
+                    Le nom est requis!
+                </span>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Pays</div>
             <div class="flex-1">
-                <app-big-select labelFor="country" label="pays" name="country" [options]="countryList" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-input-datalist formControlName="country" labelFor="country" label="country" name="my_country" list="countries" [options]="countries" [class]="'w-full'"></app-big-input-datalist>
+                <span class="text-sm font-light italic text-red-600"
+                    *ngIf="(cityForm.get('country')?.touched || cityFormSubmitted) && !cityForm.get('country')?.valid">
+                    Le pays est requis!
+                </span>
             </div>
+
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5">
             <div class="w-40">Status</div>
             <div class="flex-1">
-                <app-toggle (click)="toggleStatus()" [toggled]="status" [backgroundClass]="!status ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
+                <app-toggle (click)="toggleStatus()" [toggled]="this.cityForm.get('is_active')?.value" [backgroundClass]="!this.cityForm.get('is_active')?.value ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
             </div>
         </div>
 
@@ -32,5 +41,51 @@
             </app-button>
         </div>
     </form>
+
+
+
+    <!-- Form Loader -->
+    <div *ngIf="loading" class="sm:p-5 space-y-8 max-w-3xl">
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
 
 </div>

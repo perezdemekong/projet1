@@ -16,6 +16,9 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
         font-weight: 700 !important;
       }
     }
+    ::ng-deep .mat-progress-bar-fill::after {
+      background-color: '#50D6B6' !important;
+    }
   `]
 })
 export class TpanelComponent implements OnInit {

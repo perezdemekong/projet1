@@ -4,14 +4,18 @@
     <app-page-heading title="Connexion et sécurité" description="Mettre à jour votre mot de passe"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl">
+    <form [formGroup]="passwordForm" (submit)="changePassword()" class="sm:p-5 space-y-8 max-w-3xl">
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
-            <div class="w-60">Ancien mot de passe</div>
-            <div class="flex-1 relative">
-                <app-big-password labelFor="password" label="mot de passe" name="password" [toggled]="oldPasswordToggled" [class]="'w-full'"></app-big-password>
+            <div class="w-60">Mot de passe actuel</div>
+            <div class="flex-1 relative flex flex-col space-y-2">
+                <app-big-password formControlName="password" labelFor="password" label="mot de passe" name="old_password" [toggled]="oldPasswordToggled" [class]="'w-full'"></app-big-password>
+                <span class="text-sm font-light italic text-red-600"
+                    *ngIf="(passwordForm.get('password')?.touched || passwordFormSubmitted) && !passwordForm.get('password')?.valid">
+                    L'ancien mot de passe est requis!
+                </span>
                 
-                <button type="button" (click)="toggleOldPassword()" class="absolute top-3.5 right-5">
+                <button type="button" (click)="toggleOldPassword()" class="absolute top-1.5 right-5">
 
                     <svg *ngIf="oldPasswordToggled" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-gray-500">
                       <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
@@ -32,8 +36,13 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-60">Nouveau mot de passe</div>
             <div class="flex-1 relative">
-                <app-big-password labelFor="password" label="mot de passe" name="password" [toggled]="newPasswordToggled" [class]="'w-full'"></app-big-password>
-                
+                <app-big-password formControlName="new_password" labelFor="password" label="nouveau mot de passe" name="new_password" [toggled]="newPasswordToggled" [class]="'w-full'"></app-big-password>
+                <span class="text-sm font-light italic text-red-600"
+                    *ngIf="(passwordForm.get('new_password')?.touched || passwordFormSubmitted) && !passwordForm.get('new_password')?.valid">
+                    Le nouveau mot de passe est requis!
+                </span>
+
+
                 <button type="button" (click)="toggleNewPassword()" class="absolute top-3.5 right-5">
 
                     <svg *ngIf="newPasswordToggled" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-gray-500">
@@ -55,8 +64,18 @@
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-60">Confirmation du mot de passe</div>
             <div class="flex-1 relative">
-                <app-big-password labelFor="password" label="mot de passe" name="password" [toggled]="newPasswordConfirmToggled" [class]="'w-full'"></app-big-password>
-                
+                <app-big-password (keyup)="checkPassword()" formControlName="new_password_confirm" labelFor="password" label="Confirmation du nouveau mot de passe" name="new_password_confirm" [toggled]="newPasswordConfirmToggled" [class]="'w-full'"></app-big-password>
+                <div class="flex flex-col">
+                    <span class="text-sm font-light italic text-red-600"
+                        *ngIf="(passwordForm.get('new_password_confirm')?.touched || passwordFormSubmitted) && !passwordForm.get('new_password_confirm')?.valid">
+                        Le mot de passe de confirmation est requis!
+                    </span>
+                    <span class="text-sm font-light italic text-red-600"
+                        *ngIf="doesNotMatch">
+                        Le mot de passe de confirmation doit être similaire au nouveau mot de passe!
+                    </span>
+                </div>
+
                 <button type="button" (click)="toggleNewPasswordConfirmToggled()" class="absolute top-3.5 right-5">
 
                     <svg *ngIf="newPasswordConfirmToggled" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-gray-500">
