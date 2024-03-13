@@ -3,9 +3,9 @@
     <app-breadscrumb [breadcrumb]="breadscrumbs"></app-breadscrumb>
 
     <!-- Heading -->
-    <app-page-heading title="Mohamed Belaiouer">
+    <app-page-heading *ngIf="!loading" [title]="patient_name">
 
-        <app-toggle (click)="toggleActivityToggled()" [toggled]="activityToggled" [backgroundClass]="!activityToggled ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
+        <app-toggle (click)="togglePatientStatusToggled()" [toggled]="patient.status" [backgroundClass]="!patient.status ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
         
         <div presentation class="flex gap-2.5 max-w-full overflow-x-auto">
 
@@ -31,40 +31,52 @@
                         </clipPath>
                     </defs>
                 </svg>  
-                <p>{{birthDate | date: 'dd MMMM yyyy'}}</p>                  
+                <p>{{patient.birthdate | date: 'dd MMMM yyyy'}}</p>                  
             </div>
 
             <div class="flex gap-2 5 p-2.5 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />
                 </svg>                  
-                <p>+07 456 890 678</p>                  
+                <p>{{patient.phone_number}}</p>                  
             </div>
 
             <div class="flex gap-2 5 p-2.5 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd" d="M17.834 6.166a8.25 8.25 0 100 11.668.75.75 0 011.06 1.06c-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788 3.807-3.808 9.98-3.808 13.788 0A9.722 9.722 0 0121.75 12c0 .975-.296 1.887-.809 2.571-.514.685-1.28 1.179-2.191 1.179-.904 0-1.666-.487-2.18-1.164a5.25 5.25 0 11-.82-6.26V8.25a.75.75 0 011.5 0V12c0 .682.208 1.27.509 1.671.3.401.659.579.991.579.332 0 .69-.178.991-.579.3-.4.509-.99.509-1.671a8.222 8.222 0 00-2.416-5.834zM15.75 12a3.75 3.75 0 10-7.5 0 3.75 3.75 0 007.5 0z" clip-rule="evenodd" />
                 </svg>                               
-                <p>Belaiouer.mohamed@gmail.com</p>                  
+                <p>{{patient.email}}</p>                  
             </div>
 
             <div class="flex gap-2 5 p-2.5 whitespace-nowrap">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="'actif' | checkUserStatusColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="'actif' | checkUserStatusSvgdf" />
-                </svg>                    
-                <p class="capitalize">actif</p>                  
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" [ngClass]="{'stroke-red-500': !patient.status, 'stroke-primary-500': patient.status}">
+                    <path *ngIf="patient.status" stroke-linecap="round" stroke-linejoin="round" d='M4.5 12.75l6 6 9-13.5' />
+                    <path *ngIf="!patient.status" stroke-linecap="round" stroke-linejoin="round" d='M6 18L18 6M6 6l12 12' />
+                </svg>
+                <p class="capitalize">{{patient.status === true ? 'Actif' : 'Inactif'}}</p>                  
             </div>
 
             <div class="flex gap-2 5 p-2.5 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
                 </svg>                                
-                <p class="capitalize">inscrit le {{accountCreatedAt | date: 'dd MMMM yyyy'}}</p>                  
+                <p class="">Inscrit le {{patient.created_at| date: 'dd MMMM yyyy'}}</p>                  
             </div>
 
         </div>
 
     </app-page-heading>
+
+    <!-- Heading Loader -->
+    <div *ngIf="loading" class="w-full flex flex-col">
+        <div class="w-20">
+            <ngx-skeleton-loader [theme]="{height: '32px'}"></ngx-skeleton-loader>
+        </div>
+
+        <div class="">
+            <ngx-skeleton-loader [theme]="{height: '44px'}"></ngx-skeleton-loader>
+        </div>
+    </div>
 
     <!-- Routing -->
     <div class="">

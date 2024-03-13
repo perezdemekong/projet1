@@ -1,9 +1,12 @@
 import { Routes } from "@angular/router";
 import { NotFoundComponent } from "@app/shared/theme/layouts/not-found/not-found.component";
+import { AdminGuard } from "../guards/admin.guard";
+import { AuthGuard } from "../guards/auth.guard";
 
 export const ROUTES: Routes = [
     {
         path: 'dashboard',
+        canActivate: [AuthGuard, AdminGuard],
         loadChildren: () => 
             import('@modules/dashboard/dashboard.module').then(
                 m => m.DashboardModule
@@ -11,6 +14,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'users',
+        canActivate: [AuthGuard, AdminGuard],
         loadChildren: () => 
             import('@modules/users/users.module').then(
                 m => m.UsersModule
@@ -18,6 +22,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'medicine',
+        canActivate: [AuthGuard, AdminGuard],
         loadChildren: () =>
             import('@modules/medicine/medicine.module').then(
                 m => m.MedicineModule
@@ -25,6 +30,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'location',
+        canActivate: [AuthGuard, AdminGuard],
         loadChildren: () => 
             import('@modules/location/location.module').then(
                 m => m.LocationModule
@@ -32,6 +38,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'configurations',
+        canActivate: [AuthGuard, AdminGuard],
         loadChildren: () => 
             import('@modules/configurations/configurations.module').then(
                 m => m.ConfigurationsModule
@@ -39,6 +46,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'account',
+        canActivate: [AuthGuard, AdminGuard],
         loadChildren: () => 
             import('@modules/account/account.module').then(
                 m => m.AccountModule

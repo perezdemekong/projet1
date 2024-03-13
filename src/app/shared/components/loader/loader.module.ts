@@ -4,13 +4,15 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { TableLoaderComponent } from './table-loader/table-loader.component';
 import { DashboardLoaderComponent } from './dashboard-loader/dashboard-loader.component';
+import { RequestLoaderComponent } from './request-loader/request-loader.component';
 
 
 
 @NgModule({
   declarations: [
     TableLoaderComponent,
-    DashboardLoaderComponent
+    DashboardLoaderComponent,
+    RequestLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { DashboardLoaderComponent } from './dashboard-loader/dashboard-loader.co
   exports: [
     TableLoaderComponent,
     DashboardLoaderComponent,
+    RequestLoaderComponent,
     NgxSkeletonLoaderModule,
   ]
 })

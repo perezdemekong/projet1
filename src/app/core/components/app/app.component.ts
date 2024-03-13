@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestLoaderService } from '@app/core/services/request-loader.service';
 import { TitleService } from '@app/core/services/title.service';
 import { Notification } from '@app/shared/components/notification/interfaces/notification.interface';
 import { NotificationService } from '@app/shared/components/notification/services/notification.service';
@@ -7,6 +8,9 @@ import { NotificationService } from '@app/shared/components/notification/service
   selector: 'app-root',
   template: `
     <router-outlet></router-outlet>
+
+    <app-request-loader *ngIf="load"></app-request-loader>
+    
     <app-notification [isOpen]="notification.isOpen">
       <div class="p-4">
         <div class="flex items-start">
@@ -102,17 +106,26 @@ import { NotificationService } from '@app/shared/components/notification/service
 export class AppComponent implements OnInit{
   title = 'Succès';
   message = 'Opération réalisée avec succès'
+  load!: boolean;
 
   notification!: Notification;
 
   constructor(
     private titleService: TitleService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private requestLoaderService: RequestLoaderService,
   ) {}
 
   ngOnInit() {
     this.titleService.setTitle();
+    this.loadingStatus();
     this.notificationService.notificationController.subscribe((value: Notification) => this.notification = value);
+  }
+
+  loadingStatus() {
+    this.requestLoaderService.loading.subscribe((data: boolean) => {
+      this.load = data; 
+    })
   }
 
   toggleIsOpen() {

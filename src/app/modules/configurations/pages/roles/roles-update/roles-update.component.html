@@ -6,37 +6,37 @@
     <app-page-heading title="Rôles" description="Mettre à jour un rôle"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl">
+    <form [formGroup]="updateRoleForm" (submit)="updateRole()" *ngIf="!loading" class="sm:p-5 space-y-8 max-w-3xl">
         <div class="flex sm:items-center max-sm:gap-2.5">
             <div class="w-40">Libellé</div>
             <div class="flex-1">
-                <p class="text-sm font-light">Super admin</p>
+                <p class="text-sm font-light">{{role.display_name}}</p>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5">
             <div class="w-40">Code</div>
             <div class="flex-1">
-                <p class="text-sm font-light">Root</p>
+                <p class="text-sm font-light">{{role.name}}</p>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5">
             <div class="w-40">Accés</div>
             <div class="flex-1">
-                <p class="text-sm font-light">Web</p>
+                <p class="text-sm font-light">{{role.guard_name}}</p>
             </div>
         </div>
         <div class="flex sm:items-center max-sm:gap-2.5">
             <div class="w-40">Status</div>
             <div class="flex-1">
-                <app-toggle (click)="toggleStatus()" [toggled]="status" [backgroundClass]="!status ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
+                <app-toggle (click)="toggleStatus()" [toggled]="updateRoleForm.get('status')?.value || false" [backgroundClass]="!updateRoleForm.get('status')?.value ? 'bg-gray-400' : 'bg-secondary'"></app-toggle>
             </div>
         </div>
-        <div class="flex max-sm:gap-2.5 max-sm:flex-col">
+        <!-- <div class="flex max-sm:gap-2.5 max-sm:flex-col">
             <div class="w-40">Description</div>
             <div class="flex-1">
-                <app-textarea labelFor="description" label="description" name="description" [rows]="4" [class]="'w-full'"></app-textarea>
+                <app-textarea formControlName="description" labelFor="description" label="description" name="description" [rows]="4" [class]="'w-full'"></app-textarea>
             </div>
-        </div>
+        </div> -->
 
         <div class="flex justify-end">
             <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
@@ -44,5 +44,49 @@
             </app-button>
         </div>
     </form>
+
+    <!-- Form Loader -->
+    <div *ngIf="loading" class="sm:p-5 space-y-8 max-w-3xl">
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex sm:items-center max-sm:gap-2.5">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="flex max-sm:gap-2.5 max-sm:flex-col">
+            <div class="w-40 mr-5">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="flex-1">
+                <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
 
 </div>

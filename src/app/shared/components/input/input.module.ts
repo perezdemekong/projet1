@@ -8,6 +8,8 @@ import { BigInputComponent } from './big-input/big-input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { BigSelectComponent } from './big-select/big-select.component';
 import { BigPasswordComponent } from './big-password/big-password.component';
+import { ComplexBigSelectComponent } from './big-select/complex-big-select/complex-big-select.component';
+import { BigInputDatalistComponent } from './big-input/big-input-datalist/big-input-datalist.component';
 
 
 
@@ -19,7 +21,9 @@ import { BigPasswordComponent } from './big-password/big-password.component';
     BigInputComponent,
     TextareaComponent,
     BigSelectComponent,
-    BigPasswordComponent
+    BigPasswordComponent,
+    ComplexBigSelectComponent,
+    BigInputDatalistComponent,
   ],
   imports: [
     FormsModule,
@@ -33,6 +37,8 @@ import { BigPasswordComponent } from './big-password/big-password.component';
     TextareaComponent,
     BigSelectComponent,
     BigPasswordComponent,
+    ComplexBigSelectComponent,
+    BigInputDatalistComponent,
   ]
 })
 export class InputModule { }

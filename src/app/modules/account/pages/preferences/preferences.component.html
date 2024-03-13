@@ -4,27 +4,28 @@
     <app-page-heading title="Préférences" description="Mettre à jour ses préférences"></app-page-heading>
 
     <!-- Form -->
-    <form class="sm:p-5 space-y-8 max-w-3xl">
+    <form [formGroup]="preferencesForm" (submit)="submitPreferencesForm()" class="sm:p-5 space-y-8 max-w-3xl">
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="lg:w-56 w-32 max-sm:w-56">Langue</div>
             <div class="flex-1">
-                <app-big-select labelFor="language" label="Langue" name="language" [options]="languages" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-select formControlName="language" [disabled]="true" labelFor="language" label="Langue" name="language" [options]="languages" [class]="'px-2 py-2.5 border border-gray-200 bg-gray-200 w-full rounded-lg'"></app-big-select>
             </div>
         </div>
 
         <div class="flex sm:items-center max-sm:gap-2.5 max-sm:flex-col">
             <div class="lg:w-56 w-32 max-sm:w-56">Fuseau horaire</div>
             <div class="flex-1">
-                <app-big-select labelFor="timeZone" label="Fuseau horaire" name="timeZone" [options]="timeZones" [class]="'px-2 py-2.5 border border-[#E4E5E7] bg-primary-100 w-full rounded-lg'"></app-big-select>
+                <app-big-select formControlName="timezone" [disabled]="true" labelFor="timezone" label="Fuseau horaire" name="timezone" [options]="timeZones" [class]="'px-2 py-2.5 border border-gray-200 bg-gray-200 w-full rounded-lg'"></app-big-select>
             </div>
         </div>
 
-        <div class="flex justify-end">
-            <app-button type="submit" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
+        <!-- <div class="flex justify-end">
+            <app-button type="submit" [disabled]="!preferencesForm.valid" [class]="'text-white bg-secondary hover:bg-secondary focus:ring-secondary float-right'">              
                 Modifier
             </app-button>
-        </div>
+        </div> -->
+
     </form>
 
 </div>
